@@ -1,36 +1,358 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página inicial 1</title>
+    <title>Swipfood</title>
+    
+    <!-- Início dos estilos CSS -->
     <style>
-        .testbtn {
-            background-color: #1C1C1C;
-            color: white;
-            font-size: 12px;
-            padding: 10px;
-            width: 100px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
+        /* SELETOR UNIVERSAL - Aplica a TODOS os elementos da página */
+        * {
+            margin: 0;           /* Remove todas as margens externas padrão */
+            padding: 0;         /* Remove todos os espaçamentos internos padrão */
+            box-sizing: border-box;  /* Faz a largura incluir bordas e padding (facilita o layout) */
+        }
+        
+        /* ESTILO DO CORPO DA PÁGINA (body) */
+        body {
+            background-color: #dbcbb8;  /* Cor de fundo creme/bege */
+            font-family: Arial, Helvetica, sans-serif;  /* Define a fonte do texto */
+        }
+        
+        /* ESTILO DO BOTÃO DE LOGIN */
+        .btn-login {
+            background-color: #1C1C1C;  /* Fundo preto/escuro */
+            color: #dbcbb8;             /* Texto na cor creme */
+            font-size: 14px;            /* Tamanho da fonte */
+            padding: 8px 20px;          /* Espaçamento interno: 8px em cima/baixo, 20px nas laterais */
+            border: 2px solid #1C1C1C;  /* Borda sólida preta de 2px */
+            border-radius: 30px;        /* Bordas bem arredondadas (30px) */
+            cursor: pointer;            /* Muda o cursor para mãozinha ao passar o mouse */
+            font-weight: bold;          /* Texto em negrito */
+        }
+        
+        /* EFEITO DO BOTÃO DE LOGIN QUANDO O MOUSE PASSA POR CIMA */
+        .btn-login:hover {
+            background-color: #1C1C1C;  /* Mantém o fundo preto */
+            color: white;               /* Texto muda para branco */
+        }
+        
+        /* ESTILO DO BOTÃO EXPLORAR */
+        .btn-explorar {
+            background-color: #1C1C1C;  /* Fundo preto */
+            color: white;               /* Texto branco */
+            font-size: 16px;            /* Tamanho da fonte */
+            padding: 12px 30px;         /* Espaçamento interno */
+            border: none;               /* Remove a borda padrão */
+            border-radius: 30px;        /* Bordas arredondadas */
+            cursor: pointer;            /* Cursor de mão */
+            font-weight: bold;          /* Texto em negrito */
+            margin-top: 20px;           /* Espaço de 20px acima do botão */
+        }
+        
+        /* CONTAINER PRINCIPAL - Centraliza todo o conteúdo da página */
+        .container {
+            max-width: 1200px;          /* Largura máxima de 1200px */
+            margin: 0 auto;             /* Centraliza horizontalmente (0 em cima/baixo, auto nas laterais) */
+            padding: 20px;              /* Espaçamento interno de 20px em todos os lados */
+        }
+        
+        /* CABEÇALHO DA PÁGINA (logo + botão login) */
+        .header {
+            display: flex;              /* Ativa o Flexbox (layout flexível) */
+            justify-content: space-between;  /* Espaça os itens: logo na esquerda, login na direita */
+            align-items: center;        /* Alinha os itens verticalmente ao centro */
+            padding: 20px 0;            /* Espaçamento interno: 20px em cima/baixo, 0 nas laterais */
+            border-bottom: 2px solid rgba(0,0,0,0.1);  /* Linha fina na parte inferior (separador) */
+        }
+        
+        /* ÁREA DA LOGO (imagem + texto Swipfood) */
+        .logo-area {
+            display: flex;              /* Flexbox para alinhar imagem e texto lado a lado */
+            align-items: center;        /* Alinha verticalmente ao centro */
+            gap: 15px;                 /* Espaço de 15px entre a imagem e o texto */
+        }
+        
+        /* ESTILO DA LOGO (imagem) */
+        .logo {
+            width: 60px;               /* Largura de 60px */
+            height: 60px;              /* Altura de 60px */
+            background-color: transparent;  /* Fundo transparente */
+            border-radius: 15px;       /* Bordas levemente arredondadas */
+            display: flex;             /* Flexbox para centralizar a imagem */
+            align-items: center;       /* Centraliza verticalmente */
+            justify-content: center;   /* Centraliza horizontalmente */
+            overflow: hidden;          /* Esconde qualquer parte da imagem que ultrapasse */
+        }
+        
+        /* ESTILO DA IMAGEM DENTRO DA LOGO */
+        .logo img {
+            width: 88px;               /* Largura de 88px */
+            height: 88px;              /* Altura de 88px */
+            object-fit: cover;         /* A imagem cobre todo o espaço sem distorcer (corta se necessário) */
+        }
+        
+        /* ESTILO DO TEXTO "Swipfood" */
+        .logo-text {
+            font-size: 24px;           /* Tamanho da fonte */
+            font-weight: bold;         /* Texto em negrito */
+            color: #1C1C1C;            /* Cor preta */
+        }
+        
+        /* MENU DE NAVEGAÇÃO (Home, Restaurantes, Cafés, etc.) */
+        .nav-menu {
+            display: flex;              /* Flexbox para itens lado a lado */
+            gap: 30px;                 /* Espaço de 30px entre cada item do menu */
+            margin: 30px 0 20px 0;     /* Margem: 30px cima, 0 direita, 20px baixo, 0 esquerda */
+            padding-bottom: 20px;      /* Espaçamento interno na parte inferior */
+            border-bottom: 1px solid rgba(0,0,0,0.1);  /* Linha fina separadora */
+            flex-wrap: wrap;           /* Permite que os itens quebrem para linha de baixo em telas pequenas */
+        }
+        
+        /* ESTILO DOS LINKS DO MENU */
+        .nav-menu a {
+            text-decoration: none;     /* Remove o sublinhado padrão dos links */
+            color: #1C1C1C;            /* Cor preta */
+            font-weight: bold;         /* Texto em negrito */
+            font-size: 16px;           /* Tamanho da fonte */
+        }
+        
+        /* CONTEÚDO PRINCIPAL (texto + imagem lado a lado) */
+        .main-content {
+            display: flex;              /* Flexbox para duas colunas */
+            margin-top: 50px;          /* Espaço de 50px acima */
+            gap: 50px;                /* Espaço de 50px entre o texto e a imagem */
+            flex-wrap: wrap;          /* Em telas pequenas, as colunas empilham */
+        }
+        
+        /* COLUNA DO TEXTO PRINCIPAL */
+        .hero-text {
+            flex: 1;                   /* Ocupa 1 parte do espaço disponível (metade) */
+            min-width: 250px;         /* Largura mínima de 250px (abaixo disso, quebra) */
+        }
+        
+        /* ESTILO DO TÍTULO GRANDE */
+        .hero-text h1 {
+            font-size: 48px;           /* Tamanho da fonte bem grande */
+            line-height: 1.2;          /* Espaçamento entre linhas (1.2x o tamanho da fonte) */
+            color: #1C1C1C;            /* Cor preta */
+        }
+        
+        /* ESTILO DO TEXTO MENOR DENTRO DO TÍTULO */
+        .hero-text h1 small {
+            font-size: 20px;           /* Tamanho da fonte menor */
+            font-weight: normal;       /* Remove o negrito */
+            display: block;            /* Faz ocupar uma linha inteira */
+            margin-top: 20px;          /* Espaço de 20px acima */
+        }
+        
+        /* COLUNA DA IMAGEM */
+        .hero-image {
+            flex: 1;                   /* Ocupa 1 parte do espaço (metade) */
+            min-width: 250px;          /* Largura mínima de 250px */
+            border-radius: 20px;       /* Bordas arredondadas */
+            overflow: hidden;          /* Esconde o que ultrapassar */
+            display: flex;             /* Flexbox para centralizar a imagem */
+            align-items: center;       /* Centraliza verticalmente */
+            justify-content: center;   /* Centraliza horizontalmente */
         }
 
-        .testbtn:hover {
-            background-color: #1C1C1C;
+        /* ESTILO DA IMAGEM DENTRO DA COLUNA */
+        .hero-image img {
+            width: 100%;               /* Largura máxima disponível */
+            max-width: 500px;          /* Mas não ultrapassa 500px */
+            height: auto;              /* Altura automática (mantém proporção) */
+            max-height: 400px;         /* Altura máxima de 400px */
+            object-fit: cover;         /* A imagem cobre o espaço sem distorcer */
+            border-radius: 20px;       /* Bordas arredondadas */
+        }
+        
+        /* SEÇÃO DE RECOMENDAÇÕES (cards de lugares) */
+        .recommendations {
+            margin-top: 60px;          /* Espaço de 60px acima */
+        }
+        
+        /* TÍTULO DA SEÇÃO DE RECOMENDAÇÕES */
+        .recommendations h2 {
+            font-size: 28px;           /* Tamanho da fonte */
+            color: #1C1C1C;            /* Cor preta */
+            margin-bottom: 20px;       /* Espaço de 20px abaixo do título */
+        }
+        
+        /* CONTAINER DOS CARDS (grades de promoções) */
+        .cards {
+            display: flex;              /* Flexbox para cards lado a lado */
+            gap: 20px;                /* Espaço de 20px entre os cards */
+            flex-wrap: wrap;          /* Quebra para linha abaixo em telas pequenas */
+        }
+        
+        /* ESTILO DE CADA CARD */
+        .card {
+            flex: 1;                   /* Cada card ocupa espaço igual */
+            min-width: 200px;          /* Largura mínima de 200px */
+            background-color: white;   /* Fundo branco */
+            border-radius: 15px;       /* Bordas arredondadas */
+            padding: 20px;             /* Espaçamento interno de 20px */
+            text-align: center;        /* Texto centralizado */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);  /* Sombra suave abaixo do card */
+        }
+        
+        /* ÍCONE DENTRO DE CADA CARD */
+        .card-icon {
+            width: 60px;               /* Largura de 60px */
+            height: 60px;              /* Altura de 60px */
+            background-color: #1C1C1C; /* Fundo preto */
+            border-radius: 30px;       /* Bordas 100% arredondadas (vira um círculo) */
+            margin: 0 auto 15px;       /* Centraliza: 0 cima/baixo, auto laterais, 15px abaixo */
+            display: flex;             /* Flexbox para centralizar o ícone */
+            align-items: center;       /* Centraliza verticalmente */
+            justify-content: center;   /* Centraliza horizontalmente */
+            color: white;              /* Cor do texto/ícone branca */
+            font-size: 28px;           /* Tamanho do ícone */
+        }
+        
+        /* RODAPÉ DA PÁGINA */
+        .footer {
+            margin-top: 60px;          /* Espaço de 60px acima */
+            padding: 30px 0;           /* Espaçamento interno: 30px cima/baixo, 0 laterais */
+            text-align: center;        /* Texto centralizado */
+            border-top: 1px solid rgba(0,0,0,0.1);  /* Linha separadora na parte superior */
+            color: #666;               /* Cor cinza para o texto */
+        }
+        
+        /* RESPONSIVIDADE - PARA TELAS MENORES QUE 768px (CELULARES) */
+        @media (max-width: 768px) {
+            /* Título fica menor em celulares */
+            .hero-text h1 {
+                font-size: 32px;       /* Reduz de 48px para 32px */
             }
-</style>
+            /* Espaçamento entre itens do menu fica menor */
+            .nav-menu {
+                gap: 15px;             /* Reduz de 30px para 15px */
+            }
+        }
+    </style>
+    
+<!-- Fim do cabeçalho, início do corpo visível da página -->
 </head>
-<body bgcolor="#dbcbb8">
-    <img src="logo.jpg" alt="..." width="400" height="400">
-    <form>
-        <table>
-            <tr>
-                <td aligne="right"><a href="tela_login.html"><button class="testbtn"><big>Login</big></button></a></td>
-            </tr>
-        </table>
-        <h1 aligne="right">Veja<br>Recomendações<br>Interessantes</h1>
-        <h3 aligne="left"><small>Cafés, Restaurantes e Mais</small></h3>
-    </form>
+
+<!-- CORPO DA PÁGINA (tudo que aparece na tela) -->
+<body>
+    
+    <!-- CONTAINER PRINCIPAL (centraliza todo o conteúdo) -->
+    <div class="container">
+        
+        <!-- CABEÇALHO -->
+        <div class="header">
+            
+            <!-- ÁREA DA LOGO -->
+            <div class="logo-area">
+                <!-- DIV DA IMAGEM DA LOGO -->
+                <div class="logo">
+                    <!-- TAG DA IMAGEM: src é o caminho do arquivo, alt é o texto alternativo -->
+                    <img src="logo.png" alt="Logo Swipfood" 
+                         onerror="this.src='https://via.placeholder.com/60x60/1C1C1C/white?text=S'">
+                    <!-- onerror: se a imagem não carregar, mostra esta imagem de fundo -->
+                </div>
+                <!-- TEXTO DA LOGO -->
+                <span class="logo-text">Swipfood</span>
+            </div>
+            
+            <!-- BOTÃO DE LOGIN -->
+            <div>
+                <!-- Link que redireciona para a página de login -->
+                <a href="tela_login.html">
+                    <!-- Botão com a classe .btn-login -->
+                    <button class="btn-login">Login</button>
+                </a>
+            </div>
+        </div>
+        
+        <!-- MENU DE NAVEGAÇÃO -->
+        <div class="nav-menu">
+            <!-- Links âncora (# significa que ainda não tem destino) -->
+            <a href="#">Home</a>
+            <a href="#">Restaurantes</a>
+            <a href="#">Cafés</a>
+            <a href="#">Promoções</a>
+            <a href="#">Contato</a>
+        </div>
+        
+        <!-- CONTEÚDO PRINCIPAL (TEXTO + IMAGEM) -->
+        <div class="main-content">
+            
+            <!-- COLUDA DO TEXTO -->
+            <div class="hero-text">
+                <h1>
+                    Veja<br>                    <!-- <br> = quebra de linha -->
+                    Recomendações<br>
+                    Interessantes
+                    <small>Cafés, Restaurantes e Mais</small>  <!-- small = texto pequeno -->
+                </h1>
+                <!-- Botão que ao clicar rola a tela até a seção #recomendacoes -->
+                <button class="btn-explorar" onclick="window.location.href='#recomendacoes'">
+                    Explorar agora →
+                </button>
+            </div>
+            
+            <!-- COLUNA DA IMAGEM -->
+            <div class="hero-image">
+                <!-- Imagem ilustrativa de comida -->
+                <img src="food1.jpg" alt="Comida">
+            </div>
+        </div>
+        
+        <!-- SEÇÃO DE RECOMENDAÇÕES (ID para link interno) -->
+        <div id="recomendacoes" class="recommendations">
+            
+            <!-- TÍTULO DA SEÇÃO -->
+            <h2>₊˚⊹Lugares do momento</h2>
+            
+            <!-- CONTAINER DOS CARDS -->
+            <div class="cards">
+                
+                <!-- CARD 1 - SUSHIS -->
+                <div class="card">
+                    <div class="card-icon">🍣</div>  <!-- Emoji de sushi -->
+                    <h3>Promoção: sushi grátis aqui!</h3>
+                    <p><small>(veja os termos e condições)</small></p>
+                </div>
+                
+                <!-- CARD 2 - BAR -->
+                <div class="card">
+                    <div class="card-icon">🎤</div>  <!-- Emoji de microfone -->
+                    <h3>Restaurante & Bar com show ao vivo hoje</h3>
+                </div>
+                
+                <!-- CARD 3 - CAFÉ -->
+                <div class="card">
+                    <div class="card-icon">☕</div>  <!-- Emoji de café -->
+                    <h3>Café tranquilo com mais pontos do mês</h3>
+                </div>
+                
+                <!-- CARD 4 - ANIVERSÁRIO -->
+                <div class="card">
+                    <div class="card-icon">🎂</div>  <!-- Emoji de bolo -->
+                    <h3>Promoção exclusiva para aniversariantes</h3>
+                </div>
+            </div>
+            
+            <!-- BOTÃO EXPLORAR MAIS (centralizado) -->
+            <div style="margin-top: 40px; text-align: center;">
+                <!-- Redireciona para a tela de login -->
+                <button class="btn-explorar" onclick="window.location.href='tela_login.html'">
+                    Explorar mais →
+                </button>
+            </div>
+        </div>
+        
+        <!-- RODAPÉ -->
+        <div class="footer">
+            <p>© 2024 Swipfood - Todos os direitos reservados</p>
+        </div>
+        
+    </div>  <!-- FIM DO CONTAINER -->
+    
 </body>
 </html>

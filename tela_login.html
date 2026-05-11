@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swipfood</title>
+    
+    <style>
+        /* SELETOR UNIVERSAL - Aplica a TODOS os elementos da página */
+        * {
+            margin: 0;                  /* Remove todas as margens externas padrão */
+            padding: 0;                /* Remove todos os espaçamentos internos padrão */
+            box-sizing: border-box;    /* Faz a largura incluir bordas e padding (facilita o layout) */
+        }
+        
+        /* ESTILO DO CORPO DA PÁGINA (body) */
+        body {
+            /* Imagem de fundo */
+            background-image: url('https://via.placeholder.com/1920x1080/1C1C1C/white?text=Background+Image');
+            background-size: cover;     /* A imagem cobre toda a tela */
+            background-position: center; /* Centraliza a imagem de fundo */
+            background-attachment: fixed; /* A imagem fica fixa enquanto rola a página */
+            font-family: Arial, Helvetica, sans-serif; /* Define a fonte do texto */
+            min-height: 100vh;         /* Altura mínima de 100% da tela do usuário */
+            display: flex;             /* Ativa o Flexbox para centralizar o formulário */
+            align-items: center;       /* Centraliza o conteúdo VERTICALMENTE */
+            justify-content: center;   /* Centraliza o conteúdo HORIZONTALMENTE */
+            background-color: #dbcbb8; /* Cor de fundo creme (caso a imagem não carregue) */
+        }
+        
+        /* CAIXA BRANCA DO FORMULÁRIO */
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.61); /* Branco com 61% de transparência */
+            backdrop-filter: blur(20px);  /* Efeito de desfoque no fundo atrás da caixa */
+            border-radius: 20px;         /* Bordas arredondadas */
+            padding: 40px;               /* Espaçamento interno de 40px */
+            width: 100%;                 /* Largura total disponível */
+            max-width: 450px;            /* Largura máxima de 450px (não fica gigante) */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Sombra ao redor da caixa */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Borda branca transparente */
+            text-align: center;          /* Todo texto dentro fica centralizado */
+        }
+        
+        /* ÁREA DA LOGO */
+        .logo {
+            margin-bottom: 20px;         /* Espaço de 20px abaixo da logo */
+        }
+        
+        /* ESTILO DA IMAGEM DA LOGO */
+        .logo img {
+            max-width: 180px;            /* Largura máxima de 180px */
+            height: auto;                /* Altura automática (mantém proporção) */
+        }
+        
+        /* TÍTULO "Sign In" DENTRO DA CAIXA */
+        .login-container h2 {
+            font-size: 28px;             /* Tamanho da fonte */
+            color: #1C1C1C;              /* Cor preta/escura */
+            margin-bottom: 30px;         /* Espaço de 30px abaixo do título */
+        }
+        
+        /* GRUPO DE CADA CAMPO DO FORMULÁRIO */
+        .input-group {
+            text-align: left;            /* Texto do label alinhado à esquerda */
+            margin-bottom: 20px;         /* Espaço de 20px abaixo de cada campo */
+        }
+        
+        /* ESTILO DO RÓTULO (texto que fica acima do campo) */
+        .input-group label {
+            display: block;              /* Ocupa uma linha inteira */
+            font-weight: bold;           /* Texto em negrito */
+            color: #1C1C1C;              /* Cor preta */
+            margin-bottom: 8px;          /* Espaço de 8px abaixo do label */
+        }
+        
+        /* ESTILO DO CAMPO DE INPUT (onde o usuário digita) */
+        .input-group input {
+            width: 100%;                 /* Ocupa toda a largura disponível */
+            padding: 14px;               /* Espaçamento interno de 14px */
+            border: 1px solid rgba(0,0,0,0.1); /* Borda cinza bem clara */
+            border-radius: 10px;         /* Bordas levemente arredondadas */
+            font-size: 16px;             /* Tamanho da fonte do texto digitado */
+            background-color: rgba(255,255,255,0.9); /* Fundo branco quase opaco */
+        }
+        
+        /* BOTÃO DE ENTRAR */
+        .btn-entrar {
+            width: 100%;                 /* Ocupa toda a largura */
+            background-color: #1C1C1C;   /* Fundo preto */
+            color: white;                /* Texto branco */
+            font-size: 16px;             /* Tamanho da fonte */
+            padding: 14px;               /* Espaçamento interno */
+            border: none;                /* Remove a borda padrão */
+            border-radius: 30px;         /* Bordas bem arredondadas */
+            cursor: pointer;             /* Cursor vira mãozinha ao passar o mouse */
+            font-weight: bold;           /* Texto em negrito */
+            margin-top: 10px;            /* Espaço de 10px acima do botão */
+        }
+        
+        /* EFEITO DO BOTÃO ENTRAR QUANDO O MOUSE PASSA POR CIMA */
+        .btn-entrar:hover {
+            background-color: #333;      /* Fundo fica cinza escuro (mais claro que preto) */
+        }
+        
+        /* DIVISOR COM "ou" (linhas dos dois lados) */
+        .divider {
+            display: flex;               /* Flexbox para alinhar as linhas e o "ou" */
+            align-items: center;         /* Centraliza verticalmente */
+            margin: 25px 0;              /* Margem: 25px cima/baixo, 0 laterais */
+            color: #666;                 /* Cor cinza para o texto "ou" */
+        }
+        
+        /* LINHAS QUE FICAM DOS DOIS LADOS DO "ou" */
+        .divider::before, .divider::after {
+            content: "";                 /* Cria um elemento vazio (a linha) */
+            flex: 1;                    /* Ocupa todo o espaço disponível */
+            height: 1px;                /* Altura de 1px (fina) */
+            background-color: rgba(0,0,0,0.2); /* Cor cinza transparente */
+        }
+        
+        /* ESPAÇAMENTO DO TEXTO "ou" ENTRE AS LINHAS */
+        .divider span {
+            padding: 0 15px;             /* Espaçamento de 15px nas laterais do "ou" */
+        }
+        
+        /* BOTÃO DE CRIAR CONTA */
+        .btn-criar-conta {
+            width: 100%;                 /* Ocupa toda a largura */
+            background-color: transparent; /* Fundo transparente */
+            color: #1C1C1C;              /* Texto preto */
+            font-size: 16px;             /* Tamanho da fonte */
+            padding: 14px;               /* Espaçamento interno */
+            border: 2px solid #1C1C1C;   /* Borda preta de 2px */
+            border-radius: 30px;         /* Bordas bem arredondadas */
+            cursor: pointer;             /* Cursor vira mãozinha */
+            font-weight: bold;           /* Texto em negrito */
+            margin-top: 10px;            /* Espaço de 10px acima */
+        }
+        
+        /* EFEITO DO BOTÃO CRIAR CONTA AO PASSAR O MOUSE */
+        .btn-criar-conta:hover {
+            background-color: #1C1C1C;   /* Fundo fica preto */
+            color: white;                /* Texto fica branco */
+        }
+        
+        /* LINK DE CADASTRO (texto "faça parte do nosso site") */
+        .link-cadastro {
+            margin-top: 20px;            /* Espaço de 20px acima */
+            font-size: 14px;             /* Fonte pequena */
+        }
+        
+        .link-cadastro p {
+            color: #333;                 /* Cor cinza escuro */
+        }
+        
+        /* LINK PARA VOLTAR PARA PÁGINA INICIAL */
+        .back-link {
+            display: block;              /* Ocupa uma linha inteira */
+            margin-top: 20px;            /* Espaço de 20px acima */
+            color: #1C1C1C;              /* Cor preta */
+            text-decoration: none;       /* Remove o sublinhado padrão do link */
+            font-size: 14px;             /* Fonte pequena */
+        }
+        
+        /* EFEITO DO LINK VOLTAR AO PASSAR O MOUSE */
+        .back-link:hover {
+            text-decoration: underline;  /* Adiciona sublinhado quando passa o mouse */
+        }
+    </style>
+    
+<!-- Fim do cabeçalho, início do corpo visível da página -->
+</head>
+
+<!-- CORPO DA PÁGINA (tudo que aparece na tela) -->
+<body>
+    
+    <!-- CAIXA DO FORMULÁRIO DE LOGIN (efeito vidro/borrão) -->
+    <div class="login-container">
+        
+        <!-- ÁREA DA LOGO -->
+        <div class="logo">
+            <!-- TAG DA IMAGEM: src é o caminho do arquivo, alt é o texto alternativo -->
+            <img src="logo.png" alt="Swipfood" 
+                 onerror="this.src='https://via.placeholder.com/180x60/1C1C1C/white?text=Swipfood'">
+            <!-- onerror: se a imagem não carregar, mostra esta imagem de fundo -->
+        </div>
+        
+        <!-- FORMULÁRIO DE LOGIN -->
+        <!-- action="pagina_inicial.html": ao enviar, vai para a página inicial -->
+        <!-- method="get": envia os dados pela URL (padrão, sem banco de dados) -->
+        <form action="pagina_inicial.html" method="get">
+            
+            <!-- CAMPO DE E-MAIL/CPF/CNPJ -->
+            <div class="input-group">
+                <label>CPF/CNPJ ou E-mail</label>  <!-- Texto que fica acima do campo -->
+                <!-- Tipo: texto normal -->
+                <input type="text"
+                       placeholder="Digite seu CPF, CNPJ ou e-mail"
+                       required>                  <!-- required = campo obrigatório -->
+            </div>
+            
+            <!-- CAMPO DE SENHA -->
+            <div class="input-group">
+                <label>Senha</label>               <!-- Texto que fica acima do campo -->
+                <!-- Tipo: senha (os caracteres aparecem como •••) -->
+                <input type="password"             
+                       placeholder="Digite sua senha" 
+                       required>                  <!-- required = campo obrigatório -->
+            </div>
+            
+            <!-- BOTÃO DE ENTRAR (submit = envia o formulário) -->
+            <button type="submit" class="btn-entrar">Entrar</button>
+        </form>
+        
+        <!-- DIVISOR COM "ou" (linhas dos dois lados) -->
+        <div class="divider">
+            <span>ou</span>  <!-- Texto "ou" entre as linhas -->
+        </div>
+        
+        <!-- BOTÃO DE CRIAR CONTA (onclick = redireciona ao clicar) -->
+        <button class="btn-criar-conta" onclick="window.location.href='cadastro_usuario.html'">
+            Criar conta
+        </button>
+        
+        <!-- TEXTO INFORMATIVO ABAIXO DO BOTÃO -->
+        <div class="link-cadastro">
+            <p>faça parte do nosso site</p>
+        </div>
+        
+        <!-- LINK PARA VOLTAR PARA A PÁGINA INICIAL -->
+        <a href="index.html" class="back-link">← Voltar para página inicial</a>
+    </div>
+    
+</body>
+</html>
