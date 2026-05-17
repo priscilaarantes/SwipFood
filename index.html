@@ -4,355 +4,313 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Swipfood</title>
-    
-    <!-- Início dos estilos CSS -->
-    <style>
-        /* SELETOR UNIVERSAL - Aplica a TODOS os elementos da página */
-        * {
-            margin: 0;           /* Remove todas as margens externas padrão */
-            padding: 0;         /* Remove todos os espaçamentos internos padrão */
-            box-sizing: border-box;  /* Faz a largura incluir bordas e padding (facilita o layout) */
-        }
-        
-        /* ESTILO DO CORPO DA PÁGINA (body) */
-        body {
-            background-color: #dbcbb8;  /* Cor de fundo creme/bege */
-            font-family: Arial, Helvetica, sans-serif;  /* Define a fonte do texto */
-        }
-        
-        /* ESTILO DO BOTÃO DE LOGIN */
-        .btn-login {
-            background-color: #1C1C1C;  /* Fundo preto/escuro */
-            color: #dbcbb8;             /* Texto na cor creme */
-            font-size: 14px;            /* Tamanho da fonte */
-            padding: 8px 20px;          /* Espaçamento interno: 8px em cima/baixo, 20px nas laterais */
-            border: 2px solid #1C1C1C;  /* Borda sólida preta de 2px */
-            border-radius: 30px;        /* Bordas bem arredondadas (30px) */
-            cursor: pointer;            /* Muda o cursor para mãozinha ao passar o mouse */
-            font-weight: bold;          /* Texto em negrito */
-        }
-        
-        /* EFEITO DO BOTÃO DE LOGIN QUANDO O MOUSE PASSA POR CIMA */
-        .btn-login:hover {
-            background-color: #1C1C1C;  /* Mantém o fundo preto */
-            color: white;               /* Texto muda para branco */
-        }
-        
-        /* ESTILO DO BOTÃO EXPLORAR */
-        .btn-explorar {
-            background-color: #1C1C1C;  /* Fundo preto */
-            color: white;               /* Texto branco */
-            font-size: 16px;            /* Tamanho da fonte */
-            padding: 12px 30px;         /* Espaçamento interno */
-            border: none;               /* Remove a borda padrão */
-            border-radius: 30px;        /* Bordas arredondadas */
-            cursor: pointer;            /* Cursor de mão */
-            font-weight: bold;          /* Texto em negrito */
-            margin-top: 20px;           /* Espaço de 20px acima do botão */
-        }
-        
-        /* CONTAINER PRINCIPAL - Centraliza todo o conteúdo da página */
-        .container {
-            max-width: 1200px;          /* Largura máxima de 1200px */
-            margin: 0 auto;             /* Centraliza horizontalmente (0 em cima/baixo, auto nas laterais) */
-            padding: 20px;              /* Espaçamento interno de 20px em todos os lados */
-        }
-        
-        /* CABEÇALHO DA PÁGINA (logo + botão login) */
-        .header {
-            display: flex;              /* Ativa o Flexbox (layout flexível) */
-            justify-content: space-between;  /* Espaça os itens: logo na esquerda, login na direita */
-            align-items: center;        /* Alinha os itens verticalmente ao centro */
-            padding: 20px 0;            /* Espaçamento interno: 20px em cima/baixo, 0 nas laterais */
-            border-bottom: 2px solid rgba(0,0,0,0.1);  /* Linha fina na parte inferior (separador) */
-        }
-        
-        /* ÁREA DA LOGO (imagem + texto Swipfood) */
-        .logo-area {
-            display: flex;              /* Flexbox para alinhar imagem e texto lado a lado */
-            align-items: center;        /* Alinha verticalmente ao centro */
-            gap: 15px;                 /* Espaço de 15px entre a imagem e o texto */
-        }
-        
-        /* ESTILO DA LOGO (imagem) */
-        .logo {
-            width: 60px;               /* Largura de 60px */
-            height: 60px;              /* Altura de 60px */
-            background-color: transparent;  /* Fundo transparente */
-            border-radius: 15px;       /* Bordas levemente arredondadas */
-            display: flex;             /* Flexbox para centralizar a imagem */
-            align-items: center;       /* Centraliza verticalmente */
-            justify-content: center;   /* Centraliza horizontalmente */
-            overflow: hidden;          /* Esconde qualquer parte da imagem que ultrapasse */
-        }
-        
-        /* ESTILO DA IMAGEM DENTRO DA LOGO */
-        .logo img {
-            width: 88px;               /* Largura de 88px */
-            height: 88px;              /* Altura de 88px */
-            object-fit: cover;         /* A imagem cobre todo o espaço sem distorcer (corta se necessário) */
-        }
-        
-        /* ESTILO DO TEXTO "Swipfood" */
-        .logo-text {
-            font-size: 24px;           /* Tamanho da fonte */
-            font-weight: bold;         /* Texto em negrito */
-            color: #1C1C1C;            /* Cor preta */
-        }
-        
-        /* MENU DE NAVEGAÇÃO (Home, Restaurantes, Cafés, etc.) */
-        .nav-menu {
-            display: flex;              /* Flexbox para itens lado a lado */
-            gap: 30px;                 /* Espaço de 30px entre cada item do menu */
-            margin: 30px 0 20px 0;     /* Margem: 30px cima, 0 direita, 20px baixo, 0 esquerda */
-            padding-bottom: 20px;      /* Espaçamento interno na parte inferior */
-            border-bottom: 1px solid rgba(0,0,0,0.1);  /* Linha fina separadora */
-            flex-wrap: wrap;           /* Permite que os itens quebrem para linha de baixo em telas pequenas */
-        }
-        
-        /* ESTILO DOS LINKS DO MENU */
-        .nav-menu a {
-            text-decoration: none;     /* Remove o sublinhado padrão dos links */
-            color: #1C1C1C;            /* Cor preta */
-            font-weight: bold;         /* Texto em negrito */
-            font-size: 16px;           /* Tamanho da fonte */
-        }
-        
-        /* CONTEÚDO PRINCIPAL (texto + imagem lado a lado) */
-        .main-content {
-            display: flex;              /* Flexbox para duas colunas */
-            margin-top: 50px;          /* Espaço de 50px acima */
-            gap: 50px;                /* Espaço de 50px entre o texto e a imagem */
-            flex-wrap: wrap;          /* Em telas pequenas, as colunas empilham */
-        }
-        
-        /* COLUNA DO TEXTO PRINCIPAL */
-        .hero-text {
-            flex: 1;                   /* Ocupa 1 parte do espaço disponível (metade) */
-            min-width: 250px;         /* Largura mínima de 250px (abaixo disso, quebra) */
-        }
-        
-        /* ESTILO DO TÍTULO GRANDE */
-        .hero-text h1 {
-            font-size: 48px;           /* Tamanho da fonte bem grande */
-            line-height: 1.2;          /* Espaçamento entre linhas (1.2x o tamanho da fonte) */
-            color: #1C1C1C;            /* Cor preta */
-        }
-        
-        /* ESTILO DO TEXTO MENOR DENTRO DO TÍTULO */
-        .hero-text h1 small {
-            font-size: 20px;           /* Tamanho da fonte menor */
-            font-weight: normal;       /* Remove o negrito */
-            display: block;            /* Faz ocupar uma linha inteira */
-            margin-top: 20px;          /* Espaço de 20px acima */
-        }
-        
-        /* COLUNA DA IMAGEM */
-        .hero-image {
-            flex: 1;                   /* Ocupa 1 parte do espaço (metade) */
-            min-width: 250px;          /* Largura mínima de 250px */
-            border-radius: 20px;       /* Bordas arredondadas */
-            overflow: hidden;          /* Esconde o que ultrapassar */
-            display: flex;             /* Flexbox para centralizar a imagem */
-            align-items: center;       /* Centraliza verticalmente */
-            justify-content: center;   /* Centraliza horizontalmente */
-        }
-
-        /* ESTILO DA IMAGEM DENTRO DA COLUNA */
-        .hero-image img {
-            width: 100%;               /* Largura máxima disponível */
-            max-width: 500px;          /* Mas não ultrapassa 500px */
-            height: auto;              /* Altura automática (mantém proporção) */
-            max-height: 400px;         /* Altura máxima de 400px */
-            object-fit: cover;         /* A imagem cobre o espaço sem distorcer */
-            border-radius: 20px;       /* Bordas arredondadas */
-        }
-        
-        /* SEÇÃO DE RECOMENDAÇÕES (cards de lugares) */
-        .recommendations {
-            margin-top: 60px;          /* Espaço de 60px acima */
-        }
-        
-        /* TÍTULO DA SEÇÃO DE RECOMENDAÇÕES */
-        .recommendations h2 {
-            font-size: 28px;           /* Tamanho da fonte */
-            color: #1C1C1C;            /* Cor preta */
-            margin-bottom: 20px;       /* Espaço de 20px abaixo do título */
-        }
-        
-        /* CONTAINER DOS CARDS (grades de promoções) */
-        .cards {
-            display: flex;              /* Flexbox para cards lado a lado */
-            gap: 20px;                /* Espaço de 20px entre os cards */
-            flex-wrap: wrap;          /* Quebra para linha abaixo em telas pequenas */
-        }
-        
-        /* ESTILO DE CADA CARD */
-        .card {
-            flex: 1;                   /* Cada card ocupa espaço igual */
-            min-width: 200px;          /* Largura mínima de 200px */
-            background-color: white;   /* Fundo branco */
-            border-radius: 15px;       /* Bordas arredondadas */
-            padding: 20px;             /* Espaçamento interno de 20px */
-            text-align: center;        /* Texto centralizado */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);  /* Sombra suave abaixo do card */
-        }
-        
-        /* ÍCONE DENTRO DE CADA CARD */
-        .card-icon {
-            width: 60px;               /* Largura de 60px */
-            height: 60px;              /* Altura de 60px */
-            background-color: #1C1C1C; /* Fundo preto */
-            border-radius: 30px;       /* Bordas 100% arredondadas (vira um círculo) */
-            margin: 0 auto 15px;       /* Centraliza: 0 cima/baixo, auto laterais, 15px abaixo */
-            display: flex;             /* Flexbox para centralizar o ícone */
-            align-items: center;       /* Centraliza verticalmente */
-            justify-content: center;   /* Centraliza horizontalmente */
-            color: white;              /* Cor do texto/ícone branca */
-            font-size: 28px;           /* Tamanho do ícone */
-        }
-        
-        /* RODAPÉ DA PÁGINA */
-        .footer {
-            margin-top: 60px;          /* Espaço de 60px acima */
-            padding: 30px 0;           /* Espaçamento interno: 30px cima/baixo, 0 laterais */
-            text-align: center;        /* Texto centralizado */
-            border-top: 1px solid rgba(0,0,0,0.1);  /* Linha separadora na parte superior */
-            color: #666;               /* Cor cinza para o texto */
-        }
-        
-        /* RESPONSIVIDADE - PARA TELAS MENORES QUE 768px (CELULARES) */
-        @media (max-width: 768px) {
-            /* Título fica menor em celulares */
-            .hero-text h1 {
-                font-size: 32px;       /* Reduz de 48px para 32px */
-            }
-            /* Espaçamento entre itens do menu fica menor */
-            .nav-menu {
-                gap: 15px;             /* Reduz de 30px para 15px */
-            }
-        }
-    </style>
-    
-<!-- Fim do cabeçalho, início do corpo visível da página -->
+    <!-- Link para o arquivo CSS externo que contém todos os estilos da página -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
-<!-- CORPO DA PÁGINA (tudo que aparece na tela) -->
 <body>
     
-    <!-- CONTAINER PRINCIPAL (centraliza todo o conteúdo) -->
+    <!-- CONTAINER PRINCIPAL: centraliza o conteúdo e limita a largura máxima -->
     <div class="container">
         
-        <!-- CABEÇALHO -->
+        <!-- CABEÇALHO: contém a logo e o botão de login -->
         <div class="header">
             
-            <!-- ÁREA DA LOGO -->
+            <!-- ÁREA DA LOGO: agrupa a imagem e o texto "Swipfood" -->
             <div class="logo-area">
-                <!-- DIV DA IMAGEM DA LOGO -->
+                <!-- DIV da imagem da logo -->
                 <div class="logo">
-                    <!-- TAG DA IMAGEM: src é o caminho do arquivo, alt é o texto alternativo -->
+                    <!-- onerror: se a imagem falhar, mostra um placeholder -->
                     <img src="logo.png" alt="Logo Swipfood" 
                          onerror="this.src='https://via.placeholder.com/60x60/1C1C1C/white?text=S'">
-                    <!-- onerror: se a imagem não carregar, mostra esta imagem de fundo -->
                 </div>
-                <!-- TEXTO DA LOGO -->
+                <!-- Texto da logo -->
                 <span class="logo-text">Swipfood</span>
             </div>
             
-            <!-- BOTÃO DE LOGIN -->
+            <!-- BOTÃO DE LOGIN: redireciona para a tela de login -->
             <div>
-                <!-- Link que redireciona para a página de login -->
+                <!-- Link que envolve o botão -->
                 <a href="tela_login.html">
-                    <!-- Botão com a classe .btn-login -->
+                    <!-- Botão com a classe .btn-login (estilizado no CSS) -->
                     <button class="btn-login">Login</button>
                 </a>
             </div>
         </div>
+        <!-- FIM DO CABEÇALHO -->
         
-        <!-- MENU DE NAVEGAÇÃO -->
+        <!-- MENU DE NAVEGAÇÃO: links para outras seções do site -->
         <div class="nav-menu">
-            <!-- Links âncora (# significa que ainda não tem destino) -->
+            <!-- Links âncora (#), significa que ainda não têm destino definido -->
             <a href="#">Home</a>
             <a href="#">Restaurantes</a>
             <a href="#">Cafés</a>
             <a href="#">Promoções</a>
             <a href="#">Contato</a>
         </div>
+        <!-- FIM DO MENU -->
         
-        <!-- CONTEÚDO PRINCIPAL (TEXTO + IMAGEM) -->
+        <!-- CONTEÚDO PRINCIPAL: seção com texto e imagem lado a lado -->
         <div class="main-content">
             
-            <!-- COLUDA DO TEXTO -->
+            <!-- COLUNA DO TEXTO (lado esquerdo) -->
             <div class="hero-text">
+                <!-- Título principal da página -->
                 <h1>
-                    Veja<br>                    <!-- <br> = quebra de linha -->
-                    Recomendações<br>
-                    Interessantes
-                    <small>Cafés, Restaurantes e Mais</small>  <!-- small = texto pequeno -->
+                    Swipfood<br>       
+                    O Tinder dos<br>
+                    Restaurantes
+                    <!-- Texto menor abaixo do título -->
+                    <small>Descubra novos lugares de forma rápida e divertida!</small>
                 </h1>
-                <!-- Botão que ao clicar rola a tela até a seção #recomendacoes -->
-                <button class="btn-explorar" onclick="window.location.href='#recomendacoes'">
-                    Explorar agora →
+                <!-- Botão que ao clicar rola a tela até a seção #info-site -->
+                <!-- onclick: JavaScript que redireciona para o elemento com id="info-site" -->
+                <button class="btn-explorar" onclick="window.location.href='#info-site'">
+                    Saiba mais →
                 </button>
             </div>
             
-            <!-- COLUNA DA IMAGEM -->
+            <!-- COLUNA DA IMAGEM (lado direito) -->
             <div class="hero-image">
-                <!-- Imagem ilustrativa de comida -->
-                <img src="food1.jpg" alt="Comida">
+                <!-- onerror: se a imagem não carregar, mostra um placeholder -->
+                <img src="food1.jpg" alt="Comida" onerror="this.src='https://via.placeholder.com/500x400/1C1C1C/white?text=Swipfood'">
             </div>
         </div>
+        <!-- FIM DO CONTEÚDO PRINCIPAL -->
         
-        <!-- SEÇÃO DE RECOMENDAÇÕES (ID para link interno) -->
-        <div id="recomendacoes" class="recommendations">
+        <!-- SEÇÃO DE INFORMAÇÕES: contém os cards explicativos sobre o site -->
+        <!-- id="info-site" é usado pelo botão "Saiba mais" para rolar até aqui -->
+        <div id="info-site" class="info-grid">
             
-            <!-- TÍTULO DA SEÇÃO -->
-            <h2>₊˚⊹Lugares do momento</h2>
-            
-            <!-- CONTAINER DOS CARDS -->
-            <div class="cards">
-                
-                <!-- CARD 1 - SUSHIS -->
-                <div class="card">
-                    <div class="card-icon">🍣</div>  <!-- Emoji de sushi -->
-                    <h3>Promoção: sushi grátis aqui!</h3>
-                    <p><small>(veja os termos e condições)</small></p>
+            <!-- CARD 1: Missão / Pergunta inicial -->
+            <!-- Classe "reveal" controla a animação de entrada -->
+            <div class="info-card reveal">
+                <!-- Coluna da imagem do card -->
+                <div class="card-image">
+                    <img src="1.jpg" alt="Nossa Missão" onerror="this.src='https://via.placeholder.com/400x400/1C1C1C/white?text=🏆'">
                 </div>
-                
-                <!-- CARD 2 - BAR -->
-                <div class="card">
-                    <div class="card-icon">🎤</div>  <!-- Emoji de microfone -->
-                    <h3>Restaurante & Bar com show ao vivo hoje</h3>
-                </div>
-                
-                <!-- CARD 3 - CAFÉ -->
-                <div class="card">
-                    <div class="card-icon">☕</div>  <!-- Emoji de café -->
-                    <h3>Café tranquilo com mais pontos do mês</h3>
-                </div>
-                
-                <!-- CARD 4 - ANIVERSÁRIO -->
-                <div class="card">
-                    <div class="card-icon">🎂</div>  <!-- Emoji de bolo -->
-                    <h3>Promoção exclusiva para aniversariantes</h3>
+                <!-- Coluna de Introdução -->
+                <div class="card-content">
+                    <div class="info-icon"></div>
+                    <!-- Título do card -->
+                    <h2>Quantas vezes você já ficou minutos ou até horas discutindo com os amigos ou a família sobre onde comer?</h2>
+                    <!-- Parágrafo com texto destacado -->
+                    <p><span class="highlight">Cada um sugere uma coisa, ninguém se decide e no fim acabam indo no mesmo lugar de sempre por pura preguiça de pesquisar. Isso te lembra alguma situação?</span></p>
                 </div>
             </div>
             
-            <!-- BOTÃO EXPLORAR MAIS (centralizado) -->
-            <div style="margin-top: 40px; text-align: center;">
-                <!-- Redireciona para a tela de login -->
-                <button class="btn-explorar" onclick="window.location.href='tela_login.html'">
-                    Explorar mais →
-                </button>
+            <!-- CARD 2: O Problema -->
+            <!-- Sem a classe "reveal" inicialmente - será adicionada pelo JavaScript quando ficar visível -->
+            <div class="info-card">
+                <div class="card-image">
+                    <img src="2.jpg" alt="O Problema" onerror="this.src='https://via.placeholder.com/400x400/1C1C1C/white?text=⚠️'">
+                </div>
+                <div class="card-content">
+                    <div class="info-icon"></div>
+                    <h2>O Problema</h2>
+                    <p>Esse problema de indecisão é algo <strong>real e constante</strong>. As pessoas têm dificuldade de escolher o que comer, seja por preço, por distância ou simplesmente por algo chamado: <span class="highlight">"indecisão crônica"</span>.</p>
+                    <p>Existem muitos restaurantes ótimos na nossa região, mas não existe uma ferramenta que ajude a tomar essa decisão de forma <strong>rápida e divertida</strong>. O resultado? Perda de tempo, discussões desnecessárias e a sensação de que "nunca tem nada novo para experimentar".</p>
+                </div>
+            </div>
+            
+            <!-- CARD 3: A Solução -->
+            <div class="info-card">
+                <div class="card-image">
+                    <img src="3.jpg" alt="A Solução" onerror="this.src='https://via.placeholder.com/400x400/1C1C1C/white?text=💡'">
+                </div>
+                <div class="card-content">
+                    <div class="info-icon"></div>
+                    <h2>A Solução</h2>
+                    <p>Pensando nisso, tivemos a ideia do <strong class="highlight">SwipFood</strong>. O nome já entrega a ideia: é um site que funciona como um <strong>"Tinder dos restaurantes"</strong> para a nossa região.</p>
+                    
+                    <p><strong>➜ Como ele funciona?</strong></p>
+                    <!-- Lista não ordenada (marcadores) -->
+                    <ul>
+                        <li>O usuário acessa o site e vê todos os restaurantes locais disponíveis.</li>
+                        <li>Ele pode registrar suas preferências: se quer algo barato, uma comida japonesa, pizza, hambúrguer, etc.</li>
+                        <li>Em vez de uma busca chata e demorada, ele vai <strong>arrastando para a direita</strong> as opções que interessam e <strong>para a esquerda</strong> as que não servem.</li>
+                        <li>De forma rápida e intuitiva, o SwipeFood processa os 'matches' e entrega a <strong>melhor opção</strong> ou um <strong>ranking personalizado</strong> para você!</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- CARD 4: Público-Alvo -->
+            <div class="info-card">
+                <div class="card-image">
+                    <img src="4.jpg" alt="Público-Alvo" onerror="this.src='https://via.placeholder.com/400x400/1C1C1C/white?text=👥'">
+                </div>
+                <div class="card-content">
+                    <div class="info-icon"></div>
+                    <h2>Público-Alvo</h2>
+                    <p>Nosso foco inicial são os <strong>grandes grupos de indecisos</strong>:</p>
+                    <ul>
+                        <li>Casais que não se entendem na hora de escolher o jantar</li>
+                        <li>Famílias com crianças que têm gostos diferentes</li>
+                        <li>Turmas de amigos que querem agradar todo mundo</li>
+                        <li>Qualquer pessoa que quer transformar a escolha da refeição em algo <strong>rápido, leve e divertido</strong></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- CARD 5: Diferencial e Mercado -->
+            <div class="info-card">
+                <div class="card-image">
+                    <img src="5.jpg" alt="Diferencial" onerror="this.src='https://via.placeholder.com/400x400/1C1C1C/white?text=🚀'">
+                </div>
+                <div class="card-content">
+                    <div class="info-icon"></div>
+                    <h2>Diferencial e Mercado</h2>
+                    <p>O que torna o <strong class="highlight">SwipFood</strong> único é a <strong>gamificação da escolha</strong>. Nós não somos só mais um site com lista de restaurantes. Queremos entregar uma <strong>experiência interativa</strong> que resolva um problema comum: <strong>a indecisão</strong> — de um jeito rápido e, acima de tudo, <strong>divertido</strong>.</p>
+                    <p>E o melhor de tudo é que, com o site, fortaleceríamos até mesmo o <strong>comércio local da nossa região</strong>! Pequenos negócios ganham visibilidade, e você descobre lugares incríveis que nem sabia que existiam.</p>
+                </div>
+            </div>
+            
+            <!-- CARD 6: Chamada Final -->
+            <div class="info-card">
+                <div class="card-image">
+                    <img src="cta.jpg" alt="Comece Agora" onerror="this.src='https://via.placeholder.com/400x400/e74c3c/white?text=🎯'">
+                </div>
+                <div class="card-content">
+                    <div class="info-icon"></div>
+                    <h2>Pronto para acabar com a indecisão?</h2>
+                    <p>Junte-se ao SwipFood e transforme a escolha do seu próximo restaurante em uma experiência rápida, divertida e personalizada!</p>
+                    <!-- Botão que redireciona para a tela de login -->
+                    <button class="btn-explorar" onclick="window.location.href='tela_login.html'">
+                        Começar agora →
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+        <!-- FIM DA SEÇÃO DE INFORMAÇÕES -->
+        
+        <!-- SEÇÃO DE RECOMENDAÇÕES (cards de lugares em destaque) -->
+        <div class="footerr">
+            <div class="recommendations">
+                <h2>₊˚⊹ Lugares em destaque</h2>
+                
+                <!-- Container dos cards (grade flexível) -->
+                <div class="cards">
+                    
+                    <!-- CARD 1: Sushi -->
+                    <div class="card">
+                        <div class="card-icon">🍣</div>
+                        <h3>Promoção: sushi grátis aqui!</h3>
+                        <p><small>(veja os termos e condições)</small></p>
+                    </div>
+                    
+                    <!-- CARD 2: Bar com show ao vivo -->
+                    <div class="card">
+                        <div class="card-icon">🎤</div>
+                        <h3>Restaurante & Bar com show ao vivo hoje</h3>
+                    </div>
+                    
+                    <!-- CARD 3: Café -->
+                    <div class="card">
+                        <div class="card-icon">☕</div>
+                        <h3>Café tranquilo com mais pontos do mês</h3>
+                    </div>
+                    
+                    <!-- CARD 4: Promoção aniversariante -->
+                    <div class="card">
+                        <div class="card-icon">🎂</div>
+                        <h3>Promoção exclusiva para aniversariantes</h3>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- FIM DA SEÇÃO DE RECOMENDAÇÕES -->
         
-        <!-- RODAPÉ -->
         <div class="footer">
             <p>© 2024 Swipfood - Todos os direitos reservados</p>
+            <p style="margin-top: 10px; font-size: 12px;">O Tinder dos Restaurantes - Transformando a indecisão em diversão!</p>
         </div>
         
-    </div>  <!-- FIM DO CONTAINER -->
+    </div>
+
+    <!-- JAVASCRIPT: ANIMAÇÃO DE REVELAÇÃO DOS CARDS  -->
+    <script>
+        /* 1. Seleciona TODOS os elementos com a classe "info-card"       */
+        /*    (todos os cards explicativos do site)                       */
+        const infoCards = document.querySelectorAll('.info-card');
+        /* OBS: document.querySelectorAll() retorna uma "NodeList" (lista) */
+        /*      de todos os elementos que têm a classe .info-card         */
+
+        /* 2. Função que verifica quais cards estão visíveis na tela      */
+        /*    e adiciona a classe "reveal" para ativar a animação         */
+        function revealCards() {
+            /* Itera sobre cada card da lista (um por um) */
+            infoCards.forEach(card => {
+                /* getBoundingClientRect() - Obtém a posição do elemento  */
+                /* na tela. O método retorna um objeto com as propriedades */
+                /* .top, .bottom, .left, .right, etc.                     */
+                const cardTop = card.getBoundingClientRect().top;
+                
+                /* window.innerHeight - Retorna a altura VISÍVEL da janela */
+                /* do navegador (em pixels). Por exemplo: em um celular,  */
+                /* pode ser 800px; em um monitor, pode ser 1080px.        */
+                const windowHeight = window.innerHeight;
+                
+                /* LÓGICA DA ANIMAÇÃO:                                     */
+                /* "cardTop" é a distância do topo do card até o topo da   */
+                /* janela visível.                                         */
+                /*                                                         */
+                /* "windowHeight - 100" é a altura da tela MENOS 100px.    */
+                /* Isso cria uma pequena margem: o card começa a aparecer  */
+                /* quando ele está a 100px antes de chegar ao final da tela*/
+                /*                                                         */
+                /* Exemplo: Se a tela tem 800px de altura, o card aparece  */
+                /* quando cardTop for MENOR que 700px (800 - 100).         */
+                /* Isso faz o card aparecer ANTES de sair da tela.         */
+                if (cardTop < windowHeight - 100) {
+                    /* classList.add('reveal') - Adiciona a classe "reveal"*/
+                    /* ao card. Esta classe está definida no CSS e ativa  */
+                    /* a animação de fade-in + deslocamento.              */
+                    card.classList.add('reveal');
+                }
+                /* OBS: Cards que NÃO passaram no teste (ainda estão       */
+                /*      mais para baixo na página) NÃO recebem a classe,   */
+                /*      então continuam invisíveis até que o usuário role  */
+                /*      a página e eles entrem na área visível.            */
+            });
+        }
+        
+        /* 3. Evento 'load' - Executa a função quando a página termina    */
+        /*    de carregar completamente.                                   */
+
+        /* window.addEventListener('load', ...) significa:                 */
+        /* "Quando a janela terminar de carregar, execute a função"       */
+        window.addEventListener('load', revealCards);
+        
+        /* 4. Evento 'scroll' - Executa a função SEMPRE que o usuário     */
+        /*    rolar a página (para cima ou para baixo).                    */
+
+        /* Isso permite que novos cards fiquem visíveis conforme o usuário*/
+        /* desce a página.                                                */
+        window.addEventListener('scroll', revealCards);
+        
+        /* 5. Evento 'resize' - Executa a função quando a janela do       */
+        /*    navegador é redimensionada (ex: usuário gira o celular,     */
+        /*    ou aumenta/diminui a janela no computador).                 */
+
+        /* Isso recalcula a posição dos cards caso o tamanho da tela mude */
+        window.addEventListener('resize', revealCards);
+        
+        /* RESUMO DO FUNCIONAMENTO:                                        */
+        /* 1. O CSS define que .info-card começa com:                     */
+        /*    - opacity: 0 (invisível)                                    */
+        /*    - transform: translateY(40px) (deslocado 40px para baixo)   */
+        /*    - transition: 0.8s (animação suave de 0.8 segundos)         */
+
+        /* 2. Quando o card recebe a classe .reveal, o CSS muda para:     */
+        /*    - opacity: 1 (totalmente visível)                           */
+        /*    - transform: translateY(0) (posição original)               */
+
+        /* 3. O JavaScript detecta quando o card entra na área visível da */
+        /*    tela e adiciona a classe .reveal.                           */
+
+        /* 4. O resultado é um efeito de "fade-in" com o card "subindo"   */
+        /*    suavemente conforme o usuário rola a página.                */
+    </script>
     
 </body>
 </html>
