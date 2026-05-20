@@ -457,7 +457,7 @@ body {
 
 /* FUNDO GRADIENTE ANIMADO */
 body.pagina-inicial {
-    background: linear-gradient(135deg, #2c2c2c, #4a4a4a, #dbcbb8);
+    background: linear-gradient(135deg, #dbcbb8, #867156, #5e4f3c);
     background-size: 200% 200%;
     min-height: 100vh;
     animation: subtleGradientShift 8s ease infinite;
@@ -476,7 +476,7 @@ body.pagina-inicial {
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: #dbcbb8;
+    background-color: #796853;
     border-bottom: 2px solid rgba(0,0,0,0.1);
     flex-wrap: wrap;
     gap: 15px;
@@ -536,7 +536,7 @@ body.pagina-inicial {
 
 /* BARRA DE FILTROS */
 .filters-bar {
-    background-color: #b8a1857c;
+    background-color: #58452e41;
     border-radius: 15px;
     padding: 20px;
     margin: 30px 0;
