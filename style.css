@@ -1,192 +1,332 @@
 /* RESET GLOBAL - Remove estilos padrão do navegador */
 
+
 /* SELETOR UNIVERSAL (*) - Aplica a TODOS os elementos da página */
+
 * {
-    margin: 0;          /* Remove todas as margens externas padrão */
-    padding: 0;         /* Remove todos os espaçamentos internos padrão */
-    box-sizing: border-box; /* Faz a largura incluir bordas e padding (facilita o layout) */
+    margin: 0;
+    /* Remove todas as margens externas padrão */
+    padding: 0;
+    /* Remove todos os espaçamentos internos padrão */
+    box-sizing: border-box;
+    /* Faz a largura incluir bordas e padding (facilita o layout) */
 }
+
 
 /* ESTILOS GLOBAIS - Aplicados a todas as páginas */
 
+
 /* ESTILO DO CORPO DA PÁGINA (body) */
+
 body {
-    background-color: #dbcbb8;  /* Cor de fundo creme/bege */
-    font-family: Arial, Helvetica, sans-serif; /* Define a fonte do texto */
+    background-color: #dbcbb8;
+    /* Cor de fundo creme/bege */
+    font-family: Arial, Helvetica, sans-serif;
+    /* Define a fonte do texto */
 }
 
+
 /* CONTAINER PRINCIPAL - Centraliza o conteúdo e limita a largura */
+
 .container {
-    max-width: 1200px;   /* Largura máxima de 1200px (não fica gigante em telas grandes) */
-    margin: 0 auto;      /* Centraliza horizontalmente (auto nas laterais) */
-    padding: 20px;       /* Espaçamento interno de 20px em todos os lados */
+    max-width: 1200px;
+    /* Largura máxima de 1200px (não fica gigante em telas grandes) */
+    margin: 0 auto;
+    /* Centraliza horizontalmente (auto nas laterais) */
+    padding: 20px;
+    /* Espaçamento interno de 20px em todos os lados */
 }
+
 
 /* BOTÕES PADRÃO - Usados em várias páginas */
 
+
 /* BOTÃO DE LOGIN (usado no index) */
+
 .btn-login {
-    background-color: #1C1C1C;  /* Fundo preto/escuro */
-    color: #dbcbb8;             /* Texto na cor creme */
-    font-size: 14px;            /* Tamanho da fonte */
-    padding: 8px 20px;          /* Espaçamento: 8px cima/baixo, 20px laterais */
-    border: 2px solid #1C1C1C;  /* Borda preta de 2px */
-    border-radius: 30px;        /* Bordas bem arredondadas (30px) */
-    cursor: pointer;            /* Muda o cursor para mãozinha ao passar o mouse */
-    font-weight: bold;          /* Texto em negrito */
+    background-color: #1C1C1C;
+    /* Fundo preto/escuro */
+    color: #dbcbb8;
+    /* Texto na cor creme */
+    font-size: 14px;
+    /* Tamanho da fonte */
+    padding: 8px 20px;
+    /* Espaçamento: 8px cima/baixo, 20px laterais */
+    border: 2px solid #1C1C1C;
+    /* Borda preta de 2px */
+    border-radius: 30px;
+    /* Bordas bem arredondadas (30px) */
+    cursor: pointer;
+    /* Muda o cursor para mãozinha ao passar o mouse */
+    font-weight: bold;
+    /* Texto em negrito */
 }
+
 
 /* EFEITO DO BOTÃO DE LOGIN QUANDO O MOUSE PASSA POR CIMA */
+
 .btn-login:hover {
-    background-color: #1C1C1C;  /* Mantém fundo preto */
-    color: white;               /* Texto muda para branco */
+    background-color: #1C1C1C;
+    /* Mantém fundo preto */
+    color: white;
+    /* Texto muda para branco */
 }
+
 
 /* BOTÃO EXPLORAR (usado em várias páginas) */
+
 .btn-explorar {
-    background-color: #1C1C1C;  /* Fundo preto */
-    color: white;               /* Texto branco */
-    font-size: 16px;            /* Tamanho da fonte */
-    padding: 12px 30px;         /* Espaçamento interno */
-    border: none;               /* Remove a borda padrão */
-    border-radius: 30px;        /* Bordas arredondadas */
-    cursor: pointer;            /* Cursor vira mãozinha */
-    font-weight: bold;          /* Texto em negrito */
-    margin-top: 20px;           /* Espaço de 20px acima do botão */
-    transition: all 0.3s ease;  /* Animação suave para mudanças (0.3 segundos) */
+    background-color: #1C1C1C;
+    /* Fundo preto */
+    color: white;
+    /* Texto branco */
+    font-size: 16px;
+    /* Tamanho da fonte */
+    padding: 12px 30px;
+    /* Espaçamento interno */
+    border: none;
+    /* Remove a borda padrão */
+    border-radius: 30px;
+    /* Bordas arredondadas */
+    cursor: pointer;
+    /* Cursor vira mãozinha */
+    font-weight: bold;
+    /* Texto em negrito */
+    margin-top: 20px;
+    /* Espaço de 20px acima do botão */
+    transition: all 0.3s ease;
+    /* Animação suave para mudanças (0.3 segundos) */
 }
 
+
 /* EFEITO DO BOTÃO EXPLORAR AO PASSAR O MOUSE */
+
 .btn-explorar:hover {
-    background-color: #333;      /* Fundo fica cinza escuro */
-    transform: scale(1.02);      /* Aumenta levemente (2%) */
+    background-color: #333;
+    /* Fundo fica cinza escuro */
+    transform: scale(1.02);
+    /* Aumenta levemente (2%) */
 }
+
 
 /* CABEÇALHO E MENU (Página INDEX) */
 
+
 /* CABEÇALHO DA PÁGINA (logo + botão login) */
+
 .header {
-    display: flex;                 /* Ativa o Flexbox (layout flexível) */
-    justify-content: space-between; /* Espaça os itens: logo esquerda, login direita */
-    align-items: center;          /* Alinha os itens verticalmente ao centro */
-    padding: 20px 0;              /* Espaçamento: 20px cima/baixo, 0 laterais */
-    border-bottom: 2px solid rgba(0,0,0,0.1); /* Linha fina separadora */
+    display: flex;
+    /* Ativa o Flexbox (layout flexível) */
+    justify-content: space-between;
+    /* Espaça os itens: logo esquerda, login direita */
+    align-items: center;
+    /* Alinha os itens verticalmente ao centro */
+    padding: 20px 0;
+    /* Espaçamento: 20px cima/baixo, 0 laterais */
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    /* Linha fina separadora */
 }
+
 
 /* ÁREA DA LOGO (imagem + texto) */
+
 .logo-area {
-    display: flex;       /* Flexbox para imagem e texto lado a lado */
-    align-items: center; /* Alinha verticalmente ao centro */
-    gap: 15px;          /* Espaço de 15px entre a imagem e o texto */
+    display: flex;
+    /* Flexbox para imagem e texto lado a lado */
+    align-items: center;
+    /* Alinha verticalmente ao centro */
+    gap: 15px;
+    /* Espaço de 15px entre a imagem e o texto */
 }
+
 
 /* DIV DA IMAGEM DA LOGO */
+
 .logo {
-    width: 60px;                /* Largura de 60px */
-    height: 60px;               /* Altura de 60px */
-    background-color: transparent; /* Fundo transparente */
-    border-radius: 15px;        /* Bordas levemente arredondadas */
-    display: flex;              /* Flexbox para centralizar a imagem */
-    align-items: center;        /* Centraliza verticalmente */
-    justify-content: center;    /* Centraliza horizontalmente */
-    overflow: hidden;           /* Esconde qualquer parte da imagem que ultrapasse */
+    width: 60px;
+    /* Largura de 60px */
+    height: 60px;
+    /* Altura de 60px */
+    background-color: transparent;
+    /* Fundo transparente */
+    border-radius: 15px;
+    /* Bordas levemente arredondadas */
+    display: flex;
+    /* Flexbox para centralizar a imagem */
+    align-items: center;
+    /* Centraliza verticalmente */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    overflow: hidden;
+    /* Esconde qualquer parte da imagem que ultrapasse */
 }
+
 
 /* ESTILO DA IMAGEM DENTRO DA LOGO */
+
 .logo img {
-    width: 88px;        /* Largura de 88px */
-    height: 88px;       /* Altura de 88px */
-    object-fit: cover;  /* A imagem cobre todo o espaço sem distorcer (corta se necessário) */
+    width: 88px;
+    /* Largura de 88px */
+    height: 88px;
+    /* Altura de 88px */
+    object-fit: cover;
+    /* A imagem cobre todo o espaço sem distorcer (corta se necessário) */
 }
+
 
 /* TEXTO "Swipfood" */
+
 .logo-text {
-    font-size: 24px;      /* Tamanho da fonte */
-    font-weight: bold;    /* Texto em negrito */
-    color: #1C1C1C;       /* Cor preta */
+    font-size: 24px;
+    /* Tamanho da fonte */
+    font-weight: bold;
+    /* Texto em negrito */
+    color: #1C1C1C;
+    /* Cor preta */
 }
+
 
 /* MENU DE NAVEGAÇÃO (Home, Restaurantes, Cafés...) */
+
 .nav-menu {
-    display: flex;              /* Flexbox para itens lado a lado */
-    gap: 30px;                 /* Espaço de 30px entre cada item */
-    margin: 30px 0 20px 0;     /* Margem: 30px cima, 0 direita, 20px baixo, 0 esquerda */
-    padding-bottom: 20px;      /* Espaçamento interno na parte inferior */
-    border-bottom: 1px solid rgba(0,0,0,0.1); /* Linha separadora */
-    flex-wrap: wrap;           /* Em telas pequenas, itens quebram para linha abaixo */
+    display: flex;
+    /* Flexbox para itens lado a lado */
+    gap: 30px;
+    /* Espaço de 30px entre cada item */
+    margin: 30px 0 20px 0;
+    /* Margem: 30px cima, 0 direita, 20px baixo, 0 esquerda */
+    padding-bottom: 20px;
+    /* Espaçamento interno na parte inferior */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    /* Linha separadora */
+    flex-wrap: wrap;
+    /* Em telas pequenas, itens quebram para linha abaixo */
 }
 
+
 /* ESTILO DOS LINKS DO MENU */
+
 .nav-menu a {
-    text-decoration: none;  /* Remove o sublinhado padrão */
-    color: #1C1C1C;         /* Cor preta */
-    font-weight: bold;      /* Negrito */
-    font-size: 16px;        /* Tamanho da fonte */
+    text-decoration: none;
+    /* Remove o sublinhado padrão */
+    color: #1C1C1C;
+    /* Cor preta */
+    font-weight: bold;
+    /* Negrito */
+    font-size: 16px;
+    /* Tamanho da fonte */
 }
+
 
 /* CONTEÚDO PRINCIPAL (Hero Section - texto + imagem) */
 
+
 /* ÁREA PRINCIPAL (duas colunas: texto e imagem) */
+
 .main-content {
-    display: flex;      /* Flexbox para duas colunas lado a lado */
-    margin-top: 50px;   /* Espaço de 50px acima */
-    gap: 50px;         /* Espaço de 50px entre texto e imagem */
-    flex-wrap: wrap;   /* Em telas pequenas, as colunas empilham */
+    display: flex;
+    /* Flexbox para duas colunas lado a lado */
+    margin-top: 50px;
+    /* Espaço de 50px acima */
+    gap: 50px;
+    /* Espaço de 50px entre texto e imagem */
+    flex-wrap: wrap;
+    /* Em telas pequenas, as colunas empilham */
 }
+
 
 /* COLUNA DO TEXTO */
+
 .hero-text {
-    flex: 1;            /* Ocupa 1 parte do espaço disponível (metade) */
-    min-width: 250px;   /* Largura mínima (abaixo disso, quebra) */
+    flex: 1;
+    /* Ocupa 1 parte do espaço disponível (metade) */
+    min-width: 250px;
+    /* Largura mínima (abaixo disso, quebra) */
 }
+
 
 /* TÍTULO GRANDE */
+
 .hero-text h1 {
-    font-size: 48px;      /* Fonte grande */
-    line-height: 1.2;     /* Espaçamento entre linhas (1.2x o tamanho da fonte) */
-    color: #1C1C1C;       /* Cor preta */
+    font-size: 48px;
+    /* Fonte grande */
+    line-height: 1.2;
+    /* Espaçamento entre linhas (1.2x o tamanho da fonte) */
+    color: #1C1C1C;
+    /* Cor preta */
 }
+
 
 /* TEXTO MENOR DENTRO DO TÍTULO */
+
 .hero-text h1 small {
-    font-size: 20px;        /* Fonte menor */
-    font-weight: normal;    /* Remove o negrito */
-    display: block;         /* Ocupa uma linha inteira */
-    margin-top: 20px;       /* Espaço de 20px acima */
+    font-size: 20px;
+    /* Fonte menor */
+    font-weight: normal;
+    /* Remove o negrito */
+    display: block;
+    /* Ocupa uma linha inteira */
+    margin-top: 20px;
+    /* Espaço de 20px acima */
 }
+
 
 /* COLUNA DA IMAGEM */
+
 .hero-image {
-    flex: 1;                    /* Ocupa 1 parte do espaço (metade) */
-    min-width: 250px;           /* Largura mínima */
-    border-radius: 20px;        /* Bordas arredondadas */
-    overflow: hidden;           /* Esconde o que ultrapassar */
-    display: flex;              /* Flexbox para centralizar */
-    align-items: center;        /* Centraliza verticalmente */
-    justify-content: center;    /* Centraliza horizontalmente */
+    flex: 1;
+    /* Ocupa 1 parte do espaço (metade) */
+    min-width: 250px;
+    /* Largura mínima */
+    border-radius: 20px;
+    /* Bordas arredondadas */
+    overflow: hidden;
+    /* Esconde o que ultrapassar */
+    display: flex;
+    /* Flexbox para centralizar */
+    align-items: center;
+    /* Centraliza verticalmente */
+    justify-content: center;
+    /* Centraliza horizontalmente */
 }
 
+
 /* ESTILO DA IMAGEM DENTRO DA COLUNA */
+
 .hero-image img {
-    width: 100%;               /* Largura máxima disponível */
-    max-width: 500px;          /* Mas não ultrapassa 500px */
-    height: auto;              /* Altura automática (mantém proporção) */
-    max-height: 400px;         /* Altura máxima de 400px */
-    object-fit: cover;         /* Cobre o espaço sem distorcer */
-    border-radius: 20px;       /* Bordas arredondadas */
+    width: 100%;
+    /* Largura máxima disponível */
+    max-width: 500px;
+    /* Mas não ultrapassa 500px */
+    height: auto;
+    /* Altura automática (mantém proporção) */
+    max-height: 400px;
+    /* Altura máxima de 400px */
+    object-fit: cover;
+    /* Cobre o espaço sem distorcer */
+    border-radius: 20px;
+    /* Bordas arredondadas */
 }
+
 
 /* CARDS DE INFORMAÇÃO (COM ANIMAÇÃO DE REVELAÇÃO) */
 
+
 /* GRADE DE CARDS (um abaixo do outro) */
+
 .info-grid {
     display: flex;
-    flex-direction: column;  /* Empilha verticalmente */
-    gap: 50px;              /* Espaço de 50px entre os cards */
-    margin: 60px 0;         /* Margem: 60px cima/baixo */
+    flex-direction: column;
+    /* Empilha verticalmente */
+    gap: 50px;
+    /* Espaço de 50px entre os cards */
+    margin: 60px 0;
+    /* Margem: 60px cima/baixo */
 }
 
+
 /* CARD INDIVIDUAL - ESTADO INICIAL (INVISÍVEL) */
+
 .info-card {
     display: flex;
     align-items: center;
@@ -194,33 +334,45 @@ body {
     background-color: white;
     border-radius: 25px;
     padding: 35px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     /* ANIMAÇÃO DE REVELAÇÃO */
-    opacity: 0;                    /* 0 = totalmente invisível */
-    transform: translateY(40px);  /* Deslocado 40 pixels para BAIXO */
+    opacity: 0;
+    /* 0 = totalmente invisível */
+    transform: translateY(40px);
+    /* Deslocado 40 pixels para BAIXO */
     transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease;
     /* A animação dura 0.8 segundos com efeito suave (ease) */
 }
 
+
 /* EFEITO AO PASSAR O MOUSE (hover) */
+
 .info-card:hover {
-    transform: translateY(-5px);   /* Sobe 5px ao passar o mouse */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+    /* Sobe 5px ao passar o mouse */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
+
 
 /* CARD VISÍVEL - QUANDO A CLASSE "reveal" É ADICIONADA PELO JAVASCRIPT */
+
 .info-card.reveal {
-    opacity: 1;                   /* 1 = totalmente visível */
-    transform: translateY(0);     /* Volta à posição original (sobe 40px) */
+    opacity: 1;
+    /* 1 = totalmente visível */
+    transform: translateY(0);
+    /* Volta à posição original (sobe 40px) */
 }
 
+
 /* CARDS PARES (2º, 4º, 6º) - INVERTE A ORDEM (zig-zag) */
+
 .info-card:nth-child(even) {
     flex-direction: row-reverse;
 }
 
+
 /* PRIMEIRO CARD - Fundo escuro (destaque) */
+
 .info-card:first-child {
     background: linear-gradient(135deg, #1C1C1C, #2c2c2c);
 }
@@ -238,7 +390,9 @@ body {
     color: #e74c3c;
 }
 
+
 /* ÚLTIMO CARD - Fundo vermelho (Call to Action) */
+
 .info-card:last-child {
     background: linear-gradient(135deg, #e74c3c, #c0392b);
     text-align: center;
@@ -271,35 +425,46 @@ body {
     background-color: #333;
 }
 
+
 /* COLUNA DA IMAGEM DO CARD */
+
 .card-image {
     flex: 0.8;
     min-width: 200px;
 }
 
+
 /* ESTILO DA IMAGEM DO CARD */
+
 .card-image img {
     width: 100%;
     height: auto;
     border-radius: 20px;
     object-fit: cover;
     aspect-ratio: 1 / 1;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    background-color: #e0d5c4; /* Fallback caso a imagem não carregue */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #e0d5c4;
+    /* Fallback caso a imagem não carregue */
 }
 
+
 /* COLUNA DO TEXTO DO CARD */
+
 .card-content {
     flex: 1.2;
 }
 
+
 /* ÍCONE DECORATIVO DO CARD */
+
 .card-content .info-icon {
     font-size: 48px;
     margin-bottom: 15px;
 }
 
+
 /* TÍTULO DO CARD */
+
 .card-content h2 {
     font-size: 28px;
     color: #1C1C1C;
@@ -308,7 +473,9 @@ body {
     padding-left: 15px;
 }
 
+
 /* PARÁGRAFO DO CARD */
+
 .card-content p {
     font-size: 18px;
     line-height: 1.6;
@@ -316,14 +483,18 @@ body {
     margin-bottom: 15px;
 }
 
+
 /* LISTA DENTRO DO CARD */
+
 .card-content ul {
     margin-left: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
+
 /* ITENS DA LISTA */
+
 .card-content li {
     font-size: 18px;
     line-height: 1.6;
@@ -331,34 +502,45 @@ body {
     margin-bottom: 10px;
 }
 
+
 /* TEXTO DESTACADO (em vermelho) */
+
 .highlight {
     font-weight: bold;
     color: #e74c3c;
 }
 
+
 /* CARDS DE RECOMENDAÇÕES (Lugares em destaque) */
 
+
 /* SEÇÃO DE RECOMENDAÇÕES */
+
 .recommendations {
     margin-top: 40px;
 }
 
+
 /* TÍTULO DA SEÇÃO */
+
 .recommendations h2 {
     font-size: 28px;
     color: #1C1C1C;
     margin-bottom: 20px;
 }
 
+
 /* GRADE DE CARDS (flexível, lado a lado) */
+
 .cards {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
 
+
 /* CARD INDIVIDUAL */
+
 .card {
     flex: 1;
     min-width: 200px;
@@ -366,16 +548,20 @@ body {
     border-radius: 15px;
     padding: 20px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
+
 /* EFEITO AO PASSAR O MOUSE */
+
 .card:hover {
     transform: translateY(-5px);
 }
 
+
 /* ÍCONE DENTRO DO CARD */
+
 .card-icon {
     width: 60px;
     height: 60px;
@@ -389,49 +575,52 @@ body {
     font-size: 28px;
 }
 
+
 /* RODAPÉ (INDEX) */
 
+
 /* RODAPÉ PADRÃO */
+
 .footer {
     margin-top: 60px;
     padding: 30px 0;
     text-align: center;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     color: #666;
 }
 
+
 /* RODAPÉ ALTERNATIVO (usado no INDEX para a seção de lugares) */
+
 .footerr {
     margin-top: 60px;
     padding: 30px 0;
     text-align: left;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     color: #666;
 }
 
+
 /* RESPONSIVIDADE GERAL (telas menores que 768px (celulares)) */
+
 @media (max-width: 768px) {
     /* Título fica menor */
     .hero-text h1 {
         font-size: 32px;
     }
-    
     /* Espaço entre itens do menu reduz */
     .nav-menu {
         gap: 15px;
     }
-    
     /* Cards de informação viram coluna (empilham) */
     .info-card {
         flex-direction: column !important;
         text-align: center;
     }
-    
     /* Cards pares também viram coluna */
     .info-card:nth-child(even) {
         flex-direction: column !important;
     }
-    
     /* Título dos cards: sem barra lateral, com barra inferior */
     .card-content h2 {
         text-align: center;
@@ -440,12 +629,10 @@ body {
         padding-left: 0;
         padding-bottom: 10px;
     }
-    
     /* Lista mantém alinhamento à esquerda */
     .card-content ul {
         text-align: left;
     }
-    
     /* Imagem ocupa 80% da largura */
     .card-image {
         width: 80%;
@@ -453,9 +640,12 @@ body {
     }
 }
 
+
 /* ESTILOS EXCLUSIVOS DA PAGINA_INICIAL.HTML (após login) */
 
+
 /* FUNDO GRADIENTE ANIMADO */
+
 body.pagina-inicial {
     background: linear-gradient(135deg, #dbcbb8, #867156, #5e4f3c);
     background-size: 200% 200%;
@@ -463,21 +653,31 @@ body.pagina-inicial {
     animation: subtleGradientShift 8s ease infinite;
 }
 
+
 /* ANIMAÇÃO DO GRADIENTE (movimento suave) */
+
 @keyframes subtleGradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
+
 /* CABEÇALHO EXPANSIVO (ocupa 100% da tela) */
+
 .header-fullwidth {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
     background-color: #796853;
-    border-bottom: 2px solid rgba(0,0,0,0.1);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     flex-wrap: wrap;
     gap: 15px;
     width: 100%;
@@ -489,7 +689,9 @@ body.pagina-inicial {
     width: 100vw;
 }
 
+
 /* LOGO GRANDE (usada na pagina_inicial) */
+
 .logo-large {
     width: 88px;
     height: 88px;
@@ -504,21 +706,27 @@ body.pagina-inicial {
     object-fit: cover;
 }
 
+
 /* TEXTO DA LOGO GRANDE */
+
 .logo-text-large {
     font-size: 28px;
     font-weight: bold;
     color: #1C1C1C;
 }
 
+
 /* INFORMAÇÕES DO USUÁRIO */
+
 .user-info {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
+
 /* BOTÃO DE SAIR */
+
 .btn-sair {
     background-color: #1C1C1C;
     color: #dbcbb8;
@@ -534,7 +742,9 @@ body.pagina-inicial {
     color: white;
 }
 
+
 /* BARRA DE FILTROS */
+
 .filters-bar {
     background-color: #58452e41;
     border-radius: 15px;
@@ -547,33 +757,60 @@ body.pagina-inicial {
     align-items: center;
 }
 
+
 /* GRUPO DE CADA FILTRO */
+
 .filter-group {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    position: relative;
+    /* ponto de referencia do dropdown */
 }
 
-.filter-group span {
+.filter-btn {
+    background: transparent;
+    border: none;
     font-weight: bold;
     color: #1C1C1C;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-/* SELECT (dropdown) do filtro */
-.filter-group select {
-    padding: 8px 12px;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    background-color: #f5f5f5;
+
+/* Novo: Estilo para a caixa fantasma que vai flutuar */
+
+.dropdown-caixa {
+    display: none;
+    position: absolute;
+    top: 150%;
+    left: 0;
+    background-color: rgba(155, 126, 107, 0.856);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    z-index: 10;
 }
+
+
+/* Novo: A classe que o JavaScript liga e desliga */
+
+.dropdown-caixa.mostrar {
+    display: block;
+}
+
 
 /* LOCALIZAÇÃO */
+
 .location {
     font-weight: bold;
     color: #1C1C1C;
 }
 
+
 /* BOTÃO MATCH (chamativo, gradiente vermelho) */
+
 .btn-match {
     background: linear-gradient(135deg, #e74c3c, #c0392b, #e74c3c);
     background-size: 200% 200%;
@@ -594,11 +831,19 @@ body.pagina-inicial {
     animation: gradientShift 2s ease infinite;
 }
 
+
 /* ANIMAÇÃO DO GRADIENTE DO BOTÃO MATCH */
+
 @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .btn-match:hover {
@@ -606,7 +851,9 @@ body.pagina-inicial {
     box-shadow: 0 10px 30px rgba(231, 76, 60, 0.6);
 }
 
+
 /* TEXTO MENOR DENTRO DO BOTÃO MATCH */
+
 .btn-match small {
     font-size: 14px;
     font-weight: normal;
@@ -615,13 +862,17 @@ body.pagina-inicial {
     opacity: 0.9;
 }
 
+
 /* CONTAINER DO BOTÃO MATCH */
+
 .match-container {
     text-align: center;
     margin: 20px 0 40px 0;
 }
 
+
 /* SEÇÃO HERO (chamada principal) */
+
 .hero-section {
     background-color: #1C1C1C;
     border-radius: 20px;
@@ -641,7 +892,9 @@ body.pagina-inicial {
     opacity: 0.9;
 }
 
+
 /* SEÇÃO DE CATEGORIAS */
+
 .categorias {
     margin-bottom: 40px;
 }
@@ -650,17 +903,21 @@ body.pagina-inicial {
     font-size: 24px;
     color: white;
     margin-bottom: 20px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+
 /* GRADE DE CATEGORIAS */
+
 .categorias-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
 }
 
+
 /* BOTÃO DE CATEGORIA */
+
 .categoria-item {
     background-color: white;
     padding: 10px 20px;
@@ -678,7 +935,9 @@ body.pagina-inicial {
     color: white;
 }
 
+
 /* CATEGORIA SELECIONADA (ativo) */
+
 .categoria-item.selecionado {
     background-color: #e74c3c;
     color: white;
@@ -686,7 +945,9 @@ body.pagina-inicial {
     box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
 }
 
+
 /* BARRA DE PESQUISA */
+
 .search-bar {
     margin: 30px 0;
     display: flex;
@@ -703,7 +964,9 @@ body.pagina-inicial {
     background-color: white;
 }
 
+
 /* SEÇÃO DE ESTABELECIMENTOS */
+
 .estabelecimentos {
     margin: 40px 0;
 }
@@ -712,24 +975,28 @@ body.pagina-inicial {
     font-size: 24px;
     color: white;
     margin-bottom: 20px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+
 /* GRADE DE CARDS DE ESTABELECIMENTOS */
+
 .cards-estabelecimentos {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
+
 /* CARD DE ESTABELECIMENTO */
+
 .card-estabelecimento {
     flex: 1;
     min-width: 250px;
     background-color: white;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -737,7 +1004,9 @@ body.pagina-inicial {
     transform: translateY(-5px);
 }
 
+
 /* ÁREA DA IMAGEM DO CARD */
+
 .card-img {
     height: 180px;
     background-size: cover;
@@ -748,11 +1017,13 @@ body.pagina-inicial {
     justify-content: center;
     color: white;
     font-size: 48px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     position: relative;
 }
 
+
 /* OVERLAY ESCURO SOBRE A IMAGEM (para o texto ficar visível) */
+
 .card-img::before {
     content: "";
     position: absolute;
@@ -760,29 +1031,51 @@ body.pagina-inicial {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
 
+
 /* ÍCONE/EMOJI QUE FICA NA FRENTE */
+
 .card-img span {
     position: relative;
     z-index: 2;
 }
 
+
 /* IMAGENS DE FUNDO INDIVIDUAIS */
-.card-img.sushi { background-image: url('sushi.jpg'); }
-.card-img.bar { background-image: url('bar.jpg'); }
-.card-img.cafe { background-image: url('cafe.jpg'); }
-.card-img.pasta { background-image: url('pasta.jpg'); }
-.card-img.pizza { background-image: url('pizza.jpg'); }
+
+.card-img.sushi {
+    background-image: url('sushi.jpg');
+}
+
+.card-img.bar {
+    background-image: url('bar.jpg');
+}
+
+.card-img.cafe {
+    background-image: url('cafe.jpg');
+}
+
+.card-img.pasta {
+    background-image: url('pasta.jpg');
+}
+
+.card-img.pizza {
+    background-image: url('pizza.jpg');
+}
+
 
 /* COR DE FUNDO CASO A IMAGEM NÃO CARREGUE */
+
 .card-img {
     background-color: #1C1C1C;
 }
 
+
 /* INFORMAÇÕES DO CARD */
+
 .card-info {
     padding: 15px;
 }
@@ -797,18 +1090,23 @@ body.pagina-inicial {
     font-size: 14px;
 }
 
+
 /* RODAPÉ COM GRADIENTE (usado na pagina_inicial) */
+
 .footer-gradient {
     margin-top: 60px;
     padding: 30px 0;
     text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     color: #ddd;
 }
 
+
 /* ESTILOS EXCLUSIVOS DA TELA_LOGIN.HTML */
 
+
 /* CORPO DA TELA DE LOGIN */
+
 body.login-page {
     background-image: url('https://via.placeholder.com/1920x1080/1C1C1C/white?text=Background+Image');
     background-size: cover;
@@ -821,7 +1119,9 @@ body.login-page {
     background-color: #dbcbb8;
 }
 
+
 /* CAIXA DO FORMULÁRIO DE LOGIN (efeito vidro) */
+
 .login-container {
     background-color: rgba(255, 255, 255, 0.61);
     backdrop-filter: blur(20px);
@@ -829,12 +1129,14 @@ body.login-page {
     padding: 40px;
     width: 100%;
     max-width: 450px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
 }
 
+
 /* LOGO DA TELA DE LOGIN (classe específica para não conflitar com o INDEX) */
+
 .login-container .login-logo {
     margin-bottom: 20px;
 }
@@ -846,14 +1148,18 @@ body.login-page {
     margin: 0 auto;
 }
 
+
 /* TÍTULO Sign In */
+
 .login-container h2 {
     font-size: 28px;
     color: #1C1C1C;
     margin-bottom: 30px;
 }
 
+
 /* GRUPO DE CAMPO DO FORMULÁRIO */
+
 .login-container .input-group {
     text-align: left;
     margin-bottom: 20px;
@@ -869,13 +1175,15 @@ body.login-page {
 .login-container .input-group input {
     width: 100%;
     padding: 14px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     font-size: 16px;
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
+
 /* BOTÃO ENTRAR */
+
 .login-container .btn-entrar {
     width: 100%;
     background-color: #1C1C1C;
@@ -893,7 +1201,9 @@ body.login-page {
     background-color: #333;
 }
 
+
 /* DIVISOR "ou" com linhas laterais */
+
 .login-container .divider {
     display: flex;
     align-items: center;
@@ -901,20 +1211,24 @@ body.login-page {
     color: #666;
 }
 
+
 /* Linhas antes e depois do "ou" (pseudo-elementos) */
+
 .login-container .divider::before,
 .login-container .divider::after {
     content: "";
     flex: 1;
     height: 1px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .login-container .divider span {
     padding: 0 15px;
 }
 
+
 /* BOTÃO CRIAR CONTA */
+
 .login-container .btn-criar-conta {
     width: 100%;
     background-color: transparent;
@@ -933,7 +1247,9 @@ body.login-page {
     color: white;
 }
 
+
 /* LINK DE CADASTRO */
+
 .login-container .link-cadastro {
     margin-top: 20px;
     font-size: 14px;
@@ -943,7 +1259,9 @@ body.login-page {
     color: #333;
 }
 
+
 /* LINK VOLTAR */
+
 .login-container .back-link {
     display: block;
     margin-top: 20px;
@@ -956,33 +1274,170 @@ body.login-page {
     text-decoration: underline;
 }
 
+
 /* RESPONSIVIDADE DA PAGINA_INICIAL (telas menores) */
+
+
+/* RESPONSIVIDADE DA PAGINA_INICIAL (telas menores - Celulares) */
+
 @media (max-width: 768px) {
-    /* Filtros empilham verticalmente */
+    /* Filtros empilham verticalmente no celular */
     .filters-bar {
         flex-direction: column;
         align-items: stretch;
     }
-    
     /* Grupos de filtro se esticam */
     .filter-group {
         justify-content: space-between;
     }
-    
     /* Botão match fica menor */
     .btn-match {
         font-size: 22px;
         padding: 15px 30px;
         max-width: 280px;
     }
-    
     /* Cabeçalho com padding menor */
     .header-fullwidth {
         padding: 15px 20px;
     }
-    
     /* Texto da logo menor */
     .logo-text-large {
         font-size: 20px;
     }
+}
+
+
+/* <--- FECHOU A GAVETA DO CELULAR AQUI! */
+
+
+/* ==========================================================
+   ESTILOS GLOBAIS DAS PÍLULAS (Funciona no PC e no Celular!) 
+   ========================================================== */
+
+
+/* 1. FORÇA A FICAR NA MESMA LINHA (HORIZONTAL) */
+
+.caixa-valores {
+    display: flex !important;
+    flex-direction: row !important;
+    /* Impede que fiquem empilhados */
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 15px !important;
+    /* Espaço entre as pílulas e o traço */
+    width: 100% !important;
+}
+
+
+/* 2. O FORMATO EXATO DA PÍLULA (Redondinha e bege claro) */
+
+.caixa-pequena {
+    display: flex !important;
+    flex-direction: row !important;
+    /* Mantém tudo na mesma linha */
+    align-items: center !important;
+    background-color: #f4eee9 !important;
+    /* Cor bege clarinho do seu Figma */
+    padding: 8px 16px !important;
+    /* Espaçamento interno para ficar gordinha */
+    border-radius: 30px !important;
+    /* Deixa os cantos bem redondos */
+    color: #1C1C1C !important;
+    /* Cor do texto escura */
+    font-weight: bold !important;
+    font-size: 15px !important;
+    gap: 6px !important;
+    /* Espacinho entre a palavra e o número */
+}
+
+
+/* 3. O INPUT INVISÍVEL (Remove a caixa branca feia) */
+
+.caixa-pequena input {
+    background: transparent !important;
+    /* Fundo transparente */
+    border: none !important;
+    /* Sem bordas */
+    outline: none !important;
+    /* Sem linha azul ao clicar */
+    width: 38px !important;
+    /* Largura perfeita para os números */
+    text-align: center !important;
+    color: #1C1C1C !important;
+    font-weight: bold !important;
+    font-size: 15px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    -moz-appearance: textfield !important;
+    /* Tira as setas no Firefox */
+}
+
+
+/* 4. REMOVE AS SETINHAS CHATAS (Chrome, Edge, Safari) */
+
+.caixa-pequena input::-webkit-outer-spin-button,
+.caixa-pequena input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+
+/* 5. O TRAÇO DO MEIO */
+
+.separador {
+    font-weight: bold !important;
+    font-size: 22px !important;
+    color: #1C1C1C !important;
+}
+
+
+/* ==========================================================
+   ESTILOS DA CAIXA DE OFERTAS (Lista vertical)
+   ========================================================== */
+
+
+/* CONTAINER QUE EMPILHA OS BOTÕES */
+
+.caixa-ofertas-lista {
+    display: flex;
+    flex-direction: column;
+    /* Força os itens a ficarem um embaixo do outro */
+    gap: 12px;
+    /* Espaço entre um botão e outro */
+    width: 100%;
+}
+
+
+/* O FORMATO DO BOTÃO DA LISTA */
+
+.btn-oferta {
+    background-color: #f4eee9;
+    /* Cor bege clarinho do seu Figma */
+    border: none;
+    padding: 12px 20px;
+    /* Deixa o botão gordinho */
+    border-radius: 12px;
+    /* Cantos arredondados */
+    color: #1C1C1C;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: left;
+    /* Alinha o texto à esquerda como na sua imagem */
+    cursor: pointer;
+    width: 100%;
+    /* Ocupa toda a largura da caixa */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+
+/* EFEITO AO PASSAR O MOUSE (Para mostrar que é clicável) */
+
+.btn-oferta:hover {
+    background-color: #e0d5c4;
+    /* Fica um pouquinho mais escuro */
+    transform: scale(1.02);
+    /* Dá uma leve crescidinha */
+}
+
+
 }
