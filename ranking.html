@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking do Usuário - SwipFood</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        :root {
+            --bg-gradient-start: #1e4f8d;
+            --bg-gradient-end: #163c6d;
+            --card-bg: #fdfbf7;         
+            --item-bg: #e6dcce;         
+            --item-hover-bg: #ded2c1;   
+            --primary-dark: #112338;    
+            --accent-red: #ff5757;      
+            --text-muted: #6e6558;      
+        }
+
+        body { 
+            background: radial-gradient(circle at top, var(--bg-gradient-start), var(--bg-gradient-end) 70%); 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        /* CONTAINER PRINCIPAL DO RANKING */
+        .ranking-wrapper {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 750px;
+            border-radius: 24px;
+            padding: 45px 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        /* CABEÇALHO */
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .titulo-ranking {
+            color: var(--primary-dark);
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .subtitulo-ranking {
+            color: #8c8273;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* LISTA DE ITENS */
+        .lista-ranking {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .item-ranking {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .item-ranking:nth-child(1) { animation-delay: 0.1s; }
+        .item-ranking:nth-child(2) { animation-delay: 0.2s; }
+        .item-ranking:nth-child(3) { animation-delay: 0.3s; }
+        .item-ranking:nth-child(4) { animation-delay: 0.4s; }
+        .item-ranking:nth-child(5) { animation-delay: 0.5s; }
+        .item-ranking:nth-child(6) { animation-delay: 0.6s; }
+
+        /* CÍRCULO DO NÚMERO (POSIÇÃO) */
+        .numero-posicao {
+            background: linear-gradient(135deg, var(--accent-red), #e04545);
+            color: white;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 6px 12px rgba(255, 87, 87, 0.25);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        /* BARRA DO RESTAURANTE */
+        .info-restaurante {
+            background-color: var(--item-bg);
+            border-radius: 50px; 
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 28px;
+            height: 64px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .info-restaurante:hover {
+            transform: translateX(4px) scale(1.01);
+            background-color: var(--item-hover-bg);
+            box-shadow: 0 6px 15px rgba(110, 101, 88, 0.15);
+        }
+
+        .nome-restaurante {
+            color: var(--primary-dark);
+            font-size: 19px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+        }
+
+        /* BOTÃO "SOBRE" COM PREPARAÇÃO PARA O BALÃO */
+        .link-sobre {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            position: relative; /* Necessário para posicionar o balão */
+        }
+
+        .link-sobre::after {
+            content: '➔';
+            font-size: 11px;
+            transition: transform 0.2s ease;
+        }
+
+        .link-sobre:hover {
+            background-color: var(--primary-dark);
+            color: white;
+            border-color: var(--primary-dark);
+            box-shadow: 0 4px 10px rgba(17, 35, 56, 0.2);
+        }
+
+        .link-sobre:hover::after {
+            transform: translateX(2px);
+        }
+
+        /* balão de texto */
+
+        .link-sobre::before {
+            content: attr(data-info); /* Lê o texto do HTML */
+            position: absolute;
+            bottom: calc(100% + 12px); /* Distância acima do botão */
+            right: 0; /* Alinha o balão à direita do botão */
+            background-color: var(--primary-dark);
+            color: #fdfbf7;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            width: 220px; /* Largura do balão */
+            white-space: normal;
+            text-align: left;
+            line-height: 1.4;
+            
+            /* Efeito de aparição */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Sombrinha elegante */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            z-index: 100;
+            pointer-events: none; /* Para não atrapalhar o clique no botão */
+        }
+
+        /* A setinha do balão apontando para baixo */
+        .tooltip-seta {
+            position: absolute;
+            bottom: calc(100% + 6px);
+            right: 20px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: var(--primary-dark) transparent transparent transparent;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 101;
+            pointer-events: none;
+        }
+
+        /* O efeito quando passa o mouse (HOVER) */
+        .link-sobre:hover::before,
+        .link-sobre:hover .tooltip-seta {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* BOTÃO VOLTAR */
+        .btn-voltar {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.6;
+            transition: opacity 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-voltar:hover {
+            opacity: 1;
+            transform: translateX(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVIDADE */
+        @media(max-width: 600px) {
+            body { padding: 15px 10px; }
+            .ranking-wrapper { padding: 40px 20px 30px 20px; border-radius: 20px; }
+            .titulo-ranking { font-size: 28px; }
+            .subtitulo-ranking { font-size: 13px; }
+            .numero-posicao { width: 44px; height: 44px; font-size: 19px; }
+            .nome-restaurante { font-size: 15px; }
+            .info-restaurante { padding: 0 16px; height: 54px; gap: 10px; }
+            .link-sobre { padding: 5px 10px; font-size: 12px; }
+            .btn-voltar { top: 15px; left: 20px; }
+            
+            /* Ajuste do balão para celular */
+            .link-sobre::before { width: 180px; font-size: 12px; padding: 10px; right: -10px; }
+            .tooltip-seta { right: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ranking-wrapper">
+        <a href="match.html" class="btn-voltar">◀ Voltar</a>
+
+        <div class="header-section">
+            <h1 class="titulo-ranking">Ranking do usuário</h1>
+            <p class="subtitulo-ranking">Seus restaurantes favoritos baseados nos matches</p>
+        </div>
+
+        <div class="lista-ranking">
+            
+            <div class="item-ranking">
+                <div class="numero-posicao">1</div>
+                <div class="info-restaurante">
+                    <span class="nome-restaurante">Ponto do Açaí</span>
+                    <a href="detalhes.html?restaurante=ponto-do-acai" class="link-sobre" data-info="O mais amado! Aberto até 23h • Delivery Grátis • 4.9 ⭐️">Sobre<span class="tooltip-seta"></span></a>
+                </div>
+            </div>
+
+            <div class="item-ranking">
+                <div class="numero-posicao">2</div>
+                <div class="info-restaurante">
+                    <span class="nome-restaurante">The Best Açaí</span>
+                    <a href="detalhes.html?restaurante=the-best-acai" class="link-sobre" data-info="Açaí self-service. Mais de 40 acompanhamentos disponíveis.">Sobre<span class="tooltip-seta"></span></a>
+                </div>
+            </div>
+
+            <div class="item-ranking">
+                <div class="numero-posicao">3</div>
+                <div class="info-restaurante">
+                    <span class="nome-restaurante">Açaí Fly Quiosque</span>
+                    <a href="detalhes.html?restaurante=acai-fly" class="link-sobre" data-info="Ótimo ambiente aberto. Aceita pagamentos via Pix e cartões.">Sobre<span class="tooltip-seta"></span></a>
+                </div>
+            </div>
+
+            <div class="item-ranking">
+                <div class="numero-posicao">4</div>
+                <div class="info-restaurante">
+                    <span class="nome-restaurante">Rei do Açaí</span>
+                    <a href="detalhes.html?restaurante=rei-do-acai" class="link-sobre" data-info="Famoso pela barca de 1 litro. Tempo de entrega: 20-35 min.">Sobre<span class="tooltip-seta"></span></a>
+                </div>
+            </div>
+
+            <div class="item-ranking">
+                <div class="numero-posicao">5</div>
+                <div class="info-restaurante">
+                    <span class="nome-restaurante">Creme Mania</span>
+                    <a href="detalhes.html?restaurante=creme-mania" class="link-sobre" data-info="Especialidade: Creme de Ninho e Cupuaçu. 4.7 ⭐️">Sobre<span class="tooltip-seta"></span></a>
+                </div>
+            </div>
+
+            <div class="item-ranking">
+                <div class="numero-posicao">6</div>
+                <div class="info-restaurante">
+                    <span class="nome-restaurante">Açaí Concept</span>
+                    <a href="detalhes.html?restaurante=acai-concept" class="link-sobre" data-info="Franquia reconhecida. Opções zero açúcar disponíveis no cardápio.">Sobre<span class="tooltip-seta"></span></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

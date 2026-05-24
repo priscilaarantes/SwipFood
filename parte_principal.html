@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SwipFood</title>
+    
+    <link rel="stylesheet" href="style_swippart.css">
+</head>
+<body>
+
+<div class="container">
+    <a href="match.html" class="match-button">
+    ⭐ Match
+    </a>
+    <div class="swipe-tip">Arraste para os lados ou use as setas ← →</div>
+
+    <div class="side left">
+        <p>seta esquerda<br>no teclado</p>
+        <div class="button dislike" onclick="swipe('dislike')">👎</div>
+    </div>
+
+    <div class="cards" id="cards"></div>
+
+    <div class="side right">
+        <p>seta direita<br>no teclado</p>
+        <div class="button like" onclick="swipe('like')">👍</div>
+    </div>
+</div>
+
+<script>
+    /* 
+    PARA ADICIONAR, ALTERAR OU REMOVER RESTAURANTES:
+       
+       Cada restaurante fica guardado dentro de um par de chaves { }.
+       Para adicionar um NOVO restaurante:
+       1. Copie todo o bloco de chaves de um restaurante existente (da abertura { até o fechamento },).
+       2. Cole logo abaixo do último da lista.
+       3. separar os blocos por vírgula (,).
+       
+       Significado de cada campo que você pode alterar:
+       - nome: O nome principal que aparece em texto grande e branco.
+       - titulo: Frase curta de destaque em letras maiúsculas (cor bege/amarela).
+       - descricao: Um pequeno texto sobre o restaurante ou promoção.
+       - likes: O número de curtidas exibido no selo no canto superior direito do card.
+       - imagem: O link completo (URL) da foto que você quer mostrar de fundo.
+       =================================================================================
+    */
+    const restaurantes = [
+        { 
+            nome: "Ponto do Açaí", 
+            titulo: "Açaitería", 
+            descricao: "Açaí com apenas um clique!", 
+            likes: "150 👍", 
+            imagem: "./img/acaiadd.jpg",
+            tags: [
+                { texto: "entre 15-25 R$", destaque: true },
+                { texto: "Aceita Pix", destaque: false },
+                { texto: "Todas as idades", destaque: false }
+            ], 
+        },
+        { 
+            nome: "Kanoa Bar & Grill", 
+            titulo: "Churrasco", 
+            descricao: "Os melhor churrasco da cidade!", 
+            likes: "230 👍", 
+            imagem: "./img/kanoabar.jpg",
+            tags: [
+                { texto: "entre 150-250 R$", destaque: true },
+                { texto: "Aceita Pix", destaque: false },
+                { texto: "wifi gratuito", destaque: false }
+            ],
+        },
+        { 
+            nome: "Lótus Sushi", 
+            titulo: "Sushi", 
+            descricao: "Peixes frescos e sabor incrível.", 
+            likes: "310 👍", 
+            imagem: "./img/lotus.webp",
+            tags: [
+                { texto: "entre 100-200 R$", destaque: true },
+                { texto: "wifi gratuito", destaque: false },
+                { texto: "Aberto Agora", destaque: false }
+            ],
+        },
+        { 
+            nome: "Italian Pizzaria", 
+            titulo: "Pizzaria", 
+            descricao: "Sabores especiais todos os dias.", 
+            likes: "198 👍", 
+            imagem: "./img/italian.jpg",
+            tags: [
+                { texto: "entre 50-80 R$", destaque: true },
+                { texto: "Aceita Pix", destaque: false },
+                { texto: "espaçoso", destaque: false }
+            ], 
+        },
+        { 
+            nome: "Di Matteo", 
+            titulo: "Açaitería", 
+            descricao: "Açaí gourmet com um sabor especial.", 
+            likes: "195 👍", 
+            imagem: "./img/dimatteo.jpg",
+            tags: [
+                { texto: "entre 15-25 R$", destaque: true },
+                { texto: "climatizado", destaque: false },
+                { texto: "aceita catão", destaque: false }
+            ],
+        },
+        { 
+            nome: "La Cabana", 
+            titulo: "Pizzaria, CHurrascaria", 
+            descricao: "Buffet à vontade todos os dias.", 
+            likes: "328 👍", 
+            imagem: "./img/la cabana.webp",
+            tags: [
+                { texto: "entre 100-200 R$", destaque: true },
+                { texto: "wifi gratuito", destaque: false },
+                { texto: "Aberto Agora", destaque: false }
+            ],
+        },
+        { 
+            nome: "Itália no Box", 
+            titulo: "Comida Italiana", 
+            descricao: "Massa fresca e saborosa.", 
+            likes: "156 👍", 
+            imagem: "./img/italianobox.webp",
+            tags: [
+                { texto: "entre 30-60 R$", destaque: true },
+                { texto: "todas as idades", destaque: false },
+                { texto: "Espaçoso", destaque: false }
+            ],
+        }, 
+    ];
+
+    const cardsContainer = document.getElementById("cards");
+
+    /* parte de criar os cards */
+    function criarCards() {
+        cardsContainer.innerHTML = "";
+        restaurantes.slice(0, 3).reverse().forEach((rest, index) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.style.cssText = `z-index: ${index}; background-image: url('${rest.imagem}')`;
+            
+            let tagsHTML = "";
+            if (rest.tags && rest.tags.length > 0) {
+                rest.tags.forEach(tag => {
+
+                    const classeExtra = tag.destaque ? " highlight" : "";
+                    tagsHTML += `<div class="tag${classeExtra}">${tag.texto}</div>`;
+                });
+            }
+
+            card.innerHTML = `
+                <div class="likes">${rest.likes}</div>
+                <div class="content">
+                    <h1>${rest.nome}</h1>
+                    <h2>${rest.titulo}</h2>
+                    <p>${rest.descricao}</p>
+                    <div class="tags">
+                        ${tagsHTML} </div>
+                </div>
+            `;
+            cardsContainer.appendChild(card);
+            addDrag(card);
+        });
+    }
+
+    /* função de "swipe" para like e deslike */
+    function swipe(acao) {
+        const topCard = document.querySelector(".card:last-child");
+        if (!topCard) return;
+        topCard.classList.add(`${acao}-animation`);
+        setTimeout(() => { restaurantes.shift(); criarCards(); }, 500);
+    }
+
+    /* setas do teclado */
+    document.addEventListener("keydown", (e) => {
+        if(e.key === "ArrowRight") swipe('like');
+        if(e.key === "ArrowLeft") swipe('dislike');
+    });
+
+    /* funções de arrastar os cards */
+    function addDrag(card) {
+        let startX = 0, isDragging = false;
+
+        const start = (e) => {
+            isDragging = true;
+            startX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+            card.classList.add("dragging");
+        };
+
+        const move = (e) => {
+            if (!isDragging) return;
+            let moveX = (e.type.includes("mouse") ? e.clientX : e.touches[0].clientX) - startX;
+            card.style.transform = `translateX(${moveX}px) rotate(${moveX/15}deg)`;
+            card.style.boxShadow = moveX > 0 ? "0 0 40px rgba(66,184,131,.6)" : "0 0 40px rgba(255,87,87,.6)";
+        };
+
+        const end = (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            let moveX = (e.type.includes("mouse") ? e.clientX : e.changedTouches[0].clientX) - startX;
+            card.classList.remove("dragging");
+
+            if (Math.abs(moveX) > 120) swipe(moveX > 0 ? 'like' : 'dislike');
+            else {
+                card.style.transform = "";
+                card.style.boxShadow = "0 20px 40px rgba(0,0,0,.5)";
+            }
+        };
+
+        card.addEventListener("mousedown", start);
+        card.addEventListener("touchstart", start, {passive: true});
+        document.addEventListener("mousemove", move);
+        document.addEventListener("touchmove", move, {passive: true});
+        document.addEventListener("mouseup", end);
+        document.addEventListener("touchend", end);
+    }
+
+    /* INICIALIZAÇÃO */
+    criarCards();
+</script>
+</body>
+</html>
