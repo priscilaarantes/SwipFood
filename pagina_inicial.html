@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Swipfood</title>
-    
+
     <!-- Link para o arquivo CSS externo -->
     <!-- class="pagina-inicial" no body ativa estilos específicos (fundo gradiente, etc.) -->
     <link rel="stylesheet" href="style.css">
@@ -13,18 +14,18 @@
 
 <!-- INÍCIO DO CORPO DA PÁGINA -->
 <!-- class="pagina-inicial": ativa o fundo gradiente animado e outros estilos específicos -->
+
 <body class="pagina-inicial">
-    
+
     <!-- CABEÇALHO EXPANSIVO (ocupa 100% da largura da tela) -->
     <!-- header-fullwidth: sai do container para ocupar toda a tela -->
     <div class="header-fullwidth">
-        
+
         <!-- ÁREA DA LOGO (esquerda) -->
         <div class="logo-area">
             <!-- DIV da imagem da logo (tamanho maior que no index) -->
             <div class="logo-large">
-                <img src="logo.png" alt="Logo" 
-                     onerror="this.style.backgroundColor='#1C1C1C'">
+                <img src="logo.png" alt="Logo" onerror="this.style.backgroundColor='#1C1C1C'">
                 <!-- onerror: se a imagem falhar, coloca fundo preto -->
             </div>
             <span class="logo-text-large">Swipfood</span>
@@ -33,13 +34,69 @@
         <!-- BARRA DE FILTROS (preço, distância, ofertas) -->
         <div class="filters-bar">
             <div class="filter-group">
-                <span>$ Preferências de preço:</span>
+                <button id="btn-preco" class="filter-btn" onclick="abrirDropdown('caixa-preco')">$ Preferências de
+                        preço:</button>
+
+                <div id="caixa-preco" class="dropdown-caixa">
+                    <div class="caixa-valores">
+
+                        <div class="caixa-pequena">
+                            <span>mínimo:</span>
+                            <input type="number" id="preco-min" value="0" min="0" onchange="atualizarValoresPreco()">
+                            <span>R$</span>
+                        </div>
+
+                        <span class="separador">-</span>
+
+                        <div class="caixa-pequena">
+                            <span>máximo:</span>
+                            <input type="number" id="preco-max" value placeholder="0" min="0" onchange="atualizarValoresPreco()">
+                            <span>R$</span>
+                        </div>
+
+                    </div>
+                </div>
             </div>
             <div class="filter-group">
-                <span>⛐ Distância:</span>
+                <button id="btn-distancia" class="filter-btn" onclick="abrirDropdown('caixa-distancia')">⛐
+                        Distância:</button>
+
+                <div id="caixa-distancia" class="dropdown-caixa">
+                    <div class="caixa-valores">
+
+                        <div class="caixa-pequena">
+                            <span>mínimo:</span>
+                            <input type="number" id="distancia-min" value="0" min="0" onchange="atualizarValoresDistancia()">
+                            <span>km</span>
+                        </div>
+
+                        <span class="separador">-</span>
+
+                        <div class="caixa-pequena">
+                            <span>máximo:</span>
+                            <input type="number" id="distancia-max" value placeholder="5" min="0" onchange="atualizarValoresDistancia()">
+                            <span>km</span>
+                        </div>
+
+                    </div>
+                </div>
             </div>
             <div class="filter-group">
-                <span>⌯⌲ Ofertas:</span>
+                <button id="btn-ofertas" class="filter-btn" onclick="abrirDropdown('caixa-ofertas')">⌯⌲
+                        Ofertas:</button>
+
+                <div id="caixa-ofertas" class="dropdown-caixa">
+                    <div class="caixa-ofertas-lista">
+
+                        <button class="btn-oferta">Promoções em
+                                restaurantes</button>
+                        <button class="btn-oferta">Promoções de
+                                aniversário</button>
+                        <button class="btn-oferta">Todas as
+                                promoções</button>
+
+                    </div>
+                </div>
             </div>
             <div class="location">
                 𖡡 Barra do Garças, MT
@@ -55,13 +112,14 @@
     <!-- FIM DO CABEÇALHO -->
 
     <br><br>
-    
+
     <!-- CONTAINER PRINCIPAL (centraliza o conteúdo restante) -->
     <div class="container">
-        
+
         <!-- SEÇÃO HERO (chamada principal) -->
         <div class="hero-section">
-            <h2>Visite as melhores lojas e estabelecimentos na sua região</h2>
+            <h2>Visite as melhores lojas e estabelecimentos na sua região
+            </h2>
             <p>com um deslize →</p>
         </div>
 
@@ -69,11 +127,11 @@
         <div class="match-container">
             <!-- onclick: redireciona para a página match.html -->
             <button class="btn-match" onclick="window.location.href='match.html'">
-                MATCH  
-                <small>Não sabe o que escolher? Tenta dar Match!</small>
-            </button>
+                    MATCH
+                    <small>Não sabe o que escolher? Tenta dar Match!</small>
+                </button>
         </div>
-        
+
         <br><br>
 
         <!-- SEÇÃO DE CATEGORIAS (botões clicáveis para filtrar) -->
@@ -83,18 +141,26 @@
             <div class="categorias-grid" id="categoriasGrid">
                 <!-- Cada categoria tem: texto visível + atributo data-categoria -->
                 <!-- data-categoria é usado no JavaScript para filtrar -->
-                <span class="categoria-item" data-categoria="cafe">☕ Café</span>
-                <span class="categoria-item" data-categoria="padaria">🍞 Padaria</span>
-                <span class="categoria-item" data-categoria="doceria">🍰 Doceria</span>
-                <span class="categoria-item" data-categoria="japonesa">🍣 Japonesa</span>
-                <span class="categoria-item" data-categoria="fastfood">🍔 Fast-food</span>
-                <span class="categoria-item" data-categoria="saudavel">🥗 Saudável</span>
-                <span class="categoria-item" data-categoria="italiana">🍝 Italiana</span>
+                <span class="categoria-item" data-categoria="cafe">☕
+                        Café</span>
+                <span class="categoria-item" data-categoria="padaria">🍞
+                        Padaria</span>
+                <span class="categoria-item" data-categoria="doceria">🍰
+                        Doceria</span>
+                <span class="categoria-item" data-categoria="japonesa">🍣
+                        Japonesa</span>
+                <span class="categoria-item" data-categoria="fastfood">🍔
+                        Fast-food</span>
+                <span class="categoria-item" data-categoria="saudavel">🥗
+                        Saudável</span>
+                <span class="categoria-item" data-categoria="italiana">🍝
+                        Italiana</span>
                 <span class="categoria-item" data-categoria="churrascaria">🥩 Churrascaria</span>
-                <span class="categoria-item" data-categoria="pizzaria">🍕 Pizzaria</span>
+                <span class="categoria-item" data-categoria="pizzaria">🍕
+                        Pizzaria</span>
             </div>
         </div>
-        
+
         <br><br>
 
         <!-- BARRA DE PESQUISA -->
@@ -105,13 +171,13 @@
             <!-- Botão que chama a função filtrarEstabelecimentos() -->
             <button class="btn-explorar" onclick="filtrarEstabelecimentos()">Explorar</button>
         </div>
-        
+
         <!-- SEÇÃO DE ESTABELECIMENTOS (cards com imagens) -->
         <div class="estabelecimentos" id="estabelecimentosSection">
             <h3>✮ Lugares em destaque</h3>
             <!-- Container dos cards -->
             <div class="cards-estabelecimentos" id="cardsContainer">
-                
+
                 <!-- CARD 1: Sushi House (categoria japonesa) -->
                 <div class="card-estabelecimento" data-categoria="japonesa">
                     <!-- card-img: imagem de fundo com a classe "sushi" -->
@@ -121,7 +187,7 @@
                         <p>Rodízio com desconto • 4.8 ★</p>
                     </div>
                 </div>
-                
+
                 <!-- CARD 2: Bar do João (categoria fastfood) -->
                 <div class="card-estabelecimento" data-categoria="fastfood">
                     <div class="card-img bar"><span>🎤</span></div>
@@ -130,7 +196,7 @@
                         <p>Show ao vivo hoje • 4.6 ★</p>
                     </div>
                 </div>
-                
+
                 <!-- CARD 3: Café Central (categoria cafe) -->
                 <div class="card-estabelecimento" data-categoria="cafe">
                     <div class="card-img cafe"><span>☕</span></div>
@@ -139,7 +205,7 @@
                         <p>Ambiente aconchegante • 4.9 ★</p>
                     </div>
                 </div>
-                
+
                 <!-- CARD 4: Trattoria Bella (categoria italiana) -->
                 <div class="card-estabelecimento" data-categoria="italiana">
                     <div class="card-img pasta"><span>🍝</span></div>
@@ -148,7 +214,7 @@
                         <p>Massa artesanal • 4.7 ★</p>
                     </div>
                 </div>
-                
+
                 <!-- CARD 5: Pizzaria Napoli (categoria pizzaria) -->
                 <div class="card-estabelecimento" data-categoria="pizzaria">
                     <div class="card-img pizza"><span>🍕</span></div>
@@ -159,12 +225,12 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="footer-gradient">
             <p>© 2024 Swipfood - Todos os direitos reservados</p>
             <p style="margin-top: 10px; font-size: 12px;">O Tinder dos Restaurantes - Transformando a indecisão em diversão!</p>
         </div>
-        
+
     </div>
     <!-- FIM DO CONTAINER -->
 
@@ -172,16 +238,16 @@
     <script>
         // SET que armazena as categorias selecionadas (conjunto, sem repetição)
         let categoriasSelecionadas = new Set();
-        
+
         // PEGA todos os elementos com a classe .categoria-item (os botões de categoria)
         const categoriaItens = document.querySelectorAll('.categoria-item');
-        
+
         // PARA CADA CATEGORIA, adiciona um evento de clique
         categoriaItens.forEach(item => {
             item.addEventListener('click', function() {
                 // Pega o valor do atributo data-categoria (ex: "cafe", "japonesa")
                 const categoria = this.getAttribute('data-categoria');
-                
+
                 // VERIFICA se a categoria já está selecionada
                 if (categoriasSelecionadas.has(categoria)) {
                     // SE JÁ ESTIVER: remove do conjunto
@@ -194,22 +260,22 @@
                     // Adiciona a classe 'selecionado' (fica vermelho)
                     this.classList.add('selecionado');
                 }
-                
+
                 // CHAMA a função que filtra os estabelecimentos
                 filtrarEstabelecimentos();
             });
         });
-        
+
         // FUNÇÃO QUE FILTRA OS ESTABELECIMENTOS
         function filtrarEstabelecimentos() {
             // PEGA todos os cards de estabelecimento
             const cards = document.querySelectorAll('.card-estabelecimento');
             // PEGA o texto digitado na barra de busca e converte para minúsculo
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            
+
             // VERIFICA se alguma categoria está selecionada
             const temCategoriaSelecionada = categoriasSelecionadas.size > 0;
-            
+
             // PARA CADA CARD, decide se mostra ou esconde
             cards.forEach(card => {
                 // Pega a categoria do card (atributo data-categoria)
@@ -218,38 +284,38 @@
                 const nomeEstabelecimento = card.querySelector('h4').innerText.toLowerCase();
                 // Pega a descrição/avaliação (p)
                 const descricaoEstabelecimento = card.querySelector('p').innerText.toLowerCase();
-                
-                let categoriaMatch = true;   // Se passa no filtro de categoria
-                let searchMatch = true;      // Se passa no filtro de busca
-                
+
+                let categoriaMatch = true; // Se passa no filtro de categoria
+                let searchMatch = true; // Se passa no filtro de busca
+
                 // SE tem categoria selecionada, verifica se o card está nela
                 if (temCategoriaSelecionada) {
                     categoriaMatch = categoriasSelecionadas.has(categoriaCard);
                 }
-                
+
                 // SE tem termo de busca, verifica se o nome OU descrição contém o termo
                 if (searchTerm !== '') {
-                    searchMatch = nomeEstabelecimento.includes(searchTerm) || 
-                                  descricaoEstabelecimento.includes(searchTerm);
+                    searchMatch = nomeEstabelecimento.includes(searchTerm) ||
+                        descricaoEstabelecimento.includes(searchTerm);
                 }
-                
+
                 // DECIDE se mostra o card (display block) ou esconde (display none)
                 if (categoriaMatch && searchMatch) {
-                    card.style.display = 'block';   // Mostra
+                    card.style.display = 'block'; // Mostra
                 } else {
-                    card.style.display = 'none';    // Esconde
+                    card.style.display = 'none'; // Esconde
                 }
             });
-            
+
             // PEGA o container dos cards
             const container = document.getElementById('cardsContainer');
             // VERIFICA se existe pelo menos um card visível
             const existeResultado = Array.from(cards).some(card => card.style.display !== 'none');
-            
+
             // REMOVE mensagem existente (se houver)
             const msgExistente = document.getElementById('semResultadoMsg');
             if (msgExistente) msgExistente.remove();
-            
+
             // SE NÃO tem nenhum resultado, mostra mensagem de erro
             if (!existeResultado) {
                 // Cria uma nova div para a mensagem
@@ -267,7 +333,7 @@
                 container.appendChild(msgDiv);
             }
         }
-        
+
         // PEGA o campo de busca
         const searchInput = document.getElementById('searchInput');
         // Adiciona evento: ao SOLTAR uma tecla (keyup), chama o filtro
@@ -275,7 +341,72 @@
         searchInput.addEventListener('keyup', function() {
             filtrarEstabelecimentos();
         });
+
+        // Função para abrir e fechar as caixas de filtro
+        // Função para abrir e fechar as caixas de filtro (agora inteligente!)
+        function abrirDropdown(idDaCaixa) {
+            // 1. Pega todas as caixas de dropdown que existem na página
+            const todasAsCaixas = document.querySelectorAll('.dropdown-caixa');
+
+            // 2. Passa por cada uma delas e fecha as que NÃO são a que você clicou
+            todasAsCaixas.forEach(caixa => {
+                if (caixa.id !== idDaCaixa) {
+                    caixa.classList.remove('mostrar'); // Remove a classe que deixa visível
+                }
+            });
+
+            // 3. Agora procura a caixa exata que o usuário quer abrir
+            const caixaAlvo = document.getElementById(idDaCaixa);
+
+            // 4. Se ele encontrar a caixa, ele liga/desliga apenas ela
+            if (caixaAlvo) {
+                caixaAlvo.classList.toggle('mostrar');
+            } else {
+                console.log("Erro: Não achei nenhuma caixa com o ID " + idDaCaixa);
+            }
+        }
+        // 1. Criamos as variáveis "globais" (a memória do site)
+        // Elas começam com os valores padrão que você colocou no Figma
+        let precoMinimoSalvo = 0;
+        let precoMaximoSalvo = 9999;
+
+        // 2. Criamos a função que vai ler as caixas e atualizar a memória
+        function atualizarValoresPreco() {
+            // Pega o que está escrito nas caixinhas e já transforma em Número (Number)
+            let valorMin = Number(document.getElementById('preco-min').value);
+            let valorMax = Number(document.getElementById('preco-max').value);
+
+            // Atualiza a nossa memória global
+            precoMinimoSalvo = valorMin;
+            precoMaximoSalvo = valorMax;
+
+            // Mostra no console só para a gente ter certeza que funcionou
+            console.log(`Memória atualizada! O usuário quer gastar entre R$ ${precoMinimoSalvo} e R$ ${precoMaximoSalvo}.`);
+        }
+        // 1. Criamos uma memória SEPARADA só para a distância
+        let distanciaMinimaSalva = 0;
+        let distanciaMaximaSalva = 50; // Exemplo de 50km como limite padrão
+
+        // 2. Criamos uma função gêmea, mas que olha para os IDs da distância
+        function atualizarValoresDistancia() {
+            let valorMin = Number(document.getElementById('distancia-min').value);
+            let textoMax = document.getElementById('distancia-max').value;
+
+            // Mesma trava de segurança para o vazio
+            let valorMax;
+            if (textoMax === "") {
+                valorMax = 9999; // Sem limite de distância
+            } else {
+                valorMax = Number(textoMax);
+            }
+
+            distanciaMinimaSalva = valorMin;
+            distanciaMaximaSalva = valorMax;
+
+            console.log(`Memória atualizada! Buscando entre ${distanciaMinimaSalva}km e ${distanciaMaximaSalva}km.`);
+        }
     </script>
     <!-- FIM DO JAVASCRIPT -->
+
 </body>
-</html>
+</html>  
