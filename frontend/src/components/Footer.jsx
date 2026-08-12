@@ -1,34 +1,17 @@
 import React from 'react'
 
+// Rodapé institucional do SwipFood
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-400 py-12 px-4 border-t border-gray-800">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-        <div>
-          <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-            <span className="text-xl">🎓</span>
-            <span className="text-lg font-bold text-white">AcademiStack Full Stack</span>
-          </div>
-          <p className="text-sm text-gray-400">
-            Projeto Acadêmico para demonstração de arquitetura Node.js + Express + React + SQLite.
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-3 text-xs">
-          <span className="px-3 py-1.5 rounded-full bg-gray-800 text-gray-300 border border-gray-700">
-            Backend: Node.js / Express
-          </span>
-          <span className="px-3 py-1.5 rounded-full bg-gray-800 text-gray-300 border border-gray-700">
-            Frontend: React 18 / Vite
-          </span>
-          <span className="px-3 py-1.5 rounded-full bg-gray-800 text-gray-300 border border-gray-700">
-            Banco: SQLite
-          </span>
-        </div>
-      </div>
-
-      <div className="max-w-6xl mx-auto border-t border-gray-800/80 mt-8 pt-6 text-center text-xs text-gray-500">
-        &copy; 2026 AcademiStack. Desenvolvido para fins acadêmicos e educacionais.
+    <footer className="bg-escuro text-creme mt-12">
+      <div className="max-w-6xl mx-auto px-4 py-8 text-center">
+        <p className="font-semibold">© 2026 SwipFood — Todos os direitos reservados</p>
+        <p className="text-sm mt-2 opacity-80">
+          O Tinder dos Restaurantes — Transformando a indecisão em diversão!
+        </p>
+        <p className="text-xs mt-3 opacity-60">
+          Projeto acadêmico — IFMT Campus Barra do Garças · Programação Web
+        </p>
       </div>
     </footer>
   )

@@ -12,7 +12,13 @@ build/
 
 # Database files
 *.db
+*.db-wal
+*.db-shm
 *.sqlite
+
+# Server artifacts
+server.err
+server.log
 
 # OS files
 .DS_Store

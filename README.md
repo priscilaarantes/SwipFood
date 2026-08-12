@@ -1,6 +1,6 @@
-# 🎓 Sistema Acadêmico de Captura de Leads — React 18 + Node.js + SQLite
+# 🍔 SwipFood — O Tinder dos Restaurantes
 
-> **Projeto Acadêmico Full Stack:** Aplicação moderna baseada em componentes reativos em **React 18 (Vite)** e API RESTful robusta em **Node.js (Express)** com banco de dados **SQLite**.
+> **Projeto Acadêmico Full Stack:** Aplicação em **React 18 (Vite + Tailwind CSS)** com API RESTful em **Node.js (Express)** e banco **SQLite**.
 
 ---
 
@@ -27,178 +27,130 @@
 
 ## 📋 Sobre o Projeto
 
-Este projeto consiste em um **Sistema Acadêmico de Captura de Leads** desenvolvido com uma interface reativa moderna construída em **React 18**, **Vite** e **Tailwind CSS**, totalmente integrada a um backend em **Node.js + Express** com persistência relacional no **SQLite**.
+O **SwipFood** funciona como um *"Tinder dos restaurantes"*: o usuário se cadastra, filtra os
+estabelecimentos por preço, categoria, estacionamento, área kids, tags e distância e vai
+**arrastando cards** para curtir ou rejeitar opções. Cada *match* gera um **ranking
+personalizado** com as médias das notas de cada estabelecimento.
 
-A aplicação foi estruturada seguindo arquitetura modular de componentes em React, gerenciamento de estado reativo via Hooks (`useState`, `useEffect`), validação e sanitização estrita de dados no servidor e navegação suave sem recarregamento da página.
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-### **Frontend (React 18 + Vite + Tailwind CSS)**
-- **React 18** — Biblioteca declarativa e baseada em componentes reativos para criação de interfaces modernas.
-- **Vite** — Ferramenta de build de última geração com Hot Module Replacement (HMR) instantâneo.
-- **Tailwind CSS v3** — Framework CSS utilitário para estilização rápida, responsiva e elegante.
-- **JSX & React Hooks** — Gerenciamento de estado de formulário, máscaras dinâmicas e integração assíncrona com a API via `fetch`.
-
-### **Backend (Node.js + Express + SQLite)**
-- **Node.js** — Ambiente de execução JavaScript no servidor.
-- **Express.js** — Framework web minimalista para rotas, middlewares e servidor de arquivos estáticos.
-- **better-sqlite3** — Driver SQLite síncrono e de alta performance utilizando *Prepared Statements*.
-- **Helmet** — Proteção e cabeçalhos de segurança HTTP.
-- **CORS** — Middleware para permissão de requisições Cross-Origin entre React e Node.js.
-- **Validator** — Sanitização de dados contra ataques XSS e validação de e-mails.
+Recursos principais:
+- 🔐 **Autenticação** com `scrypt` + sessões por token (HMAC-SHA256).
+- 🏪 **Estabelecimentos** com faixa de preço, capacidade, tipo de assento, estacionamento,
+  área kids, tags e imagens.
+- ⭐ **Avaliações** de 0 a 5 em atributos como limpeza, manuseio, custo-benefício e
+  atendimento (máx. 8 campos obrigatórios no formulário) + fotos (JPEG/PNG/WEBP, até 500 KB).
+- 📍 **Filtros combináveis** entre si e **filtro por distância** (Haversine).
+- 🃏 **Swipe** com arraste, botões e setas do teclado; tela de **Match** e **Ranking**.
 
 ---
 
-## 📁 Estrutura de Arquivos do Projeto
+## 🛠️ Tecnologias
+
+- **Frontend:** React 18, Vite, Tailwind CSS, roteador próprio por hash (`#/`).
+- **Backend:** Node.js, Express, `better-sqlite3`, Helmet, CORS, `validator`.
+- **Banco:** SQLite (WAL), com seed de 20 restaurantes de Barra do Garças/MT.
+
+---
+
+## 📁 Estrutura
 
 ```text
-testereact/
-├── api/                          # Backend API RESTful em Node.js
-│   ├── db/                       # Banco de dados SQLite (criado em runtime)
-│   │   └── landing.db            # Arquivo da base de dados local
-│   ├── src/
-│   │   ├── config/
-│   │   │   └── conexaoBanco.js   # Conexão e inicialização do SQLite
-│   │   ├── controladores/
-│   │   │   └── leadControlador.js# Lógica de negócio da API
-│   │   ├── rotas/
-│   │   │   └── leadRotas.js      # Endpoints HTTP da aplicação
-│   │   ├── utilitarios/
-│   │   │   └── validadores.js    # Funções de sanitização e validação
-│   │   ├── app.js                # Express app, middlewares e estáticos do React
-│   │   └── server.js             # Inicialização do servidor na porta 3000
-│   ├── .env                      # Variáveis de ambiente
-│   ├── iniciarBanco.js           # Criação e estrutura da tabela de leads
-│   └── package.json              # Dependências do Node.js
-│
-├── frontend/                     # Frontend Reativo em React + Vite
-│   ├── src/
-│   │   ├── components/           # Componentes React Modulares
-│   │   │   ├── Header.jsx        # Navbar fixa com marca AcademiStack
-│   │   │   ├── Hero.jsx          # Banner principal e destaques do projeto
-│   │   │   ├── Beneficios.jsx    # Cards de arquitetura (React, Node, SQLite)
-│   │   │   ├── FormularioLead.jsx# Formulário reativo com máscara e validação
-│   │   │   ├── Toast.jsx         # Componente de notificação flutuante
-│   │   │   └── Footer.jsx        # Rodapé acadêmico
-│   │   ├── App.jsx               # Componente raiz da aplicação
-│   │   ├── main.jsx              # Ponto de entrada do React (ReactDOM)
-│   │   └── index.css             # Estilos globais e Tailwind CSS
-│   ├── index.html                # Ponto de montagem HTML (#root)
-│   ├── vite.config.js            # Configuração do Vite e proxy da API (/api -> 3000)
-│   ├── tailwind.config.js        # Configuração do Tailwind CSS
-│   ├── postcss.config.js         # Configuração PostCSS
-│   └── package.json              # Dependências do React e scripts Vite
-│
-├── doc/                          # Documentação do projeto
-│   └── plano_landingpage_nodejs.md
-│
-├── .gitignore                    # Arquivos ignorados pelo Git (node_modules, dist, db)
-└── README.md                     # Documentação oficial do projeto
+SwipFood_ProjDevSistemas/
+├── api/                          # Backend Node.js + Express + SQLite
+│   ├── db/swipfood.db            # Banco de dados (criado em runtime)
+│   ├── iniciarBanco.js           # DDL das tabelas
+│   ├── semearBanco.js            # Seed dos restaurantes de exemplo
+│   └── src/
+│       ├── app.js                # Express, CORS, Helmet e estáticos
+│       ├── server.js             # Inicialização na porta 3000
+│       ├── config/               # conexaoBanco.js
+│       ├── controladores/        # usuario, estabelecimento, avaliacao, swipe, ranking
+│       ├── rotas/                # auth, estabelecimentos, avaliacoes, swipes, ranking
+│       └── utilitarios/          # senha, autenticacao, validadores
+├── frontend/                     # React 18 + Vite + Tailwind
+│   ├── public/img/               # Imagens dos estabelecimentos
+│   └── src/
+│       ├── contexto/             # AuthContext, ToastContext
+│       ├── rota/hashRouter.jsx   # Roteador por hash (#/)
+│       ├── utilitarios/api.js    # Helpers fetch com token
+│       ├── componentes/          # Header, Footer, Estrelas, FiltrosBar, Cards, Toast
+│       └── paginas/              # Landing, Login, Cadastro, Principal, Swipe, Match, Ranking, Informacoes
+├── codigolegado/                 # Protótipo estático original (referência)
+├── doc/                          # Planos e documentação
+└── README.md
 ```
 
 ---
 
-## ⚡ Guia Rápido: Como Executar o Servidor React e o Backend Node.js
+## ⚡ Como Executar
 
-### **1. Instalar as Dependências (Primeira Execução)**
+### 1. Instalar dependências (primeira vez)
 
-Abra o terminal na raiz do projeto e execute:
-
-**Backend (API Node.js):**
 ```bash
-cd api
-npm install
+cd api && npm install
+cd ../frontend && npm install
 ```
 
-**Frontend (React 18 + Vite):**
+### 2. Modo desenvolvimento (dois terminais)
+
 ```bash
-cd ../frontend
-npm install
+cd api && npm run dev            # API em http://localhost:3000
+cd frontend && npm run dev       # React em http://localhost:5173 (proxy /api → 3000)
 ```
 
----
+### 3. Modo produção (build único servido pela API)
 
-### 🚀 **2. Executar o Projeto em Modo de Desenvolvimento (Recomendado)**
-
-No modo de desenvolvimento, o servidor React roda via Vite na porta **5173** com atualização instantânea no navegador (Hot Reload) e redirecionamento de requisições de API para a porta **3000**.
-
-#### **Passo 1: Iniciar o Servidor Backend (Node.js)**
-No primeiro terminal:
 ```bash
-cd api
-npm run dev
+cd frontend && npm run build
+cd ../api && npm start           # Aplicação completa em http://localhost:3000
 ```
-> O servidor iniciará na porta **3000** (`http://localhost:3000`).
 
-#### **Passo 2: Iniciar o Servidor Frontend (React)**
-Abra um **segundo terminal** no VS Code ou terminal de sua preferência:
-```bash
-cd frontend
-npm run dev
-```
-> O Vite iniciará o servidor React na porta **5173** (`http://localhost:5173`).
-
-#### **Passo 3: Acessar no Navegador**
-- 🌐 **Interface React (Modo Dev):** [http://localhost:5173](http://localhost:5173)
-- 🔌 **API Node.js (Health Check):** [http://localhost:3000/api/health](http://localhost:3000/api/health)
+> O banco `swipfood.db` é criado e semeado automaticamente na primeira execução
+> (20 restaurantes). Para zerar, apague `api/db/swipfood.db*` e reinicie o servidor.
 
 ---
 
-### 📦 **3. Executar o Projeto em Modo de Produção (Build Único)**
+## 🗄️ Endpoints da API
 
-Caso prefira compilar a aplicação React e servir tudo através do servidor Node.js/Express na porta **3000**:
+| Método | Rota | Autenticação | Descrição |
+|---|---|---|---|
+| `POST` | `/api/auth/cadastro` | — | Cria usuário (nome, e-mail/CPF/CNPJ, senha) |
+| `POST` | `/api/auth/login` | — | Login e retorno de token |
+| `POST` | `/api/auth/logout` | sim | Invalida o token da sessão |
+| `GET`  | `/api/auth/me` | sim | Dados do usuário autenticado |
+| `GET`  | `/api/estabelecimentos` | — | Lista com filtros combináveis |
+| `GET`  | `/api/estabelecimentos/destaques` | — | Destaques da landing |
+| `GET`  | `/api/estabelecimentos/:id` | opcional | Detalhe + médias das avaliações |
+| `POST` | `/api/estabelecimentos` | sim | Cadastro de estabelecimento |
+| `POST` | `/api/estabelecimentos/:id/avaliacoes` | sim | Adiciona avaliação (notas 0–5, comentário, fotos) |
+| `GET`  | `/api/estabelecimentos/:id/avaliacoes` | — | Lista avaliações do estabelecimento |
+| `POST` | `/api/swipes/:id` | sim | Registra like/dislike |
+| `GET`  | `/api/ranking` | sim | Ranking personalizado do usuário |
 
-1. **Gerar a compilação de produção do React:**
-   ```bash
-   cd frontend
-   npm run build
-   ```
-   *Isso criará a pasta otimizada `frontend/dist`.*
-
-2. **Iniciar o servidor backend Express:**
-   ```bash
-   cd ../api
-   npm start
-   ```
-
-3. **Acessar no navegador:**
-   - 🌐 **Aplicação Completa em Produção:** [http://localhost:3000](http://localhost:3000)
-
----
-
-## 🛑 Como Parar os Servidores e Liberar Portas
-
-Para encerrar os servidores no terminal:
-- Pressione **`Ctrl` + `C`** e confirme com **`S`** (no Windows) ou encerre a sessão do terminal.
-
-Caso ocorra o erro `EADDRINUSE` (porta ocupada):
-- **Windows (PowerShell):**
-  ```powershell
-  npx kill-port 3000
-  npx kill-port 5173
-  ```
-- **Linux / Mac (Terminal):**
-  ```bash
-  npx kill-port 3000 5173
-  ```
+**Filtros de `/api/estabelecimentos`:** `q`, `categorias`, `preco_min`, `preco_max`,
+`estacionamento`, `estacionamento_vigiado`, `area_kids`, `tags`, `raio_km` (+`latitude`/`longitude`),
+`ordenar_por` (`likes` | `media` | `nome`).
 
 ---
 
-## 🗄️ Endpoints da API RESTful
+## 🧭 Rotas do Frontend (hash)
 
-| Método | Rota | Descrição |
-|---|---|---|
-| `GET` | `/` | Servidor estático da aplicação React (`frontend/dist`) |
-| `GET` | `/api/health` | Health Check do servidor Node.js |
-| `POST` | `/api/leads` | Cadastrar novo lead no banco SQLite |
-| `GET` | `/api/leads` | Listar leads cadastrados (uso interno/acadêmico) |
+| Rota | Página |
+|---|---|
+| `#/` | Landing |
+| `#/login` | Login |
+| `#/cadastro` | Cadastro |
+| `#/principal` | Página principal (filtros + busca) |
+| `#/swipe` | Swipe (arraste os cards) |
+| `#/match/:id` | Deu Match! |
+| `#/ranking` | Ranking personalizado |
+| `#/estabelecimento/:id` | Informações + avaliação |
 
 ---
 
 ## 📜 Licença e Créditos
 
-Projeto desenvolvido com fins acadêmicos e educacionais no âmbito da disciplina de **Programação Web** do **IFMT — Campus Barra do Garças**, sob orientação do professor **Carlos David Rocha de Souza**.
+Projeto desenvolvido com fins acadêmicos e educacionais no âmbito da disciplina de
+**Programação Web** do **IFMT — Campus Barra do Garças**, sob orientação do professor
+**Carlos David Rocha de Souza**.
 
 🔗 Repositório oficial: [https://github.com/priscilaarantes/SwipFood_ProjDevSistemas](https://github.com/priscilaarantes/SwipFood_ProjDevSistemas)

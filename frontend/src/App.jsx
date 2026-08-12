@@ -1,48 +1,43 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { AuthProvider } from './contexto/AuthContext'
+import { ToastProvider } from './contexto/ToastContext'
+import Roteador from './rota/hashRouter'
 import Header from './components/Header'
-import Hero from './components/Hero'
-import Beneficios from './components/Beneficios'
-import FormularioLead from './components/FormularioLead'
-import Toast from './components/Toast'
 import Footer from './components/Footer'
 
+import Landing from './paginas/Landing'
+import Login from './paginas/Login'
+import Cadastro from './paginas/Cadastro'
+import Principal from './paginas/Principal'
+import Swipe from './paginas/Swipe'
+import Match from './paginas/Match'
+import Ranking from './paginas/Ranking'
+import Informacoes from './paginas/Informacoes'
+
+// Tabela de rotas do aplicativo (roteador por hash #/)
+const rotas = {
+  '/': { componente: Landing },
+  '/login': { componente: Login },
+  '/cadastro': { componente: Cadastro },
+  '/principal': { componente: Principal, requerAutenticacao: true },
+  '/swipe': { componente: Swipe, requerAutenticacao: true },
+  '/match': { componente: Match, requerAutenticacao: true },
+  '/ranking': { componente: Ranking, requerAutenticacao: true },
+  '/estabelecimento': { componente: Informacoes }
+}
+
 export default function App() {
-  const [toastState, setToastState] = useState({
-    mensagem: '',
-    tipo: 'sucesso',
-    visivel: false
-  })
-
-  const exibirToastSucesso = (mensagem) => {
-    setToastState({ mensagem, tipo: 'sucesso', visivel: true })
-  }
-
-  const exibirToastErro = (mensagem) => {
-    setToastState({ mensagem, tipo: 'erro', visivel: true })
-  }
-
-  const fecharToast = () => {
-    setToastState(prev => ({ ...prev, visivel: false }))
-  }
-
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <Header />
-      <main className="flex-1">
-        <Hero />
-        <Beneficios />
-        <FormularioLead
-          emSucesso={exibirToastSucesso}
-          emErro={exibirToastErro}
-        />
-      </main>
-      <Footer />
-      <Toast
-        mensagem={toastState.mensagem}
-        tipo={toastState.tipo}
-        visivel={toastState.visivel}
-        aoFechar={fecharToast}
-      />
-    </div>
+    <AuthProvider>
+      <ToastProvider>
+        <div className="min-h-screen flex flex-col bg-creme">
+          <Header />
+          <main className="flex-1">
+            <Roteador rotas={rotas} />
+          </main>
+          <Footer />
+        </div>
+      </ToastProvider>
+    </AuthProvider>
   )
 }

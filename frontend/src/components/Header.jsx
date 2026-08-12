@@ -1,36 +1,61 @@
 import React from 'react'
+import { useAuth } from '../contexto/AuthContext'
+import { navegarPara } from '../rota/hashRouter'
 
+// Cabeçalho fixo com a marca SwipFood, menu de navegação e ações de sessão
 export default function Header() {
+  const { usuario, sair } = useAuth()
+
+  const links = [
+    { rotulo: 'Home', destino: '/' },
+    { rotulo: 'Restaurantes', destino: '/principal' },
+    { rotulo: 'Swipe', destino: '/swipe' },
+    { rotulo: 'Ranking', destino: '/ranking' }
+  ]
+
   return (
-    <>
-      {/* Navbar fixa no topo com visual moderno e acadêmico */}
-      <header className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-indigo-100 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-indigo-200">
-              🎓
-            </div>
-            <div>
-              <span className="text-xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-                AcademiStack
-              </span>
-              <span className="hidden sm:inline-block ml-2 text-xs px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-semibold border border-indigo-200">
-                Node.js + React
-              </span>
-            </div>
-          </div>
+    <header className="bg-escuro text-creme shadow-md sticky top-0 z-40">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+        <a href="#/" className="flex items-center gap-3">
+          <img src="/img/logo.png" alt="Logo SwipFood" className="w-10 h-10 object-cover rounded-xl" />
+          <span className="text-xl font-bold text-white">SwipFood</span>
+        </a>
 
-          <a
-            href="#formulario"
-            className="bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:opacity-95 transition shadow-md shadow-indigo-200 hover:shadow-indigo-300"
-          >
-            Testar Sistema
-          </a>
+        <nav className="flex items-center gap-5 flex-wrap">
+          {links.map((link) => (
+            <a
+              key={link.rotulo}
+              href={`#${link.destino}`}
+              className="font-semibold text-sm hover:text-white transition-colors"
+            >
+              {link.rotulo}
+            </a>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          {usuario ? (
+            <>
+              <span className="text-sm font-semibold hidden sm:inline">Olá, {usuario.nome.split(' ')[0]}</span>
+              <button
+                onClick={() => sair().then(() => navegarPara('/'))}
+                className="bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-4 py-1.5 rounded-full transition-colors"
+              >
+                Sair
+              </button>
+            </>
+          ) : (
+            <>
+              <a href="#/login" className="bg-creme hover:bg-white text-escuro text-sm font-bold px-4 py-1.5 rounded-full transition-colors">
+                Login
+              </a>
+              <a href="#/cadastro" className="bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-4 py-1.5 rounded-full transition-colors">
+                Criar conta
+              </a>
+            </>
+          )}
         </div>
-      </header>
-
-      {/* Espaçamento do navbar fixo */}
-      <div className="h-16"></div>
-    </>
+      </div>
+    </header>
   )
 }

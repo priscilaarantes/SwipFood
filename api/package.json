@@ -1,7 +1,7 @@
 {
-  "name": "api-landing-page",
+  "name": "api-swipfood",
   "version": "1.0.0",
-  "description": "API para captura de leads da Landing Page",
+  "description": "API RESTful do SwipFood - O Tinder dos Restaurantes",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -13,7 +13,6 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.0.0",
-    "sql.js": "^1.14.1",
     "validator": "^13.12.0"
   }
 }

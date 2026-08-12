@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const banco = require('../config/conexaoBanco')
 
-// Chave secreta usada na assinatura dos tokens (em produção usar variável de ambiente)
+// Chave secreta usada na assinatura dos tokens (definida no .env)
 const SEGREDO = process.env.SEGREDO_JWT || 'segredo-swipfood-desenvolvimento'
 
 // Gera um token assinado (payload + assinatura HMAC-SHA256)
@@ -59,6 +59,21 @@ function exigirAutenticacao(req, res, next) {
   next()
 }
 
+// Middleware de autenticação opcional: preenche req.usuario quando há token válido,
+// mas não bloqueia a requisição (usado em rotas públicas como detalhe de restaurante)
+function autenticacaoOpcional(req, res, next) {
+  const cabecalhoAutorizacao = req.headers['authorization'] || ''
+  const token = cabecalhoAutorizacao.replace(/^Bearer\s+/i, '')
+  const payload = verificarToken(token)
+  if (payload && payload.usuario_id) {
+    const usuario = banco
+      .prepare('SELECT id, nome, identificador FROM usuarios WHERE id = ?')
+      .get(payload.usuario_id)
+    if (usuario) req.usuario = usuario
+  }
+  next()
+}
+
 // Cria uma sessão no banco e retorna o token para o cliente
 function criarSessao(usuarioId) {
   const payload = { usuario_id: usuarioId, criado_em: Date.now() }
@@ -67,4 +82,4 @@ function criarSessao(usuarioId) {
   return token
 }
 
-module.exports = { assinarToken, verificarToken, criarSessao, exigirAutenticacao }
+module.exports = { assinarToken, verificarToken, criarSessao, exigirAutenticacao, autenticacaoOpcional }

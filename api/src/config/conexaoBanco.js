@@ -5,7 +5,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') })
 
 const pastaDb = path.resolve(__dirname, '../../db')
 if (!fs.existsSync(pastaDb)) fs.mkdirSync(pastaDb, { recursive: true })
-const caminhoBanco = path.join(pastaDb, 'landing.db')
+const caminhoBanco = path.join(pastaDb, 'swipfood.db')
 
 const banco = new Database(caminhoBanco)
 
