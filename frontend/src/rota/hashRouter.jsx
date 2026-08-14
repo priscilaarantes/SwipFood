@@ -29,7 +29,7 @@ export function useRota() {
 export function parsearRota(rota) {
   const partes = rota.split('/').filter(Boolean)
   return {
-    nome: partes[0] || '/',
+    nome: partes.length ? `/${partes[0]}` : '/',
     parametros: partes.slice(1)
   }
 }

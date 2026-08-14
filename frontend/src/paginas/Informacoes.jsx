@@ -120,7 +120,7 @@ export default function Informacoes({ parametros }) {
 
     // Garante que as notas obrigatórias foram preenchidas (RNF máx 8 obrigatórios)
     for (const campo of CAMPOS_OBRIGATORIOS) {
-      if (!notas[campo.chave]) {
+      if (notas[campo.chave] === undefined || notas[campo.chave] === null) {
         setMensagem(`Informe a nota de "${campo.rotulo}".`)
         return
       }
@@ -128,7 +128,7 @@ export default function Informacoes({ parametros }) {
 
     const corpo = { comentario, fotos }
     for (const campo of [...CAMPOS_OBRIGATORIOS, ...CAMPOS_OPCIONAIS]) {
-      if (notas[campo.chave]) corpo[campo.chave] = notas[campo.chave]
+      if (notas[campo.chave] !== undefined && notas[campo.chave] !== null) corpo[campo.chave] = notas[campo.chave]
     }
 
     setEnviando(true)

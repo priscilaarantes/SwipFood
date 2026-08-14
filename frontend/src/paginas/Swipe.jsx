@@ -73,7 +73,7 @@ export default function Swipe() {
     }
     window.addEventListener('keydown', aoTeclar)
     return () => window.removeEventListener('keydown', aoTeclar)
-  })
+  }, [cardAtual, registrando])
 
   // Início do arraste
   const iniciarArraste = (evento) => {

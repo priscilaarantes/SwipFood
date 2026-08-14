@@ -32,6 +32,10 @@ function registrarSwipe(req, res) {
       banco
         .prepare('UPDATE estabelecimentos SET likes = MAX(0, likes - 1) WHERE id = ?')
         .run(estabelecimentoId)
+    } else if (anterior.acao === 'dislike' && acao === 'like') {
+      banco
+        .prepare('UPDATE estabelecimentos SET likes = likes + 1 WHERE id = ?')
+        .run(estabelecimentoId)
     }
     banco
       .prepare('UPDATE swipes SET acao = ? WHERE id = ?')

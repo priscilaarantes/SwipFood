@@ -8,7 +8,7 @@ export default function Estrelas({ nota, aoMudar, somenteLeitura = false, tamanh
 
   const clicar = (valor) => {
     if (!somenteLeitura && aoMudar) {
-      aoMudar(valor === nota ? valor - 1 : valor)
+      aoMudar(valor === nota ? 0 : valor)
     }
   }
 
