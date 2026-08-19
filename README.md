@@ -18,10 +18,10 @@
 
 | Nome | Matrícula |
 |---|---|
-| Gabriel Queiroz Nunes | — |
-| Felipe Silva Gomes | — |
+| Gabriel Queiroz Nunes | 202410921240007 |
+| Felipe Silva Gomes | 202410921240017 |
 | Ana Clara dos Santos Fernandes | 202410921240046 |
-| Debora Priscila Arantes Alves da Silva Sousa | — |
+| Debora Priscila Arantes Alves da Silva Sousa | 202410921240024 |
 
 
 
@@ -153,4 +153,4 @@ Projeto desenvolvido com fins acadêmicos e educacionais no âmbito da disciplin
 **Programação Web** do **IFMT — Campus Barra do Garças**, sob orientação do professor
 **Carlos David Rocha de Souza**.
 
---> Repositório oficial: [https://github.com/priscilaarantes/SwipFood_ProjDevSistemas](https://github.com/priscilaarantes/SwipFood_ProjDevSistemas)
+--> Repositório oficial: [https://github.com/priscilaarantes/SwipFood_ProjDevSistemas](https://github.com/priscilaarantes/SwipFood)
