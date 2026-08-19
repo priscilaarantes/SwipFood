@@ -18,10 +18,10 @@
 
 | Nome | Matrícula |
 |---|---|
-| Gabriel Queiroz Nunes | 202410921240007 |
+| Gabriel Queiroz Nunes | 202410921240024 |
 | Felipe Silva Gomes | 202410921240017 |
 | Ana Clara dos Santos Fernandes | 202410921240046 |
-| Debora Priscila Arantes Alves da Silva Sousa | 202410921240024 |
+| Debora Priscila Arantes Alves da Silva Sousa | 202410921240007 |
 
 
 
