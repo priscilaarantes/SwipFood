@@ -1,10 +1,10 @@
-# 🍔 SwipFood — O Tinder dos Restaurantes
+# SwipFood — O Tinder dos Restaurantes
 
 > **Projeto Acadêmico Full Stack:** Aplicação em **React 18 (Vite + Tailwind CSS)** com API RESTful em **Node.js (Express)** e banco **SQLite**.
 
----
 
-## 🏫 Informações Acadêmicas
+
+## Informações Acadêmicas
 
 | Campo | Descrição |
 |---|---|
@@ -14,18 +14,18 @@
 | **Disciplina** | Programação Web |
 | **Professor** | Carlos David Rocha de Souza |
 
-### 👥 Equipe de Desenvolvimento
+### Equipe de Desenvolvimento
 
 | Nome | Matrícula |
 |---|---|
-| Gabriel Queiroz Nunes | — |
-| Felipe Silva Gomes | — |
-| Ana Clara dos Santos Fernandes | — |
-| Debora Priscila Arantes Alves da Silva Sousa | — |
+| Gabriel Queiroz Nunes | 202410921240024 |
+| Felipe Silva Gomes | 202410921240017 |
+| Ana Clara dos Santos Fernandes | 202410921240046 |
+| Debora Priscila Arantes Alves da Silva Sousa | 202410921240007 |
 
----
 
-## 📋 Sobre o Projeto
+
+## Sobre o Projeto
 
 O **SwipFood** funciona como um *"Tinder dos restaurantes"*: o usuário se cadastra, filtra os
 estabelecimentos por preço, categoria, estacionamento, área kids, tags e distância e vai
@@ -33,25 +33,25 @@ estabelecimentos por preço, categoria, estacionamento, área kids, tags e dist�
 personalizado** com as médias das notas de cada estabelecimento.
 
 Recursos principais:
-- 🔐 **Autenticação** com `scrypt` + sessões por token (HMAC-SHA256).
-- 🏪 **Estabelecimentos** com faixa de preço, capacidade, tipo de assento, estacionamento,
+- **Autenticação** com `scrypt` + sessões por token (HMAC-SHA256).
+- **Estabelecimentos** com faixa de preço, capacidade, tipo de assento, estacionamento,
   área kids, tags e imagens.
-- ⭐ **Avaliações** de 0 a 5 em atributos como limpeza, manuseio, custo-benefício e
+- **Avaliações** de 0 a 5 em atributos como limpeza, manuseio, custo-benefício e
   atendimento (máx. 8 campos obrigatórios no formulário) + fotos (JPEG/PNG/WEBP, até 500 KB).
-- 📍 **Filtros combináveis** entre si e **filtro por distância** (Haversine).
-- 🃏 **Swipe** com arraste, botões e setas do teclado; tela de **Match** e **Ranking**.
+- **Filtros combináveis** entre si e **filtro por distância** (Haversine).
+- **Swipe** com arraste, botões e setas do teclado; tela de **Match** e **Ranking**.
 
----
 
-## 🛠️ Tecnologias
+
+## Tecnologias
 
 - **Frontend:** React 18, Vite, Tailwind CSS, roteador próprio por hash (`#/`).
 - **Backend:** Node.js, Express, `better-sqlite3`, Helmet, CORS, `validator`.
 - **Banco:** SQLite (WAL), com seed de 20 restaurantes de Barra do Garças/MT.
 
----
 
-## 📁 Estrutura
+
+## Estrutura
 
 ```text
 SwipFood_ProjDevSistemas/
@@ -79,9 +79,9 @@ SwipFood_ProjDevSistemas/
 └── README.md
 ```
 
----
 
-## ⚡ Como Executar
+
+## Como Executar
 
 ### 1. Instalar dependências (primeira vez)
 
@@ -107,9 +107,9 @@ cd ../api && npm start           # Aplicação completa em http://localhost:3000
 > O banco `swipfood.db` é criado e semeado automaticamente na primeira execução
 > (20 restaurantes). Para zerar, apague `api/db/swipfood.db*` e reinicie o servidor.
 
----
 
-## 🗄️ Endpoints da API
+
+## Endpoints da API
 
 | Método | Rota | Autenticação | Descrição |
 |---|---|---|---|
@@ -130,9 +130,9 @@ cd ../api && npm start           # Aplicação completa em http://localhost:3000
 `estacionamento`, `estacionamento_vigiado`, `area_kids`, `tags`, `raio_km` (+`latitude`/`longitude`),
 `ordenar_por` (`likes` | `media` | `nome`).
 
----
 
-## 🧭 Rotas do Frontend (hash)
+
+## Rotas do Frontend (hash)
 
 | Rota | Página |
 |---|---|
@@ -145,12 +145,12 @@ cd ../api && npm start           # Aplicação completa em http://localhost:3000
 | `#/ranking` | Ranking personalizado |
 | `#/estabelecimento/:id` | Informações + avaliação |
 
----
 
-## 📜 Licença e Créditos
+
+## Licença e Créditos
 
 Projeto desenvolvido com fins acadêmicos e educacionais no âmbito da disciplina de
 **Programação Web** do **IFMT — Campus Barra do Garças**, sob orientação do professor
 **Carlos David Rocha de Souza**.
 
-🔗 Repositório oficial: [https://github.com/priscilaarantes/SwipFood_ProjDevSistemas](https://github.com/priscilaarantes/SwipFood_ProjDevSistemas)
+--> Repositório oficial: [https://github.com/priscilaarantes/SwipFood](https://github.com/priscilaarantes/SwipFood)

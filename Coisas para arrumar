@@ -1,0 +1,9 @@
+1. Imagens quebradas em produção — O servidor não encontrava as imagens porque procurava na pasta errada. Adicionado fallback para servir a pasta public/.
+2. Cards de swipe vazios — Os cards por trás do card principal não tinham imagem nem conteúdo. Agora mostram foto e nome do restaurante.
+3. E-mails corrompidos no cadastro — A função de sanitização convertia caracteres especiais de e-mails (ex: user+tag@email.com), impedindo o login posterior. Criada função separada que preserva e-mails.
+4. Erros de cadastro não apareciam — Quando o backend retornava vários erros, a mensagem não era exibida corretamente. Corrigido o tratamento para aceitar string, array ou objeto.
+5. Filtro de distância ignorava coordenada 0 — Usuários no equador ou meridiano tinham o filtro de distância desativado porque 0 é tratado como falso em JS.
+6. Página de restaurante sem ID — Acessar /estabelecimento sem número causava erro silencioso. Adicionada verificação para redirecionar.
+7. Sessão fantasma no backend — O middleware de autenticação opcional aceitava tokens de sessões deletadas. Agora valida no banco.
+8. Links protegidos visíveis para visitantes — Restaurantes, Swipe e Ranking apareciam no menu para quem não estava logado. Agora só aparecem para usuários autenticados.
+9. Logout desatualizado — Quando o token expirava no servidor, o menu continuava mostrando o usuário logado. Adicionado callback para sincronizar o estado.
