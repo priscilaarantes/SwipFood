@@ -6,12 +6,18 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+      },
       colors: {
-        creme: '#dbcbb8',
-        cremeClaro: '#f4eee9',
-        escuro: '#1C1C1C',
-        vermelho: '#e74c3c',
-        vermelhoEscuro: '#c0392b'
+        begeGlobal: '#EAE2D6',
+        pessegoHeader: '#e4b693',
+        pessegoDropdown: '#e8c9b2',
+        begeInput: '#F5EBE1',
+        amareloCategoria: '#fcf3c5',
+        azulMarinho: '#0A1128',
+        escuro: '#131b2f',
+        vermelho: '#FF595E',
       }
     },
   },

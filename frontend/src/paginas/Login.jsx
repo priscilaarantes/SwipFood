@@ -3,7 +3,6 @@ import { useAuth } from '../contexto/AuthContext'
 import { ErroApi } from '../utilitarios/api'
 import { navegarPara } from '../rota/hashRouter'
 
-// Tela de login com e-mail/CPF/CNPJ + senha
 export default function Login() {
   const { entrar } = useAuth()
   const [identificador, setIdentificador] = useState('')
@@ -26,64 +25,72 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-4 py-10">
-      <div className="bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl p-8 w-full max-w-md border border-white/30">
-        <img src="/img/logo.png" alt="Logo SwipFood" className="w-20 h-20 object-cover rounded-2xl mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-escuro text-center mb-6">Entrar</h2>
+    <div 
+      className="min-h-screen flex flex-col items-center justify-center p-4"
+      style={{
+        backgroundImage: "url('/img/login_bg.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
+      <div className="bg-black/20 backdrop-blur-3xl rounded-[3rem] shadow-2xl p-10 md:p-14 w-full max-w-md border border-white/10 flex flex-col items-center">
+        
+        <div className="mb-10 text-center">
+          <h2 className="text-xl font-bold bg-begeInput px-8 py-2 rounded-full text-azulMarinho inline-block shadow-sm">
+            Sign In
+          </h2>
+        </div>
 
         {erro && (
-          <div className="bg-red-100 border border-red-300 text-red-700 text-sm font-semibold px-4 py-2 rounded-lg mb-4">
+          <div className="bg-red-100 border border-red-300 text-red-700 text-sm font-semibold px-4 py-3 rounded-xl mb-6 shadow-sm w-full text-center">
             {erro}
           </div>
         )}
 
-        <form onSubmit={aoEnviar} className="space-y-4">
-          <div>
-            <label className="block font-bold text-escuro mb-1">E-mail ou CPF/CNPJ</label>
+        <form onSubmit={aoEnviar} className="space-y-6 w-full flex flex-col items-center">
+          <div className="w-full">
             <input
               type="text"
               value={identificador}
               onChange={(e) => setIdentificador(e.target.value)}
-              placeholder="seuemail@exemplo.com ou CPF/CNPJ"
+              placeholder="CPF/CNPJ ou E-mail"
               required
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white/90 focus:outline-none focus:ring-2 focus:ring-red-600"
+              className="input-login text-center"
             />
           </div>
-          <div>
-            <label className="block font-bold text-escuro mb-1">Senha</label>
+          <div className="w-full">
             <input
               type="password"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
-              placeholder="Sua senha"
+              placeholder="Senha"
               required
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white/90 focus:outline-none focus:ring-2 focus:ring-red-600"
+              className="input-login text-center"
             />
           </div>
-          <button
-            type="submit"
-            disabled={enviando}
-            className="w-full bg-escuro hover:bg-gray-800 text-white font-bold py-3 rounded-full transition-colors disabled:opacity-50"
-          >
-            {enviando ? 'Entrando…' : 'Entrar'}
-          </button>
+          
+          <div className="pt-4">
+            <button
+              type="submit"
+              disabled={enviando}
+              className="btn-login w-36"
+            >
+              {enviando ? '...' : 'Entrar'}
+            </button>
+          </div>
         </form>
 
-        <div className="flex items-center gap-3 my-5 text-gray-500 text-sm">
-          <span className="flex-1 h-px bg-gray-300" />
+        <div className="flex items-center gap-4 my-8 w-full max-w-[200px] text-white/50 text-sm font-medium">
+          <span className="flex-1 h-[1px] bg-white/20" />
           ou
-          <span className="flex-1 h-px bg-gray-300" />
+          <span className="flex-1 h-[1px] bg-white/20" />
         </div>
 
         <a
           href="#/cadastro"
-          className="block w-full text-center border-2 border-escuro text-escuro font-bold py-3 rounded-full hover:bg-escuro hover:text-white transition-colors"
+          className="btn-login w-40 text-center"
         >
           Criar conta
-        </a>
-
-        <a href="#/" className="block mt-5 text-center text-escuro text-sm hover:underline">
-          ← Voltar ao início
         </a>
       </div>
     </div>

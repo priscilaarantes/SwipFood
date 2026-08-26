@@ -31,70 +31,83 @@ export default function Cadastro() {
   }
 
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-4 py-10">
-      <div className="bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl p-8 w-full max-w-md border border-white/30">
-        <img src="/img/logo.png" alt="Logo SwipFood" className="w-20 h-20 object-cover rounded-2xl mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-escuro text-center mb-6">Criar conta</h2>
+    <div 
+      className="min-h-screen flex flex-col items-center justify-center p-4"
+      style={{
+        backgroundImage: "url('/img/login_bg.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
+      <div className="bg-black/20 backdrop-blur-3xl rounded-[3rem] shadow-2xl p-10 md:p-14 w-full max-w-md border border-white/10 flex flex-col items-center">
+        
+        <div className="mb-10 text-center">
+          <h2 className="text-xl font-bold bg-begeInput px-8 py-2 rounded-full text-azulMarinho inline-block shadow-sm">
+            Criar conta
+          </h2>
+        </div>
 
         {erro && (
-          <div className="bg-red-100 border border-red-300 text-red-700 text-sm font-semibold px-4 py-2 rounded-lg mb-4">
+          <div className="bg-red-100 border border-red-300 text-red-700 text-sm font-semibold px-4 py-3 rounded-xl mb-6 shadow-sm w-full text-center">
             {erro}
           </div>
         )}
 
-        <form onSubmit={aoEnviar} className="space-y-4">
-          <div>
-            <label className="block font-bold text-escuro mb-1">Nome completo</label>
+        <form onSubmit={aoEnviar} className="space-y-6 w-full flex flex-col items-center">
+          <div className="w-full">
             <input
               type="text"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
-              placeholder="Seu nome"
+              placeholder="Nome completo"
               required
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white/90 focus:outline-none focus:ring-2 focus:ring-red-600"
+              className="input-login text-center"
             />
           </div>
-          <div>
-            <label className="block font-bold text-escuro mb-1">E-mail ou CPF/CNPJ</label>
+          <div className="w-full">
             <input
               type="text"
               value={identificador}
               onChange={(e) => setIdentificador(e.target.value)}
-              placeholder="seuemail@exemplo.com ou CPF/CNPJ"
+              placeholder="CPF/CNPJ ou E-mail"
               required
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white/90 focus:outline-none focus:ring-2 focus:ring-red-600"
+              className="input-login text-center"
             />
           </div>
-          <div>
-            <label className="block font-bold text-escuro mb-1">Senha</label>
+          <div className="w-full">
             <input
               type="password"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
-              placeholder="Mínimo de 6 caracteres"
+              placeholder="Senha (min 6 caracteres)"
               minLength={6}
               required
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white/90 focus:outline-none focus:ring-2 focus:ring-red-600"
+              className="input-login text-center"
             />
           </div>
-          <button
-            type="submit"
-            disabled={enviando}
-            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-full transition-colors disabled:opacity-50"
-          >
-            {enviando ? 'Criando conta…' : 'Cadastrar'}
-          </button>
+          
+          <div className="pt-4">
+            <button
+              type="submit"
+              disabled={enviando}
+              className="btn-login w-40"
+            >
+              {enviando ? '...' : 'Cadastrar'}
+            </button>
+          </div>
         </form>
 
-        <p className="mt-5 text-center text-sm text-gray-600">
-          Já tem conta?{' '}
-          <a href="#/login" className="font-bold text-escuro hover:underline">
-            Entrar
-          </a>
-        </p>
+        <div className="flex items-center gap-4 my-8 w-full max-w-[200px] text-white/50 text-sm font-medium">
+          <span className="flex-1 h-[1px] bg-white/20" />
+          ou
+          <span className="flex-1 h-[1px] bg-white/20" />
+        </div>
 
-        <a href="#/" className="block mt-4 text-center text-escuro text-sm hover:underline">
-          ← Voltar ao início
+        <a
+          href="#/login"
+          className="btn-login w-36 text-center"
+        >
+          Voltar
         </a>
       </div>
     </div>

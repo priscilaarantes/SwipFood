@@ -1,8 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Estilos adicionais e suavizações */
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #0A1128;
+}
+
+.input-login {
+  background-color: #F5EBE1;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  padding: 0.75rem 1.25rem;
+  color: #0A1128;
+  outline: none;
+  transition: all 0.2s;
+  width: 100%;
+}
+.input-login:focus {
+  border-color: #a855f7;
+}
+
+.btn-login {
+  background-color: #F5EBE1;
+  color: #0A1128;
+  border-radius: 9999px;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  border: none;
+}
+.btn-login:hover {
+  transform: translateY(-4px);
 }

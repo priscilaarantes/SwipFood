@@ -1,163 +1,94 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const CATEGORIAS = [
-  'pizzaria', 'doceria', 'churrascaria', 'japonesa', 'italiana',
-  'fastfood', 'cafe', 'saudavel', 'padaria'
-]
-
-const ESTACIONAMENTOS = [
-  { valor: 'proprio', rotulo: 'Próprio' },
-  { valor: 'convenio', rotulo: 'Convênio' },
-  { valor: 'valet', rotulo: 'Valet' },
-  { valor: 'nao_possui', rotulo: 'Não possui' }
-]
-
-const AREAS_KIDS = [
-  { valor: 'sim', rotulo: 'Sim' },
-  { valor: 'nao', rotulo: 'Não' },
-  { valor: 'monitor', rotulo: 'Com monitor' }
-]
-
-const OPCOES_TAGS = [
-  'Família', 'Moderno', 'Rústico', 'Romântico', 'Wifi gratuito',
-  'Aceita Pix', 'Delivery', 'Bar', 'Rodízio', 'Climatizado'
-]
-
-// Barra de filtros combináveis (busca, categoria, preço, estacionamento,
-// área kids, tags, distância e ordenação). Cada mudança dispara aoMudar.
 export default function FiltrosBar({ filtros, aoMudar }) {
-  const atualizar = (campo, valor) => aoMudar({ ...filtros, [campo]: valor })
+  const [menuAberto, setMenuAberto] = useState(null)
 
-  const alternarCategoria = (categoria) => {
-    const categorias = filtros.categorias.includes(categoria)
-      ? filtros.categorias.filter((c) => c !== categoria)
-      : [...filtros.categorias, categoria]
-    atualizar('categorias', categorias)
-  }
-
-  const alternarTag = (tag) => {
-    const tags = filtros.tags.includes(tag)
-      ? filtros.tags.filter((t) => t !== tag)
-      : [...filtros.tags, tag]
-    atualizar('tags', tags)
-  }
-
-  const chip = (ativo, texto, aoClicar) => (
-    <button
-      key={texto}
-      onClick={aoClicar}
-      className={`px-3 py-1 rounded-full text-xs font-bold border transition-colors ${
-        ativo
-          ? 'bg-red-600 text-white border-red-700'
-          : 'bg-white text-escuro border-gray-300 hover:bg-cremeClaro'
-      }`}
-    >
-      {texto}
-    </button>
-  )
+  const toggleMenu = (menu) => setMenuAberto(menuAberto === menu ? null : menu)
 
   return (
-    <div className="bg-cremeClaro rounded-2xl p-4 shadow-sm space-y-4">
-      {/* Busca */}
-      <div className="flex flex-wrap items-center gap-3">
-        <input
-          type="text"
-          placeholder="Buscar restaurante, prato ou endereço…"
-          value={filtros.busca}
-          onChange={(e) => atualizar('busca', e.target.value)}
-          className="flex-1 min-w-[220px] px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-600"
-        />
-        <select
-          value={filtros.ordenar_por}
-          onChange={(e) => atualizar('ordenar_por', e.target.value)}
-          className="px-3 py-2 rounded-full border border-gray-300 bg-white text-sm font-semibold"
-        >
-          <option value="likes">Mais curtidos</option>
-          <option value="media">Melhor nota</option>
-          <option value="nome">Nome (A–Z)</option>
-        </select>
-      </div>
+    <div className="bg-pessegoHeader w-full shadow-sm relative z-50 py-3">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between text-azulMarinho">
+        
+        {/* Lado Esquerdo - Menus */}
+        <div className="flex items-center gap-10">
+          {/* Preferências de preço */}
+          <div className="relative">
+            <button className="font-semibold text-lg hover:text-white transition-colors" onClick={() => toggleMenu('preco')}>
+              Preferências de preço
+            </button>
+            {menuAberto === 'preco' && (
+               <div className="absolute top-12 left-0 mt-2 bg-pessegoDropdown border border-pessegoHeader rounded-xl p-5 shadow-xl flex flex-col gap-3 min-w-[320px]">
+                  <div className="flex justify-between font-bold text-sm bg-begeInput px-5 py-3 rounded-full text-azulMarinho">
+                    <span>mínimo: 15R$</span>
+                    <span>-</span>
+                    <span>máximo: 500R$</span>
+                  </div>
+                  <input type="range" className="w-full mt-4 accent-azulMarinho" />
+               </div>
+            )}
+          </div>
+          
+          {/* Distância */}
+          <div className="relative">
+            <button className="font-semibold text-lg hover:text-white transition-colors" onClick={() => toggleMenu('distancia')}>
+              Distância
+            </button>
+            {menuAberto === 'distancia' && (
+               <div className="absolute top-12 left-0 mt-2 bg-pessegoDropdown border border-pessegoHeader rounded-xl p-5 shadow-xl flex flex-col gap-3 min-w-[320px]">
+                  <div className="flex justify-between font-bold text-sm bg-begeInput px-5 py-3 rounded-full text-azulMarinho">
+                    <span>mínimo: 2km</span>
+                    <span>-</span>
+                    <span>máximo: 50km</span>
+                  </div>
+                  <input type="range" className="w-full mt-4 accent-azulMarinho" />
+               </div>
+            )}
+          </div>
+          
+          {/* Ofertas */}
+          <div className="relative">
+            <button className="font-semibold text-lg hover:text-white transition-colors" onClick={() => toggleMenu('ofertas')}>
+              ofertas
+            </button>
+            {menuAberto === 'ofertas' && (
+               <div className="absolute top-12 left-0 mt-2 bg-pessegoDropdown border border-pessegoHeader rounded-xl p-4 shadow-xl flex flex-col gap-3 min-w-[320px]">
+                  <button className="bg-begeInput font-bold py-3 px-5 text-sm rounded-full text-left w-full hover:bg-white transition-colors">Promoções em restaurantes</button>
+                  <button className="bg-begeInput font-bold py-3 px-5 text-sm rounded-full text-left w-full hover:bg-white transition-colors">Promoções de aniversário</button>
+                  <button className="bg-begeInput font-bold py-3 px-5 text-sm rounded-full text-left w-full hover:bg-white transition-colors">Promoções em rodízios</button>
+                  <button className="bg-begeInput font-bold py-3 px-5 text-sm rounded-full text-left w-full hover:bg-white transition-colors">Promoções para feriados</button>
+                  <button className="bg-begeInput font-bold py-3 px-5 text-sm rounded-full text-center w-full mt-2 hover:bg-white transition-colors">faça parte do premium para mais descontos</button>
+               </div>
+            )}
+          </div>
 
-      {/* Categorias */}
-      <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-xs font-bold text-escuro w-24">Categorias</span>
-        {CATEGORIAS.map((cat) =>
-          chip(filtros.categorias.includes(cat), cat, () => alternarCategoria(cat))
-        )}
-      </div>
+          <button className="font-semibold text-lg hover:text-white transition-colors relative">
+            novidades
+            <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-normal whitespace-nowrap opacity-60">lista de lugares recém abertos</span>
+          </button>
+        </div>
 
-      {/* Faixa de preço */}
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="text-xs font-bold text-escuro w-24">Preço (R$)</span>
-        <input
-          type="number"
-          min="0"
-          placeholder="mín"
-          value={filtros.preco_min}
-          onChange={(e) => atualizar('preco_min', e.target.value)}
-          className="w-20 px-3 py-2 rounded-full border border-gray-300 bg-white text-sm text-center"
-        />
-        <span className="font-bold">–</span>
-        <input
-          type="number"
-          min="0"
-          placeholder="máx"
-          value={filtros.preco_max}
-          onChange={(e) => atualizar('preco_max', e.target.value)}
-          className="w-20 px-3 py-2 rounded-full border border-gray-300 bg-white text-sm text-center"
-        />
-      </div>
+        {/* Lado Direito - Notificação e Perfil */}
+        <div className="flex items-center gap-4 relative">
+          <button className="hover:scale-110 transition-transform text-2xl opacity-80">
+            🔔
+          </button>
+          
+          <button onClick={() => toggleMenu('perfil')} className="bg-begeInput w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-sm hover:scale-105 transition-transform">
+            👤
+          </button>
+          
+          {menuAberto === 'perfil' && (
+             <div className="absolute top-14 right-0 mt-2 bg-pessegoDropdown border border-pessegoHeader rounded-xl p-4 shadow-xl flex flex-col gap-2 min-w-[200px]">
+                <button className="bg-begeInput font-bold py-2.5 px-5 text-sm rounded-full text-left hover:bg-white transition-colors">ver perfil</button>
+                <button className="bg-begeInput font-bold py-2.5 px-5 text-sm rounded-full text-left hover:bg-white transition-colors">configurações</button>
+                <button className="bg-begeInput font-bold py-2.5 px-5 text-sm rounded-full text-left hover:bg-white transition-colors">conta</button>
+                <button className="bg-begeInput font-bold py-2.5 px-5 text-sm rounded-full text-left hover:bg-white transition-colors">salvos</button>
+                <button className="bg-begeInput font-bold py-2.5 px-5 text-sm rounded-full text-left hover:bg-white transition-colors">avaliações</button>
+                <button className="bg-begeInput font-bold py-2.5 px-5 text-sm rounded-full text-right mt-2 hover:bg-white transition-colors">sair 🚪</button>
+             </div>
+          )}
+        </div>
 
-      {/* Estacionamento */}
-      <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-xs font-bold text-escuro w-24">Estacionam.</span>
-        {ESTACIONAMENTOS.map((opcao) =>
-          chip(filtros.estacionamento === opcao.valor, opcao.rotulo, () =>
-            atualizar('estacionamento', filtros.estacionamento === opcao.valor ? '' : opcao.valor)
-          )
-        )}
-        {chip(Boolean(filtros.estacionamento_vigiado), 'Vigiado', () =>
-          atualizar('estacionamento_vigiado', !filtros.estacionamento_vigiado)
-        )}
-      </div>
-
-      {/* Área kids */}
-      <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-xs font-bold text-escuro w-24">Área kids</span>
-        {AREAS_KIDS.map((opcao) =>
-          chip(filtros.area_kids === opcao.valor, opcao.rotulo, () =>
-            atualizar('area_kids', filtros.area_kids === opcao.valor ? '' : opcao.valor)
-          )
-        )}
-      </div>
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-xs font-bold text-escuro w-24">Tags</span>
-        {OPCOES_TAGS.map((tag) => chip(filtros.tags.includes(tag), tag, () => alternarTag(tag)))}
-      </div>
-
-      {/* Distância */}
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="text-xs font-bold text-escuro w-24">Distância (km)</span>
-        <input
-          type="number"
-          min="1"
-          placeholder="raio em km"
-          value={filtros.raio_km}
-          onChange={(e) => atualizar('raio_km', e.target.value)}
-          className="w-28 px-3 py-2 rounded-full border border-gray-300 bg-white text-sm text-center"
-        />
-        <button
-          onClick={() => atualizar('usar_localizacao', !filtros.usar_localizacao)}
-          className={`px-3 py-1 rounded-full text-xs font-bold transition-colors ${
-            filtros.usar_localizacao
-              ? 'bg-green-600 text-white'
-              : 'bg-white text-escuro border border-gray-300'
-          }`}
-        >
-          {filtros.usar_localizacao ? 'Localização ativa' : 'Usar minha localização'}
-        </button>
       </div>
     </div>
   )

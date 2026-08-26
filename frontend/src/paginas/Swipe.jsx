@@ -22,6 +22,11 @@ function marcarSwipeado(id) {
 
 // Tela de swipe: cards empilháveis com like/dislike (arraste, botões e setas do teclado)
 export default function Swipe() {
+  const obterCorTag = (tag) => {
+    const cores = ['bg-tagRosa', 'bg-tagVerde', 'bg-tagAzul', 'bg-tagLaranja', 'bg-tagAmarelo', 'bg-tagRoxo']
+    const index = tag.length % cores.length
+    return cores[index]
+  }
   const [fila, setFila] = useState([])
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState('')
@@ -112,20 +117,20 @@ export default function Swipe() {
 
   if (!cardAtual) {
     return (
-      <div className="max-w-xl mx-auto px-4 py-16 text-center">
+      <div className="max-w-xl mx-auto px-4 py-16 text-center bg-white/60 backdrop-blur-xl rounded-[2.5rem] mt-10 shadow-soft border border-white/60">
         <p className="text-6xl mb-4">🎉</p>
-        <h2 className="text-2xl font-bold text-escuro">Você arrastou por todos os restaurantes!</h2>
-        <p className="text-gray-600 mt-2">Confira seu ranking ou explore as opções novamente.</p>
-        <div className="flex justify-center gap-4 mt-6">
+        <h2 className="text-3xl font-black text-azulMarinho">Você arrastou por todos os restaurantes!</h2>
+        <p className="text-azulMarinho/70 mt-3 font-medium">Confira seu ranking ou explore as opções novamente.</p>
+        <div className="flex justify-center gap-4 mt-8">
           <button
             onClick={() => navegarPara('/principal')}
-            className="bg-escuro text-white font-bold px-6 py-3 rounded-full"
+            className="btn-primary px-8"
           >
             Explorar restaurantes
           </button>
           <button
             onClick={() => navegarPara('/ranking')}
-            className="bg-red-600 text-white font-bold px-6 py-3 rounded-full"
+            className="bg-vermelho text-white font-bold px-8 py-3 rounded-full hover:bg-vermelhoEscuro hover:scale-105 transition-transform shadow-md"
           >
             Ver ranking
           </button>
@@ -158,7 +163,7 @@ export default function Swipe() {
 
         {/* Card do topo */}
         <div
-          className={`absolute inset-0 rounded-3xl shadow-2xl overflow-hidden bg-white ${registrando ? 'opacity-60' : ''}`}
+          className={`absolute inset-0 card-soft bg-white border-2 border-white/50 ${registrando ? 'opacity-60' : ''}`}
           style={{
             transform: `translate(${deslocamento.x}px, ${deslocamento.y}px) rotate(${rotacao}deg)`,
             transition: arrastandoRef.current ? 'none' : 'transform 0.3s ease',
@@ -176,20 +181,20 @@ export default function Swipe() {
             alt={cardAtual.nome}
             className="w-full h-64 object-cover"
           />
-          <div className="p-5">
-            <h2 className="text-2xl font-black text-escuro">{cardAtual.nome}</h2>
-            <p className="text-sm font-bold text-gray-500 uppercase tracking-wide">
+          <div className="p-6">
+            <h2 className="text-3xl font-black text-azulMarinho">{cardAtual.nome}</h2>
+            <p className="text-sm font-bold text-azulMarinho/50 uppercase tracking-wide mt-1">
               {cardAtual.categoria} · R$ {cardAtual.faixa_preco}
             </p>
-            <p className="text-gray-600 mt-2">{cardAtual.descricao}</p>
-            <div className="flex flex-wrap gap-2 mt-4">
+            <p className="text-azulMarinho/80 mt-3">{cardAtual.descricao}</p>
+            <div className="flex flex-wrap gap-2 mt-5">
               {cardAtual.tags?.map((tag) => (
-                <span key={tag} className="bg-cremeClaro text-escuro text-xs font-bold px-3 py-1 rounded-full">
-                  {tag}
+                <span key={tag} className={`${obterCorTag(tag)} text-azulMarinho text-xs font-bold px-3 py-1.5 rounded-full shadow-sm`}>
+                  #{tag}
                 </span>
               ))}
             </div>
-            <p className="mt-4 text-sm font-bold text-escuro">❤ {cardAtual.likes ?? 0} curtidas</p>
+            <p className="mt-5 text-sm font-bold text-azulMarinho">❤ {cardAtual.likes ?? 0} curtidas</p>
           </div>
 
           {/* Selos de like/dislike durante o arraste */}

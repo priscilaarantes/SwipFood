@@ -1,125 +1,79 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { api } from '../utilitarios/api'
+import React, { useState } from 'react'
 import FiltrosBar from '../components/FiltrosBar'
-import CardEstabelecimento from '../components/CardEstabelecimento'
 import { navegarPara } from '../rota/hashRouter'
 
-const FILTROS_INICIAIS = {
-  busca: '',
-  categorias: [],
-  preco_min: '',
-  preco_max: '',
-  estacionamento: '',
-  estacionamento_vigiado: false,
-  area_kids: '',
-  tags: [],
-  raio_km: '',
-  ordenar_por: 'likes',
-  usar_localizacao: false
-}
-
-// Página principal pós-login: busca, filtros combináveis e grade de restaurantes
 export default function Principal() {
-  const [filtros, setFiltros] = useState(FILTROS_INICIAIS)
-  const [estabelecimentos, setEstabelecimentos] = useState([])
-  const [coordenadas, setCoordenadas] = useState(null)
-  const [carregando, setCarregando] = useState(true)
-  const [erro, setErro] = useState('')
+  const [filtros, setFiltros] = useState({})
 
-  // Quando o usuário ativa a localização, captura as coordenadas do navegador
-  useEffect(() => {
-    if (filtros.usar_localizacao && !coordenadas && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (posicao) => setCoordenadas({ latitude: posicao.coords.latitude, longitude: posicao.coords.longitude }),
-        () => setErro('Não foi possível obter sua localização.')
-      )
-    }
-    if (!filtros.usar_localizacao) setCoordenadas(null)
-  }, [filtros.usar_localizacao])
-
-  // Monta a query string com os filtros combináveis
-  const montarParametros = useMemo(() => {
-    const parametros = new URLSearchParams()
-    if (filtros.busca) parametros.set('q', filtros.busca)
-    if (filtros.categorias.length > 0) parametros.set('categorias', filtros.categorias.join(','))
-    if (filtros.preco_min !== '') parametros.set('preco_min', filtros.preco_min)
-    if (filtros.preco_max !== '') parametros.set('preco_max', filtros.preco_max)
-    if (filtros.estacionamento) parametros.set('estacionamento', filtros.estacionamento)
-    if (filtros.estacionamento_vigiado) parametros.set('estacionamento_vigiado', '1')
-    if (filtros.area_kids) parametros.set('area_kids', filtros.area_kids)
-    if (filtros.tags.length > 0) parametros.set('tags', filtros.tags.join(','))
-    if (filtros.raio_km !== '' && coordenadas) {
-      parametros.set('raio_km', filtros.raio_km)
-      parametros.set('latitude', coordenadas.latitude)
-      parametros.set('longitude', coordenadas.longitude)
-    }
-    parametros.set('ordenar_por', filtros.ordenar_por)
-    return parametros.toString()
-  }, [filtros, coordenadas])
-
-  // Busca os estabelecimentos sempre que os filtros mudam
-  useEffect(() => {
-    const buscar = async () => {
-      setCarregando(true)
-      setErro('')
-      try {
-        const dados = await api.get(`/estabelecimentos?${montarParametros}`)
-        setEstabelecimentos(dados.dados)
-      } catch {
-        setErro('Não foi possível carregar os estabelecimentos.')
-      } finally {
-        setCarregando(false)
-      }
-    }
-    buscar()
-  }, [montarParametros])
+  const categorias = [
+    { nome: 'Café', imagem: '/img/icone_cafe.jpg' },
+    { nome: 'Padaria', imagem: '/img/food1.jpg' },
+    { nome: 'Doceria', imagem: '/img/food2.jpg' },
+    { nome: 'Japonesa', imagem: '/img/icone_sushi.jpg' },
+    { nome: 'Fast-food', imagem: '/img/icone_hamburguer.jpg' },
+    { nome: 'Saudável', imagem: '/img/food1.jpg' },
+    { nome: 'Italiana', imagem: '/img/food2.jpg' },
+    { nome: 'Churrascaria', imagem: '/img/food1.jpg' },
+    { nome: 'Pizzaria', imagem: '/img/food2.jpg' },
+  ]
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Chamada + botão de match */}
-      <section className="bg-escuro rounded-3xl p-8 text-white text-center mb-8">
-        <h2 className="text-3xl font-black">Encontre o restaurante perfeito</h2>
-        <p className="opacity-90 mt-2">
-          Filtre por preço, categoria, estacionamento e muito mais — depois descubra
-          qual lugar combina com você.
-        </p>
-        <button
-          onClick={() => navegarPara('/swipe')}
-          className="mt-6 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-lg px-10 py-4 rounded-full shadow-lg animate-pulse"
-        >
-          ⭐ Começar o Match
-          <span className="block text-xs font-normal opacity-80 mt-1">arraste e descubra lugares novos</span>
-        </button>
-      </section>
-
-      {/* Barra de filtros */}
+    <div className="bg-begeGlobal min-h-screen">
+      {/* Barra de Filtros Peach (Header) */}
       <FiltrosBar filtros={filtros} aoMudar={setFiltros} />
 
-      {/* Grade de estabelecimentos */}
-      <section className="mt-8">
-        <div className="flex items-center justify-between mb-5">
-          <h3 className="text-2xl font-bold text-escuro">Restaurantes encontrados</h3>
-          <span className="text-sm font-semibold text-gray-600">{estabelecimentos.length} resultado(s)</span>
+      <div className="max-w-7xl mx-auto px-6 py-6 text-azulMarinho">
+        <div className="text-sm font-semibold opacity-70 mb-8 flex items-center gap-1">
+          Barra do Garças, MT 📍
         </div>
 
-        {erro && <p className="text-red-600 font-semibold mb-4">{erro}</p>}
+        <div className="flex flex-col md:flex-row gap-12 justify-between">
+          
+          {/* Lado Esquerdo - Categorias */}
+          <div className="w-full md:w-5/12">
+            <h1 className="text-4xl font-black mb-8 leading-tight">
+              Visite as melhores lojas e<br/>estabelecimentos<br/>na sua região com um deslize
+            </h1>
+            <h2 className="text-xl font-extrabold mb-6">Categorias:</h2>
+            
+            <div className="grid grid-cols-3 gap-6">
+              {categorias.map(cat => (
+                <div key={cat.nome} className="flex flex-col items-center gap-2 cursor-pointer hover:scale-105 transition-transform">
+                  <div className="bg-amareloCategoria w-28 h-20 rounded-3xl flex items-center justify-center overflow-hidden shadow-sm">
+                    <img src={cat.imagem} alt={cat.nome} className="w-16 h-16 object-cover rounded-xl mix-blend-multiply" />
+                  </div>
+                  <span className="text-sm font-semibold opacity-75">{cat.nome}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        {carregando ? (
-          <p className="text-escuro font-semibold animate-pulse">Carregando estabelecimentos…</p>
-        ) : estabelecimentos.length === 0 ? (
-          <div className="bg-white rounded-2xl p-10 text-center shadow">
-            <p className="text-2xl">🍽️</p>
-            <p className="text-escuro font-bold mt-2">Nenhum restaurante encontrado</p>
-            <p className="text-gray-500 text-sm mt-1">Tente ajustar ou remover alguns filtros.</p>
+          {/* Lado Direito - Explorar */}
+          <div className="w-full md:w-6/12 flex flex-col items-center relative">
+            <div className="w-full max-w-md relative mb-10">
+              <input 
+                type="text" 
+                placeholder="procure por suas preferências" 
+                className="w-full bg-begeInput px-6 py-4 rounded-full focus:outline-none focus:ring-2 focus:ring-pessegoHeader shadow-inner font-medium placeholder:text-gray-400"
+              />
+              <span className="absolute right-6 top-4 opacity-50">🔍</span>
+            </div>
+
+            <h2 className="text-6xl font-black text-azulMarinho mb-16 self-center ml-20">Explorar</h2>
+
+            {/* Stack de Polaroids */}
+            <div className="relative w-[500px] h-[400px] cursor-pointer group" onClick={() => navegarPara('/swipe')}>
+              <div className="absolute top-10 right-0 w-[300px] h-[400px] bg-begeInput rounded-xl p-3 shadow-2xl rotate-[15deg] group-hover:rotate-[20deg] transition-transform">
+                <img src="/img/food1.jpg" className="w-full h-4/5 object-cover rounded-lg" />
+              </div>
+              <div className="absolute top-5 left-10 w-[320px] h-[420px] bg-begeInput rounded-xl p-3 shadow-2xl rotate-[-5deg] group-hover:rotate-[-8deg] transition-transform z-10">
+                <img src="/img/polaroid_food.jpg" className="w-full h-4/5 object-cover rounded-lg" />
+              </div>
+            </div>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {estabelecimentos.map((estabelecimento) => (
-              <CardEstabelecimento key={estabelecimento.id} estabelecimento={estabelecimento} mostrarMedia />
-            ))}
-          </div>
-        )}
-      </section>
+
+        </div>
+      </div>
     </div>
   )
 }
