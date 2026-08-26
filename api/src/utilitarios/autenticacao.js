@@ -66,10 +66,13 @@ function autenticacaoOpcional(req, res, next) {
   const token = cabecalhoAutorizacao.replace(/^Bearer\s+/i, '')
   const payload = verificarToken(token)
   if (payload && payload.usuario_id) {
-    const usuario = banco
-      .prepare('SELECT id, nome, identificador FROM usuarios WHERE id = ?')
-      .get(payload.usuario_id)
-    if (usuario) req.usuario = usuario
+    const sessao = banco.prepare('SELECT id FROM sessoes WHERE token = ?').get(token)
+    if (sessao) {
+      const usuario = banco
+        .prepare('SELECT id, nome, identificador FROM usuarios WHERE id = ?')
+        .get(payload.usuario_id)
+      if (usuario) req.usuario = usuario
+    }
   }
   next()
 }

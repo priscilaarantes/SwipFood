@@ -37,10 +37,12 @@ function normalizarNota(valor) {
 // Valida uma imagem enviada em base64 (formato data-url) para as avaliações
 function validarFotoBase64(campo) {
   const dataUrl = String(campo || '')
-  const padrao = /^data:image\/(jpeg|png|webp|jpg);base64,(.+)$/
-  const casamento = dataUrl.match(padrao)
+  const prefixoRegex = /^data:image\/(jpeg|png|webp|jpg);base64,/
+  const casamento = dataUrl.match(prefixoRegex)
   if (!casamento) return { valido: false, mensagem: 'Foto inválida. Use JPEG, PNG ou WEBP.' }
-  const tamanhoBytes = Buffer.from(casamento[2], 'base64').length
+  
+  const base64Data = dataUrl.slice(casamento[0].length)
+  const tamanhoBytes = Buffer.from(base64Data, 'base64').length
   const limiteBytes = 500 * 1024 // 500 KB
   if (tamanhoBytes > limiteBytes) {
     return { valido: false, mensagem: 'Foto muito grande. O limite é de 500 KB.' }

@@ -13,7 +13,14 @@ const SQL_MEDIAS = `
        COALESCE(av.odor_ambiente,0) + COALESCE(av.custo_beneficio,0) +
        COALESCE(av.limpeza_geral,0) + COALESCE(av.iluminacao,0) +
        COALESCE(av.velocidade_atendimento,0) + COALESCE(av.cordialidade,0) +
-       COALESCE(av.seguranca_entorno,0)) / 9.0
+       COALESCE(av.seguranca_entorno,0)) / 
+      CAST(
+        (av.limpeza_local IS NOT NULL) + (av.manuseio_alimentos IS NOT NULL) +
+        (av.odor_ambiente IS NOT NULL) + (av.custo_beneficio IS NOT NULL) +
+        (av.limpeza_geral IS NOT NULL) + (av.iluminacao IS NOT NULL) +
+        (av.velocidade_atendimento IS NOT NULL) + (av.cordialidade IS NOT NULL) +
+        (av.seguranca_entorno IS NOT NULL) AS REAL
+      )
     ), 2) FROM avaliacoes av WHERE av.estabelecimento_id = e.id) AS media_geral
 `
 

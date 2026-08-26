@@ -67,7 +67,12 @@ function listarAvaliacoes(req, res) {
     `)
     .all(estabelecimentoId)
 
-  res.json({ sucesso: true, dados: avaliacoes.map(mapearAvaliacao) })
+  const dados = avaliacoes.map(linha => {
+    const aval = mapearAvaliacao(linha)
+    delete aval.usuario_id
+    return aval
+  })
+  res.json({ sucesso: true, dados })
 }
 
 module.exports = { criarAvaliacao, listarAvaliacoes }
