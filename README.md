@@ -153,4 +153,4 @@ Projeto desenvolvido com fins acadêmicos e educacionais no âmbito da disciplin
 **Programação Web** do **IFMT — Campus Barra do Garças**, sob orientação do professor
 **Carlos David Rocha de Souza**.
 
---> Repositório oficial: [https://github.com/priscilaarantes/SwipFood_ProjDevSistemas](https://github.com/priscilaarantes/SwipFood)
+--> Repositório oficial: [https://github.com/priscilaarantes/SwipFood](https://github.com/priscilaarantes/SwipFood)
