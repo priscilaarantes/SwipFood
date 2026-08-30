@@ -13,22 +13,32 @@ export default function Header() {
     return () => window.removeEventListener('hashchange', atualizarRota)
   }, [])
 
-  if (rotaAtual === '#/principal') return null
+if (rotaAtual === '#/principal') return null
 
-  const links = [
-    { rotulo: 'Home', destino: '/' },
-    { rotulo: 'Swipe', destino: '/swipe' },
-    { rotulo: 'Ranking', destino: '/ranking' }
-  ]
+  const naPaginaSwipe = rotaAtual === '#/swipe'
+  const paginaSemSwipe = naPaginaSwipe || rotaAtual === '#/login' || rotaAtual === '#/cadastro'
+  const paginaDeFundo = rotaAtual === '#/login' || rotaAtual === '#/cadastro'
+
+  const links = naPaginaSwipe
+    ? [{ rotulo: 'Home', destino: '/principal' }]
+    : paginaSemSwipe
+      ? [{ rotulo: 'Home', destino: '/' }]
+      : [
+          { rotulo: 'Home', destino: '/' },
+          { rotulo: 'Swipe', destino: '/swipe' }
+        ]
+
+  const mostrarLinks = rotaAtual !== '' && rotaAtual !== '#/'
 
   return (
-    <header className="bg-cremeClaro/80 backdrop-blur-xl text-azulMarinho shadow-sm sticky top-0 z-40 border-b border-white/40">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3">
+    <header className={`${paginaDeFundo ? 'bg-white/30 backdrop-blur-sm' : 'bg-cremeClaro/80 backdrop-blur-xl border-b border-white/40'} text-azulMarinho shadow-sm sticky top-0 z-40`}>
+      <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3 relative">
         <a href="#/" className="flex items-center gap-2">
-          <span className="text-3xl font-extrabold text-vermelho tracking-tighter" style={{ fontFamily: 'Poppins, sans-serif' }}>Swip<span className="text-azulMarinho">Food</span></span>
+          <img src="/img/logo.png" alt="SwipFood" className="h-22 w-20" />
         </a>
 
-        <nav className="flex items-center gap-6 flex-wrap">
+        {mostrarLinks && (
+        <nav className="absolute left-1/2 -translate-x-1/2 flex items-center gap-6 flex-wrap">
           {links.map((link) => (
             <a
               key={link.rotulo}
@@ -39,6 +49,7 @@ export default function Header() {
             </a>
           ))}
         </nav>
+        )}
 
         <div className="flex items-center gap-4">
           {usuario ? (

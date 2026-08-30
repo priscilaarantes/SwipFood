@@ -31,14 +31,16 @@ export default function Cadastro() {
   }
 
   return (
-    <div 
-      className="min-h-screen flex flex-col items-center justify-center p-4"
-      style={{
-        backgroundImage: "url('/img/login_bg.jpg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
-    >
+    <div className="relative z-0 min-h-screen flex flex-col items-center justify-center p-4 overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundImage: "url('/img/login_bg.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      />
       <div className="bg-black/20 backdrop-blur-3xl rounded-[3rem] shadow-2xl p-10 md:p-14 w-full max-w-md border border-white/10 flex flex-col items-center">
         
         <div className="mb-10 text-center">
@@ -61,7 +63,7 @@ export default function Cadastro() {
               onChange={(e) => setNome(e.target.value)}
               placeholder="Nome completo"
               required
-              className="input-login text-center"
+              className="input-login"
             />
           </div>
           <div className="w-full">
@@ -71,7 +73,7 @@ export default function Cadastro() {
               onChange={(e) => setIdentificador(e.target.value)}
               placeholder="CPF/CNPJ ou E-mail"
               required
-              className="input-login text-center"
+              className="input-login"
             />
           </div>
           <div className="w-full">
@@ -82,7 +84,7 @@ export default function Cadastro() {
               placeholder="Senha (min 6 caracteres)"
               minLength={6}
               required
-              className="input-login text-center"
+              className="input-login"
             />
           </div>
           

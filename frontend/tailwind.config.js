@@ -18,6 +18,12 @@ export default {
         azulMarinho: '#0A1128',
         escuro: '#131b2f',
         vermelho: '#FF595E',
+        tagRosa: '#F9D3DC',
+        tagVerde: '#CBE8D2',
+        tagAzul: '#C9DBF2',
+        tagLaranja: '#FBD8B2',
+        tagAmarelo: '#FBE9A8',
+        tagRoxo: '#D9CFF0',
       }
     },
   },

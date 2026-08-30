@@ -22,10 +22,11 @@ function marcarSwipeado(id) {
 
 // Tela de swipe: cards empilháveis com like/dislike (arraste, botões e setas do teclado)
 export default function Swipe() {
+  // Paleta baseada nas etiquetas da imagem "Etiquetas.png" (código legado)
+  const coresTags = ['#FFA5A5', '#B1F2F6', '#CDA6FF', '#FFA5FE', '#BCFF99']
   const obterCorTag = (tag) => {
-    const cores = ['bg-tagRosa', 'bg-tagVerde', 'bg-tagAzul', 'bg-tagLaranja', 'bg-tagAmarelo', 'bg-tagRoxo']
-    const index = tag.length % cores.length
-    return cores[index]
+    const index = tag.length % coresTags.length
+    return coresTags[index]
   }
   const [fila, setFila] = useState([])
   const [carregando, setCarregando] = useState(true)
@@ -108,15 +109,16 @@ export default function Swipe() {
   }
 
   if (carregando) {
-    return <p className="text-center text-escuro font-semibold mt-20 animate-pulse">Carregando restaurantes…</p>
+    return <p className="text-center text-escuro font-semibold mt-20 animate-pulse bg-begeGlobal min-h-screen">Carregando restaurantes…</p>
   }
 
   if (erro) {
-    return <p className="text-center text-red-600 font-semibold mt-20">{erro}</p>
+    return <p className="text-center text-red-600 font-semibold mt-20 bg-begeGlobal min-h-screen">{erro}</p>
   }
 
   if (!cardAtual) {
     return (
+      <div className="bg-begeGlobal min-h-screen">
       <div className="max-w-xl mx-auto px-4 py-16 text-center bg-white/60 backdrop-blur-xl rounded-[2.5rem] mt-10 shadow-soft border border-white/60">
         <p className="text-6xl mb-4">🎉</p>
         <h2 className="text-3xl font-black text-azulMarinho">Você arrastou por todos os restaurantes!</h2>
@@ -136,6 +138,7 @@ export default function Swipe() {
           </button>
         </div>
       </div>
+      </div>
     )
   }
 
@@ -143,9 +146,10 @@ export default function Swipe() {
   const rotacao = deslocamento.x / 20
 
   return (
-    <div className="max-w-md mx-auto px-4 py-8">
+    <div className="bg-begeGlobal min-h-screen flex flex-col items-center justify-center">
+    <div className="w-full max-w-md px-4 py-8">
       <p className="text-center text-sm font-semibold text-gray-600 mb-4">
-        Arraste para os lados ou use as setas ← →
+        Arraste para os lados ou use as setas <br/> ← →
       </p>
 
       <div className="relative h-[480px]">
@@ -163,7 +167,7 @@ export default function Swipe() {
 
         {/* Card do topo */}
         <div
-          className={`absolute inset-0 card-soft bg-white border-2 border-white/50 ${registrando ? 'opacity-60' : ''}`}
+          className={`absolute inset-0 card-soft bg-white border-2 border-white/50 overflow-hidden ${registrando ? 'opacity-60' : ''}`}
           style={{
             transform: `translate(${deslocamento.x}px, ${deslocamento.y}px) rotate(${rotacao}deg)`,
             transition: arrastandoRef.current ? 'none' : 'transform 0.3s ease',
@@ -179,22 +183,26 @@ export default function Swipe() {
           <img
             src={cardAtual.imagens?.[0] || '/img/food1.jpg'}
             alt={cardAtual.nome}
-            className="w-full h-64 object-cover"
+            className="w-full h-52 object-cover"
           />
-          <div className="p-6">
+          <div className="p-5">
             <h2 className="text-3xl font-black text-azulMarinho">{cardAtual.nome}</h2>
             <p className="text-sm font-bold text-azulMarinho/50 uppercase tracking-wide mt-1">
               {cardAtual.categoria} · R$ {cardAtual.faixa_preco}
             </p>
-            <p className="text-azulMarinho/80 mt-3">{cardAtual.descricao}</p>
+            <p className="text-azulMarinho/80 mt-3 line-clamp-2">{cardAtual.descricao}</p>
             <div className="flex flex-wrap gap-2 mt-5">
               {cardAtual.tags?.map((tag) => (
-                <span key={tag} className={`${obterCorTag(tag)} text-azulMarinho text-xs font-bold px-3 py-1.5 rounded-full shadow-sm`}>
+                <span
+                  key={tag}
+                  style={{ backgroundColor: obterCorTag(tag) }}
+                  className="text-azulMarinho text-xs font-bold px-3 py-1 rounded-full shadow-sm"
+                >
                   #{tag}
                 </span>
               ))}
             </div>
-            <p className="mt-5 text-sm font-bold text-azulMarinho">❤ {cardAtual.likes ?? 0} curtidas</p>
+            <p className="mt-4 text-sm font-bold text-azulMarinho">❤ {cardAtual.likes ?? 0} curtidas</p>
           </div>
 
           {/* Selos de like/dislike durante o arraste */}
@@ -234,6 +242,7 @@ export default function Swipe() {
           ✓
         </button>
       </div>
+    </div>
     </div>
   )
 }

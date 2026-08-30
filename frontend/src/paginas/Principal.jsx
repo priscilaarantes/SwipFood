@@ -6,15 +6,15 @@ export default function Principal() {
   const [filtros, setFiltros] = useState({})
 
   const categorias = [
-    { nome: 'Café', imagem: '/img/icone_cafe.jpg' },
-    { nome: 'Padaria', imagem: '/img/food1.jpg' },
-    { nome: 'Doceria', imagem: '/img/food2.jpg' },
-    { nome: 'Japonesa', imagem: '/img/icone_sushi.jpg' },
-    { nome: 'Fast-food', imagem: '/img/icone_hamburguer.jpg' },
-    { nome: 'Saudável', imagem: '/img/food1.jpg' },
-    { nome: 'Italiana', imagem: '/img/food2.jpg' },
-    { nome: 'Churrascaria', imagem: '/img/food1.jpg' },
-    { nome: 'Pizzaria', imagem: '/img/food2.jpg' },
+    { nome: 'Café', imagem: '/img/restaurantes/rest1.jpg' },
+    { nome: 'Padaria', imagem: '/img/restaurantes/rest2.jpg' },
+    { nome: 'Doceria', imagem: '/img/restaurantes/rest3.jpg' },
+    { nome: 'Japonesa', imagem: '/img/restaurantes/rest4.jpg' },
+    { nome: 'Fast-food', imagem: '/img/restaurantes/rest5.jpg' },
+    { nome: 'Saudável', imagem: '/img/restaurantes/rest6.jpg' },
+    { nome: 'Italiana', imagem: '/img/restaurantes/rest7.jpg' },
+    { nome: 'Churrascaria', imagem: '/img/restaurantes/rest8.jpg' },
+    { nome: 'Pizzaria', imagem: '/img/restaurantes/rest9.jpg' },
   ]
 
   return (
@@ -64,10 +64,10 @@ export default function Principal() {
             {/* Stack de Polaroids */}
             <div className="relative w-[500px] h-[400px] cursor-pointer group" onClick={() => navegarPara('/swipe')}>
               <div className="absolute top-10 right-0 w-[300px] h-[400px] bg-begeInput rounded-xl p-3 shadow-2xl rotate-[15deg] group-hover:rotate-[20deg] transition-transform">
-                <img src="/img/food1.jpg" className="w-full h-4/5 object-cover rounded-lg" />
+                <img src="/img/restaurantes/rest10.jpg" className="w-full h-4/5 object-cover rounded-lg" />
               </div>
               <div className="absolute top-5 left-10 w-[320px] h-[420px] bg-begeInput rounded-xl p-3 shadow-2xl rotate-[-5deg] group-hover:rotate-[-8deg] transition-transform z-10">
-                <img src="/img/polaroid_food.jpg" className="w-full h-4/5 object-cover rounded-lg" />
+                <img src="/img/restaurantes/rest11.jpg" className="w-full h-4/5 object-cover rounded-lg" />
               </div>
             </div>
           </div>
