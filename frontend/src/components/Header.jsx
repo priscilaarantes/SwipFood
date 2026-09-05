@@ -16,6 +16,7 @@ export default function Header() {
 if (rotaAtual === '#/principal') return null
 
   const naPaginaSwipe = rotaAtual === '#/swipe'
+  const naLanding = rotaAtual === '' || rotaAtual === '#/'
   const paginaSemSwipe = naPaginaSwipe || rotaAtual === '#/login' || rotaAtual === '#/cadastro'
   const paginaDeFundo = rotaAtual === '#/login' || rotaAtual === '#/cadastro'
 
@@ -31,7 +32,13 @@ if (rotaAtual === '#/principal') return null
   const mostrarLinks = rotaAtual !== '' && rotaAtual !== '#/'
 
   return (
-    <header className={`${paginaDeFundo ? 'bg-white/30 backdrop-blur-sm' : 'bg-cremeClaro/80 backdrop-blur-xl border-b border-white/40'} text-azulMarinho shadow-sm sticky top-0 z-40`}>
+    <header className={`${
+      naLanding
+        ? 'bg-white/80 backdrop-blur-xl border-b border-white/40'
+        : paginaDeFundo
+          ? 'bg-white/30 backdrop-blur-sm'
+          : 'bg-cremeClaro/80 backdrop-blur-xl border-b border-white/40'
+    } text-azulMarinho shadow-sm sticky top-0 z-40`}>
       <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3 relative">
         <a href="#/" className="flex items-center gap-2">
           <img src="/img/logo.png" alt="SwipFood" className="h-22 w-20" />

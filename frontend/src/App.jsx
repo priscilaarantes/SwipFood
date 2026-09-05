@@ -30,9 +30,9 @@ export default function App() {
   return (
     <AuthProvider>
       <ToastProvider>
-        <div className="min-h-screen flex flex-col bg-creme">
+        <div className="min-h-screen flex flex-col bg-[#dbcbb8]">
           <Header />
-          <main className="flex-1">
+          <main className="flex-1 flex flex-col">
             <Roteador rotas={rotas} />
           </main>
           <Footer />

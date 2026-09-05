@@ -1,55 +1,66 @@
-import React, { useEffect, useState } from 'react'
-import { api } from '../utilitarios/api'
-import CardEstabelecimento from '../components/CardEstabelecimento'
+import React, { useEffect, useRef } from 'react'
 
 // Landing page institucional do SwipFood — "O Tinder dos Restaurantes"
-export default function Landing() {
-  const [destaques, setDestaques] = useState([])
-  const [erro, setErro] = useState('')
+const cards = [
+  {
+    imagem: '/img/1.jpg',
+    titulo: 'Quantas vezes você já ficou horas discutindo com a família sobre onde comer?',
+    texto:
+      'Cada um sugere uma coisa, ninguém se decide e no fim acabam indo no mesmo lugar de sempre por pura preguiça de pesquisar. Isso te lembra alguma situação?'
+  },
+  {
+    imagem: '/img/2.jpg',
+    titulo: 'O Problema',
+    texto:
+      'As pessoas têm dificuldade de escolher o que comer, seja por preço, por distância ou simplesmente por uma "indecisão crônica". Existem ótimos restaurantes na nossa região, mas nenhuma ferramenta ajuda a decidir de forma rápida e divertida.'
+  },
+  {
+    imagem: '/img/3.jpg',
+    titulo: 'A Solução',
+    texto:
+      'O SwipFood funciona como um "Tinder dos restaurantes": você vê as opções locais e vai arrastando para a direita o que interessa e para a esquerda o que não serve. De forma rápida e intuitiva, o sistema entrega a melhor opção ou um ranking personalizado para você!'
+  },
+  {
+    imagem: '/img/4.jpg',
+    titulo: 'Público-Alvo',
+    texto:
+      'Casais indecisos, famílias com gostos diferentes, turmas de amigos que querem agradar todo mundo — qualquer pessoa que queira transformar a escolha da refeição em algo rápido, leve e divertido.'
+  },
+  {
+    imagem: '/img/5.jpg',
+    titulo: 'Diferencial e Mercado',
+    texto:
+      'A gamificação da escolha. Não somos só mais um site com lista de restaurantes: entregamos uma experiência interativa que resolve a indecisão — e ainda fortalece o comércio local da nossa região.'
+  }
+]
 
-  // Busca os lugares em destaque vindos da API
+export default function Landing() {
+  // Refs dos cards institucionais (usados pela animação de revelação)
+  const refsCards = useRef([])
+
+  // Animação de revelação dos cards ao rolar a página — replicada do código legado
   useEffect(() => {
-    api
-      .get('/estabelecimentos/destaques')
-      .then((dados) => setDestaques(dados.dados))
-      .catch(() => setErro('Não foi possível carregar os destaques.'))
+    const revelarCards = () => {
+      const alturaJanela = window.innerHeight
+      refsCards.current.forEach((card) => {
+        if (!card) return
+        if (card.getBoundingClientRect().top < alturaJanela - 100) {
+          card.classList.add('reveal')
+        }
+      })
+    }
+
+    revelarCards()
+    window.addEventListener('scroll', revelarCards)
+    window.addEventListener('resize', revelarCards)
+    return () => {
+      window.removeEventListener('scroll', revelarCards)
+      window.removeEventListener('resize', revelarCards)
+    }
   }, [])
 
-  const cards = [
-    {
-      imagem: '/img/1.jpg',
-      titulo: 'Quantas vezes você já ficou horas discutindo com a família sobre onde comer?',
-      texto:
-        'Cada um sugere uma coisa, ninguém se decide e no fim acabam indo no mesmo lugar de sempre por pura preguiça de pesquisar. Isso te lembra alguma situação?'
-    },
-    {
-      imagem: '/img/2.jpg',
-      titulo: 'O Problema',
-      texto:
-        'As pessoas têm dificuldade de escolher o que comer, seja por preço, por distância ou simplesmente por uma "indecisão crônica". Existem ótimos restaurantes na nossa região, mas nenhuma ferramenta ajuda a decidir de forma rápida e divertida.'
-    },
-    {
-      imagem: '/img/3.jpg',
-      titulo: 'A Solução',
-      texto:
-        'O SwipFood funciona como um "Tinder dos restaurantes": você vê as opções locais e vai arrastando para a direita o que interessa e para a esquerda o que não serve. De forma rápida e intuitiva, o sistema entrega a melhor opção ou um ranking personalizado para você!'
-    },
-    {
-      imagem: '/img/4.jpg',
-      titulo: 'Público-Alvo',
-      texto:
-        'Casais indecisos, famílias com gostos diferentes, turmas de amigos que querem agradar todo mundo — qualquer pessoa que queira transformar a escolha da refeição em algo rápido, leve e divertido.'
-    },
-    {
-      imagem: '/img/5.jpg',
-      titulo: 'Diferencial e Mercado',
-      texto:
-        'A gamificação da escolha. Não somos só mais um site com lista de restaurantes: entregamos uma experiência interativa que resolve a indecisão — e ainda fortalece o comércio local da nossa região.'
-    }
-  ]
-
   return (
-    <div>
+    <div className="flex-1 bg-[#dbcbb8]">
       {/* HERO */}
       <section className="max-w-6xl mx-auto px-4 pt-12 pb-10 flex flex-col md:flex-row items-center gap-10">
         <div className="flex-1">
@@ -81,7 +92,8 @@ export default function Landing() {
         {cards.map((card, indice) => (
           <div
             key={card.titulo}
-            className={`bg-white rounded-3xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center ${
+            ref={(el) => (refsCards.current[indice] = el)}
+            className={`card-reveal bg-white rounded-3xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center ${
               indice % 2 === 1 ? 'md:flex-row-reverse' : ''
             }`}
           >
@@ -98,17 +110,6 @@ export default function Landing() {
             </div>
           </div>
         ))}
-      </section>
-
-      {/* DESTAQUES DA API */}
-      <section className="max-w-6xl mx-auto px-4 py-10">
-        <h2 className="text-3xl font-bold text-escuro mb-6">₊˚⊹ Lugares em destaque</h2>
-        {erro && <p className="text-red-600 font-semibold">{erro}</p>}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {destaques.map((estabelecimento) => (
-            <CardEstabelecimento key={estabelecimento.id} estabelecimento={estabelecimento} />
-          ))}
-        </div>
       </section>
 
       {/* CTA FINAL */}

@@ -42,3 +42,15 @@ body {
 .btn-login:hover {
   transform: translateY(-4px);
 }
+
+/* Animação de revelação dos cards da Landing (replicada do código legado) */
+.card-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.card-reveal.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
