@@ -147,6 +147,13 @@ SwipFood_ProjDevSistemas/
 
 
 
+## Pré-requisitos
+
+- **Node.js:** Recomendado **v20 LTS ou v22 LTS** (possui binários pré-compilados do SQLite para instalação rápida em Windows, Linux e macOS sem necessidade de ferramentas de compilação C++ adicionais).
+- **Gerenciador de Pacotes:** `npm` (incluso no Node.js).
+
+---
+
 ## Como Executar
 
 ### 1. Instalar dependências (primeira vez)
@@ -156,11 +163,20 @@ cd api && npm install
 cd ../frontend && npm install
 ```
 
-### 2. Modo desenvolvimento (dois terminais)
+### 2. Modo desenvolvimento
 
+**Opção A — Script Único no Windows (PowerShell):**
+```powershell
+.\dev.ps1
+```
+
+**Opção B — Dois terminais manuais:**
 ```bash
-cd api && npm run dev            # API em http://localhost:3000
-cd frontend && npm run dev       # React em http://localhost:5173 (proxy /api → 3000)
+# Terminal 1 (Backend - porta 3000):
+cd api && npm run dev
+
+# Terminal 2 (Frontend - porta 5173 com proxy /api → 3000):
+cd frontend && npm run dev
 ```
 
 ### 3. Modo produção (build único servido pela API)
@@ -171,9 +187,9 @@ cd ../api && npm start           # Aplicação completa em http://localhost:3000
 ```
 
 > O banco `swipfood.db` é criado e semeado automaticamente na primeira execução
-> (20 restaurantes). Para zerar, apague `api/db/swipfood.db*` e reinicie o servidor.
+> (20 restaurantes). Para zerar o banco e restaurar os dados originais, apague `api/db/swipfood.db*` e reinicie o servidor.
 
-
+---
 
 ## Endpoints da API
 
@@ -200,7 +216,7 @@ cd ../api && npm start           # Aplicação completa em http://localhost:3000
 `estacionamento`, `estacionamento_vigiado`, `area_kids`, `tags`, `raio_km` (+`latitude`/`longitude`),
 `ordenar_por` (`likes` | `media` | `nome`).
 
-
+---
 
 ## Rotas do Frontend (hash)
 
@@ -218,7 +234,17 @@ cd ../api && npm start           # Aplicação completa em http://localhost:3000
 > A rota antiga `#/match/:id` continua funcionando: a tela de Match ignora o parâmetro e
 > calcula a recomendação a partir do perfil atual do usuário.
 
+---
 
+## Documentação Técnica do Sistema
+
+Os documentos completos de especificação e engenharia de software estão disponíveis nos links abaixo:
+
+- 📄 **[Escopo do Projeto](escopo_do_projeto.md):** Justificativa SMART, fronteiras do sistema, diagramas UML, EAP/WBS e matriz de riscos técnicos.
+- 📋 **[Requisitos de Usuário](requisitos_de_usuario.md):** Personas, Histórias de Usuário (*User Stories*) e critérios de aceitação.
+- ⚙️ **[Requisitos de Sistema](requisitos_de_sistema.md):** Requisitos Funcionais (RF), Requisitos Não-Funcionais (RNF), regras de negócio e dicionário de dados.
+
+---
 
 ## Licença e Créditos
 
@@ -227,3 +253,4 @@ Projeto desenvolvido com fins acadêmicos e educacionais no âmbito da disciplin
 **Carlos David Rocha de Souza**.
 
 --> Repositório oficial: [https://github.com/priscilaarantes/SwipFood](https://github.com/priscilaarantes/SwipFood)
+

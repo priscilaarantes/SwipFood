@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { useAuth } from '../contexto/AuthContext'
 
 // Landing page institucional do SwipFood — "O Tinder dos Restaurantes"
 const cards = [
@@ -35,6 +36,7 @@ const cards = [
 ]
 
 export default function Landing() {
+  const { usuario } = useAuth()
   // Refs dos cards institucionais (usados pela animação de revelação)
   const refsCards = useRef([])
 
@@ -72,10 +74,10 @@ export default function Landing() {
             Descubra novos lugares de forma rápida e divertida!
           </p>
           <a
-            href="#/cadastro"
+            href={usuario ? '#/principal' : '#/cadastro'}
             className="inline-block mt-6 bg-escuro hover:bg-gray-800 text-white font-bold px-8 py-3 rounded-full transition-all"
           >
-            Começar agora →
+            {usuario ? 'Ir para o app →' : 'Começar agora →'}
           </a>
         </div>
         <div className="flex-1">
@@ -121,10 +123,10 @@ export default function Landing() {
             experiência rápida, divertida e personalizada!
           </p>
           <a
-            href="#/cadastro"
+            href={usuario ? '#/principal' : '#/cadastro'}
             className="inline-block mt-6 bg-escuro hover:bg-gray-800 text-white font-bold px-8 py-3 rounded-full transition-all"
           >
-            Criar conta grátis →
+            {usuario ? 'Continuar arrastando →' : 'Criar conta grátis →'}
           </a>
         </div>
       </section>

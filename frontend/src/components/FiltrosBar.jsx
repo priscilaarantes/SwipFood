@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 
 export default function FiltrosBar({ filtros, aoMudar }) {
   const [menuAberto, setMenuAberto] = useState(null)
+  const [precoMax, setPrecoMax] = useState(500)
+  const [distanciaMax, setDistanciaMax] = useState(50)
 
   const toggleMenu = (menu) => setMenuAberto(menuAberto === menu ? null : menu)
 
@@ -21,9 +23,17 @@ export default function FiltrosBar({ filtros, aoMudar }) {
                   <div className="flex justify-between font-bold text-sm bg-begeInput px-5 py-3 rounded-full text-azulMarinho">
                     <span>mínimo: 15R$</span>
                     <span>-</span>
-                    <span>máximo: 500R$</span>
+                    <span>máximo: {precoMax}R$</span>
                   </div>
-                  <input type="range" className="w-full mt-4 accent-azulMarinho" />
+                  <input 
+                    type="range" 
+                    min="15" 
+                    max="1000" 
+                    step="5"
+                    value={precoMax}
+                    onChange={(e) => setPrecoMax(e.target.value)}
+                    className="w-full mt-4 accent-azulMarinho" 
+                  />
                </div>
             )}
           </div>
@@ -38,9 +48,17 @@ export default function FiltrosBar({ filtros, aoMudar }) {
                   <div className="flex justify-between font-bold text-sm bg-begeInput px-5 py-3 rounded-full text-azulMarinho">
                     <span>mínimo: 2km</span>
                     <span>-</span>
-                    <span>máximo: 50km</span>
+                    <span>máximo: {distanciaMax}km</span>
                   </div>
-                  <input type="range" className="w-full mt-4 accent-azulMarinho" />
+                  <input 
+                    type="range" 
+                    min="2" 
+                    max="100"
+                    step="1"
+                    value={distanciaMax}
+                    onChange={(e) => setDistanciaMax(e.target.value)}
+                    className="w-full mt-4 accent-azulMarinho" 
+                  />
                </div>
             )}
           </div>
@@ -63,7 +81,6 @@ export default function FiltrosBar({ filtros, aoMudar }) {
 
           <button className="font-semibold text-lg hover:text-white transition-colors relative">
             novidades
-            <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-normal whitespace-nowrap opacity-60">lista de lugares recém abertos</span>
           </button>
         </div>
 
