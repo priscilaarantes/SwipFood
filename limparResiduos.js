@@ -1,0 +1,5 @@
+const banco = require('./api/src/config/conexaoBanco')
+const e = banco.prepare("DELETE FROM estabelecimentos WHERE nome = 'Restaurante Teste E2E'").run()
+const u = banco.prepare("DELETE FROM usuarios WHERE nome = 'Teste Banco'").run()
+const s = banco.prepare('DELETE FROM sessoes WHERE usuario_id NOT IN (SELECT id FROM usuarios)').run()
+console.log(`residuos removidos: estabelecimentos=${e.changes}, usuarios=${u.changes}, sessoes orfas=${s.changes}`)

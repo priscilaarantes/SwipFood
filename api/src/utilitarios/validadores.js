@@ -252,11 +252,26 @@ function validarAvaliacao(dados) {
   }
 }
 
+function normalizarNomeCategoria(cat) {
+  if (!cat) return ''
+  const limpo = sanitizar(cat).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+  if (limpo === 'cafe' || limpo === 'cafes') return 'cafe'
+  if (limpo === 'padaria' || limpo === 'padarias') return 'padaria'
+  if (limpo === 'doceria' || limpo === 'docerias' || limpo === 'acai' || limpo === 'doces') return 'doceria'
+  if (limpo === 'japonesa' || limpo === 'japones' || limpo === 'sushi' || limpo === 'oriental') return 'japonesa'
+  if (limpo === 'fastfood' || limpo === 'fast-food' || limpo === 'fast food' || limpo === 'lanches' || limpo === 'hamburguer') return 'fastfood'
+  if (limpo === 'saudavel' || limpo === 'saudaveis' || limpo === 'fitness' || limpo === 'regional') return 'saudavel'
+  if (limpo === 'italiana' || limpo === 'italiano' || limpo === 'massas') return 'italiana'
+  if (limpo === 'churrascaria' || limpo === 'churrasco' || limpo === 'carnes') return 'churrascaria'
+  if (limpo === 'pizzaria' || limpo === 'pizza' || limpo === 'pizzas') return 'pizzaria'
+  return limpo.replace(/[^a-z0-9]/g, '')
+}
+
 // Normaliza os filtros recebidos via query string (combináveis entre si)
 function normalizarFiltros(query) {
   const categorias = String(query.categorias || '')
     .split(',')
-    .map(item => sanitizar(item))
+    .map(normalizarNomeCategoria)
     .filter(Boolean)
 
   const estacionamentos = String(query.estacionamento || '')

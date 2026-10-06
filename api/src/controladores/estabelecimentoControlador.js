@@ -71,7 +71,7 @@ function listar(req, res) {
   }
   if (filtros.categorias.length > 0) {
     const marcadores = filtros.categorias.map(() => '?').join(',')
-    condicoes.push(`e.categoria IN (${marcadores})`)
+    condicoes.push(`LOWER(e.categoria) IN (${marcadores})`)
     parametros.push(...filtros.categorias)
   }
   if (filtros.preco_min !== null) {

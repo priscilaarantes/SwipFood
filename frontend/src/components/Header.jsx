@@ -13,7 +13,7 @@ export default function Header() {
     return () => window.removeEventListener('hashchange', atualizarRota)
   }, [])
 
-if (rotaAtual === '#/principal') return null
+if (rotaAtual === '#/principal' || rotaAtual.startsWith('#/categoria')) return null
 
   const naPaginaSwipe = rotaAtual === '#/swipe'
   const naLanding = rotaAtual === '' || rotaAtual === '#/'

@@ -13,6 +13,7 @@ import Swipe from './paginas/Swipe'
 import Match from './paginas/Match'
 import Ranking from './paginas/Ranking'
 import Informacoes from './paginas/Informacoes'
+import Categoria from './paginas/Categoria'
 
 // Tabela de rotas do aplicativo (roteador por hash #/)
 const rotas = {
@@ -23,7 +24,8 @@ const rotas = {
   '/swipe': { componente: Swipe, requerAutenticacao: true },
   '/match': { componente: Match, requerAutenticacao: true },
   '/ranking': { componente: Ranking, requerAutenticacao: true },
-  '/estabelecimento': { componente: Informacoes }
+  '/estabelecimento': { componente: Informacoes },
+  '/categoria': { componente: Categoria, requerAutenticacao: true }
 }
 
 export default function App() {
