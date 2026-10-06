@@ -21,12 +21,13 @@ if (rotaAtual === '#/principal') return null
   const paginaDeFundo = rotaAtual === '#/login' || rotaAtual === '#/cadastro'
 
   const links = naPaginaSwipe
-    ? [{ rotulo: 'Home', destino: '/principal' }]
+    ? [{ rotulo: 'Home', destino: '/principal' }, { rotulo: 'Match', destino: '/match' }]
     : paginaSemSwipe
       ? [{ rotulo: 'Home', destino: '/' }]
       : [
           { rotulo: 'Home', destino: '/' },
-          { rotulo: 'Swipe', destino: '/swipe' }
+          { rotulo: 'Swipe', destino: '/swipe' },
+          { rotulo: 'Match', destino: '/match' }
         ]
 
   const mostrarLinks = rotaAtual !== '' && rotaAtual !== '#/'

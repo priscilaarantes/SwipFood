@@ -54,3 +54,35 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Superfície de card clara usada na landing, no swipe e no ranking */
+@layer components {
+  .card-soft {
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    box-shadow: 0 18px 40px -18px rgba(10, 17, 40, 0.45);
+  }
+
+  .shadow-soft {
+    box-shadow: 0 18px 40px -18px rgba(10, 17, 40, 0.35);
+  }
+
+  /* Botão principal (criar conta, match, recomendações) */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background-color: #FF595E;
+    color: #ffffff;
+    font-weight: 800;
+    border-radius: 9999px;
+    transition: transform 0.2s, background-color 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: #D63C41;
+    transform: translateY(-2px);
+  }
+}

@@ -196,4 +196,13 @@ function mapearAvaliacao(linha) {
   return { ...linha, fotos }
 }
 
-module.exports = { listar, destaques, detalhe, criar, mapearAvaliacao, calcularDistanciaKm }
+module.exports = {
+  listar,
+  destaques,
+  detalhe,
+  criar,
+  mapearAvaliacao,
+  mapearEstabelecimento,
+  calcularDistanciaKm,
+  SQL_MEDIAS
+}

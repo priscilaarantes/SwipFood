@@ -1,4 +1,6 @@
 const banco = require('../config/conexaoBanco')
+const recomendador = require('../servicos/recomendador')
+const { mapearEstabelecimento, SQL_MEDIAS } = require('./estabelecimentoControlador')
 
 // Gera o ranking personalizado do usuário baseado nos seus "likes" (swipes) e notas
 function ranking(req, res) {
@@ -56,7 +58,20 @@ function ranking(req, res) {
     return notaB - notaA
   })
 
-  res.json({ sucesso: true, dados })
+  // Sugestões calculadas pelo mesmo motor de etiquetas usado no botão de match
+  const catalogo = banco
+    .prepare(`SELECT e.*, ${SQL_MEDIAS} FROM estabelecimentos e ORDER BY e.likes DESC, e.nome ASC`)
+    .all()
+    .map(mapearEstabelecimento)
+  const sugestoes = recomendador.montarRecomendacao(req.usuario.id, catalogo, { tamanhoTop: 5 })
+
+  res.json({
+    sucesso: true,
+    dados,
+    perfil: sugestoes.perfil,
+    recomendacao: sugestoes.recomendacao,
+    recomendacoes: sugestoes.top
+  })
 }
 
 module.exports = { ranking }
